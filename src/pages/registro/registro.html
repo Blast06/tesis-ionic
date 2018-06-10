@@ -1,0 +1,32 @@
+<mbsc-form class="md-create-account" [options]="formSettings">
+    <div class="md-chart-pic"></div>
+    <div class="md-cac-title mbsc-padding">
+        <h4>Bienvenido a la
+            <br> mejor app de pedidos</h4>
+        <h4>Continua creando tu cuenta</h4>
+    </div>
+
+
+    <form [formGroup]="signupForm" novalidate>
+
+        <div class="md-cac-cont">
+            <div class="">
+                <mbsc-input name="username" type="text" placeholder="Nombre" [(ngModel)]="name" formControlName="name" [error]="signupForm.controls.name.invalid && signupForm.controls.name.dirty"
+                    [errorMessage]="errorFor('name')"></mbsc-input>
+                <mbsc-input name="email" type="email" placeholder="Email" [(ngModel)]="email" formControlName="email" [error]="signupForm.controls.email.invalid && signupForm.controls.email.dirty"
+                    [errorMessage]="errorFor('email')"></mbsc-input>
+                <mbsc-input name="password" type="text" placeholder="clave" password-toggle="true" [(ngModel)]="password" formControlName="password"
+                    [error]="signupForm.controls.password.invalid && signupForm.controls.password.dirty" [errorMessage]="errorFor('password')"></mbsc-input>
+                <mbsc-input name="password" type="text" placeholder="confirmar clave" password-toggle="true" [(ngModel)]="password_confirmation"
+                    formControlName="password_confirmation" [error]="signupForm.controls.password_confirmation.invalid && signupForm.controls.password_confirmation.dirty"
+                    [errorMessage]="errorFor('password_confirmation')"></mbsc-input>
+            </div>
+            <div class="md-cac-btn mbsc-form-group-inset mbsc-btn-group-block">
+                <mbsc-button type="submit" (click)="registrar()" [disabled]="email.length < 5 || password.length < 4">Crear cuenta</mbsc-button>
+
+            </div>
+        </div>
+
+
+    </form>
+</mbsc-form>

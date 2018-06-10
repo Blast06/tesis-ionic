@@ -1,0 +1,40 @@
+.md-create-account {
+    padding: 0 !important;
+}
+
+.md-create-account .md-cac-title {
+    text-align: center;
+    padding-bottom: 3em;
+}
+
+.md-create-account .md-cac-title,
+.md-create-account .md-cac-cont {
+    padding-top: 0;
+}
+
+.md-create-account .md-cac-cont {
+    padding-bottom: 0;
+}
+
+.md-create-account .md-chart-pic {
+    background-image: url("/content/img/demos/chart@1x.png");
+    height: 150px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 144dpi) {
+    .md-create-account .md-chart-pic {
+        background: url("/Content/img/demos/chart@2x.png") no-repeat center 12px;
+        background-size: 109px 81px;
+        background-position: center;
+    }
+}
+
+.md-phone-num .mbsc-np-dsp {
+    min-height: 25px;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}

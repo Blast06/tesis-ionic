@@ -1,0 +1,20 @@
+<mbsc-form class="md-login-form" [options]="formSettings"  >
+  <form [formGroup]="loginForm" novalidate>
+      <div class="md-logo micons icon-mbsc-logo"></div>
+      <div class="mbsc-form-group-inset">
+          <mbsc-input [(ngModel)]="correo" formControlName="email" name="Email" placeholder="Email" [error]="loginForm.controls.email.invalid && loginForm.controls.email.dirty" [errorMessage]="errorFor('email')"></mbsc-input>
+          <mbsc-input [(ngModel)]="clave" formControlName="password" name="password" type="text" placeholder="Password" password-toggle="true" icon="none" icon-align="right" [error]="loginForm.controls.password.invalid && loginForm.controls.password.dirty" [errorMessage]="errorFor('password')"></mbsc-input>
+      </div>
+      <div class="mbsc-form-group-inset mbsc-padding mbsc-align-center">
+          <a (click)="irRegistro()" >No tienes cuenta? Crea una!.</a>
+          <br><br>
+          <a href="#">Olvidaste tu clave?</a>
+      </div>
+      <div class="mbsc-form-group-inset mbsc-padding">
+          <mbsc-button block *ngIf="isLogin" [disabled]="loginForm.invalid && attemptedSubmit" (click)="logIn()">Sign in</mbsc-button>
+          
+          <button class="mbsc-form-group-inset mbsc-padding block" ion-button [disabled]="correo.length < 5 || clave.length < 4" (click)="ingresar()">INGRESAR</button>
+      </div>
+
+  </form>
+</mbsc-form>

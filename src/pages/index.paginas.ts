@@ -1,0 +1,9 @@
+export { ArticuloPage } from './articulo/articulo';
+export { CategoriasPage } from './categorias/categorias';
+export { RegistroPage } from './registro/registro';
+export { PorCategoriaPage } from './por-categoria/por-categoria';
+export { PedidosPage } from './pedidos/pedidos';
+export { PedidosDetallePage } from './pedidos-detalle/pedidos-detalle';
+export { CarritoPage } from './carrito/carrito';
+export { LoginPage } from './login/login';
+export { TabsPage } from './tabs/tabs';
