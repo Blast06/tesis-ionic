@@ -1,3 +1,11 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons>
+            <button ion-button (click)="viewCtrl.dismiss(false)"> Cerrar</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
 <mbsc-form class="md-login-form" [options]="formSettings"  >
   <form [formGroup]="loginForm" novalidate>
       <div class="md-logo micons icon-mbsc-logo"></div>

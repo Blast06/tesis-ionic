@@ -1,8 +1,10 @@
-import { URL_BASE } from './../URLs/url.servicios';
+import { URL_SIGNUP, URL_LOGIN } from './../URLs/url.servicios';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 
 import { Injectable } from "@angular/core";
-import { Http, URLSearchParams, HttpModule, Response } from "@angular/http";
+import { Http, URLSearchParams, HttpModule, Response, Headers } from "@angular/http";
 import 'rxjs/add/operator/map';
 
 import { Storage } from "@ionic/storage";
@@ -12,18 +14,45 @@ import { AlertController, Platform } from "ionic-angular";
 import { FormGroup } from '@angular/forms';
 
 
+const headers = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+    'Access-Control-Allow-Origin': '*'
+};
+
+
+// const httpOptions = {
+//     headers: new HttpHeaders({
+//         'Access-Control-Allow-Origin': '*',
+//         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+//         'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
+//         'Access-Control-Allow-Credentials': true,
+//     })
+// };
+
 @Injectable()
 export class UsuarioProvider {
 
     token: string;
     id_usuario: string;
-    
+    // headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+   
+
+
+
+    // headers = new Headers();
+
     signupForm: FormGroup;
 
     constructor(private http: Http,
         private alertCtrl: AlertController,
         private platform: Platform,
-        private storage: Storage) {
+        private storage: Storage,
+        private http2: HttpClient) {
+
+
 
     }
 
@@ -45,9 +74,11 @@ export class UsuarioProvider {
             password: password
         };
 
-        let url = URL_BASE + '/login';
+       
 
-        return this.http.post(url, body).map(data_resp => {
+        // return this.http2.post(url, body, {headers:headers});
+
+        return this.http.post(URL_LOGIN, body).map(data_resp => {
 
             console.log("DATOS A ENVIAR(DENTRO DEL USUARIO SERVICE): ");
             //convertir el body en json() 
@@ -67,6 +98,24 @@ export class UsuarioProvider {
                 //guardar storage
             }
         });
+    }
+
+    ingresar2(email:string, password:string){
+
+        let data = new URLSearchParams();
+        data.append("email",email);
+        data.append("password",password);
+
+        return this.http.post(URL_LOGIN,data)
+                        .map( resp => {
+                            let data_resp = resp.json();
+                            console.log(data_resp);
+                            
+
+
+                        })
+        
+
     }
 
     cerrar_sesion() {
@@ -149,21 +198,21 @@ export class UsuarioProvider {
     }
 
 
-    registrar(name:string,email:string,password:string,password_confirmation:string){
-        let form ={
-            name:name,
+    registrar(name: string, email: string, password: string, password_confirmation: string) {
+        let form = {
+            name: name,
             email: email,
-            password:password,
-            password_confirmation:password_confirmation
-            
+            password: password,
+            password_confirmation: password_confirmation
+
         };
 
-        return this.http.post(URL_BASE + '/signup', form).subscribe(
+        return this.http.post( URL_SIGNUP, form).subscribe(
             data => console.log(data),
             error => console.log(error)
         )
 
-        
+
     }
 
 }

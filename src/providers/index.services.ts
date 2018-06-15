@@ -1,3 +1,3 @@
 export { ArticlesProvider } from './article.service';
-export { CarritoProvider } from './carrito';
-export { UsuarioProvider } from './usuario';
+export { CarritoProvider } from './carrito.service';
+export { UsuarioProvider } from './usuario.service';

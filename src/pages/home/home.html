@@ -9,6 +9,16 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Inicio</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="carritoService.ver_carrito()">
+        <ion-icon name="cart"></ion-icon>
+        <ion-badge color="danger" class="carrito-numero" *ngIf="carritoService.items.length > 0">{{carritoService.items.length}}
+        </ion-badge>
+
+      </button>
+      &nbsp; &nbsp;
+    </ion-buttons>
   </ion-navbar>
   <ion-searchbar placeholder="Buscar" (ionInput)="getItems($event)"></ion-searchbar>
 </ion-header>
@@ -34,12 +44,12 @@
     <ion-item no-lines>
       <ion-title>Recomendados..</ion-title>
       <ion-scroll scrollX="true">
-      
-          <img src="assets/imgs/card-amsterdam.png" />
-      
-          <img src="assets/imgs/card-sf.png" />
-      
-          <img src="assets/imgs/card-madison.png" />
+
+        <img src="assets/imgs/card-amsterdam.png" />
+
+        <img src="assets/imgs/card-sf.png" />
+
+        <img src="assets/imgs/card-madison.png" />
 
 
       </ion-scroll>
@@ -49,27 +59,16 @@
 
 
 
-<div class="pins">
-  <div class="pin" *ngFor="let article of articles | async" [navPush]="articuloPage" [navParams]="{articulo: article}">
-    <img [src]="article.image_path" alt="" srcset="">
-    <p>{{article.name}}</p>
-    <small>{{article.price | currency}}</small>
+  <div class="pins">
+    <div class="pin" *ngFor="let article of articles | async" [navPush]="articuloPage" [navParams]="{articulo: article}">
+      <img [src]="article.image_path" alt="" srcset="">
+      <p>{{article.name}}</p>
+      <small>{{article.price | currency}}</small>
+    </div>
   </div>
-</div>
 
 
-<!-- 
-  <ion-grid>
-    <ion-row *ngFor="let article of articles | async" [navPush]="articuloPage" [navParams]="{articulo: article}">
-      <ion-col col-6>
-        <img [src]="article.image_path" alt="" srcset="">
-        <p>{{article.name}}
-          <br>
-          {{article.price | currency}}
-        </p>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
+
 
 
   <ion-infinite-scroll (ionInfinite)="siguiente_pagina($event)">

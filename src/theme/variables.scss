@@ -23,6 +23,23 @@ $app-direction: ltr;
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
 
+.carrito_vacio{
+  position: relative;
+  top: 30%;
+  font-size: 20px;
+}
+
+.icon-5x{
+  font-size: 100px;
+
+}
+
+.carrito-numero{
+  position: absolute;
+  top: -5px;
+  left: 18px;
+  
+}
 
 
 // Named Color Variables

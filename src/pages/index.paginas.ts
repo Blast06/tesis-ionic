@@ -1,3 +1,4 @@
+export { HomePage } from './home/home';
 export { ArticuloPage } from './articulo/articulo';
 export { CategoriasPage } from './categorias/categorias';
 export { RegistroPage } from './registro/registro';

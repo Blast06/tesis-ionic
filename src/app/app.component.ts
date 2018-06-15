@@ -1,10 +1,9 @@
-import { LoginPage } from './../pages/login/login';
+
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { HomePage } from '../pages/home/home';
-import { RegistroPage } from '../pages/registro/registro';
+import { RegistroPage,HomePage,TabsPage,LoginPage } from "../pages/index.paginas";
 
 
 @Component({
@@ -13,7 +12,7 @@ import { RegistroPage } from '../pages/registro/registro';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = TabsPage;
 
   pages: Array<{ title: string, component: any }>;
 
@@ -26,7 +25,6 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
       { title: 'Login', component: LoginPage },
       { title: 'Registro', component: RegistroPage },
 

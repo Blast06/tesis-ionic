@@ -4,5 +4,8 @@
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
+
   }
 }
+
+

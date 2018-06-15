@@ -2,7 +2,7 @@ import { UsuarioProvider } from './../../providers/index.services';
 
 import { RegistroPage } from './../registro/registro';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { mobiscroll } from '@mobiscroll/angular';
 
@@ -28,7 +28,11 @@ export class LoginPage {
 
   
 
-  constructor(private fb: FormBuilder, private navCtrl: NavController, private navParams: NavParams, private usuarioService: UsuarioProvider) {
+  constructor(private fb: FormBuilder, 
+              private navCtrl: NavController, 
+              private navParams: NavParams, 
+              private usuarioService: UsuarioProvider,
+              private viewCtrl: ViewController) {
     this.loginForm = fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]

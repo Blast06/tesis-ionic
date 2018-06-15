@@ -1,4 +1,4 @@
-import { UsuarioProvider } from './../../providers/usuario';
+import { UsuarioProvider } from '../../providers/usuario.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';

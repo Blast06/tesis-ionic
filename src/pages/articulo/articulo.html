@@ -22,7 +22,7 @@
     <p>{{articulo.description}}</p>
     <p>Precio: <strong>{{articulo.price | currency}}</strong></p>
 
-    <button ion-button block icon-left> <ion-icon name="cart"></ion-icon>
+    <button ion-button block icon-left (click)="carritoService.agregar_carrito(articulo)" > <ion-icon name="cart" ></ion-icon>
        Agregar al carrito</button>
   </div>
 

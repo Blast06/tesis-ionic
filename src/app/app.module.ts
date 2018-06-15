@@ -1,6 +1,6 @@
+import { HTTP } from '@ionic-native/http';
 
 
-import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule } from '@angular/http';
 import { MbscModule } from '@mobiscroll/angular';
 import { FormsModule } from '@angular/forms';
@@ -16,11 +16,13 @@ import { HomePage } from '../pages/home/home';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+// storage
+import { IonicStorageModule } from '@ionic/storage';
+
 //servicios
 import { CarritoProvider,ArticlesProvider,UsuarioProvider} from "../providers/index.services";
 
 //paginas
-
 import { 
  
     ArticuloPage,
@@ -82,7 +84,9 @@ import {
     UsuarioProvider,
     IonicStorageModule,
     ArticlesProvider,
-    CarritoProvider
+    CarritoProvider,
+    HTTP
+
   ]
 })
 export class AppModule {}
