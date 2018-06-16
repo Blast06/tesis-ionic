@@ -1,3 +1,4 @@
+import { UsuarioProvider } from './../providers/usuario.service';
 
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
@@ -16,7 +17,7 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor( public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor( public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public us:UsuarioProvider) {
     this.initializeApp();
 
     
@@ -24,11 +25,22 @@ export class MyApp {
 
 
     // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Login', component: LoginPage },
-      { title: 'Registro', component: RegistroPage },
-
-    ];
+    if (us.token) {
+      this.pages = [
+        { title: 'Mi perfil', component: LoginPage },
+        { title: 'Configuracion', component: RegistroPage },
+        { title: 'Mis sitios', component: RegistroPage },
+        { title: 'Mensajes', component: RegistroPage },
+  
+      ];
+      
+    }else{
+      this.pages = [
+        { title: 'Login', component: LoginPage },
+        { title: 'Registro', component: RegistroPage },
+  
+      ];
+    }
 
   }
 

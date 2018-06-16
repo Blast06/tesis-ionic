@@ -24,26 +24,30 @@ export class HomePage  implements OnInit{
 
   articles: Observable<Article[]>;
 
-
-  constructor(public navCtrl: NavController,
-              public _us:UsuarioProvider, public _articleService:ArticlesProvider, public carritoService:CarritoProvider) {
-
-  }
-
-  ngOnInit(){
-
-    this.articles = this._articleService.getArticles();
-    console.log("cantidad de items:")
-    console.log(this.carritoService.items.length)
   
-
+  
+  constructor(public navCtrl: NavController,
+    public _us:UsuarioProvider, public _articleService:ArticlesProvider, public carritoService:CarritoProvider) {
+      
+    }
+    
+    ngOnInit(){
+      
+      this.articles = this._articleService.getArticles();
+      console.log("cantidad de items:")
+      console.log(this.carritoService.items.length)
+      
+      
+    }
+    
+    siguiente_pagina(infiniteScroll){
+      
+      this._articleService.getArticles();
+      
+      
+    }
+    
+    
+    
   }
-
-  siguiente_pagina(infiniteScroll){
-
-    this._articleService.getArticles()
-
-
-  }
-
-}
+  

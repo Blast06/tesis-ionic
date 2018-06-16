@@ -51,6 +51,7 @@ export class UsuarioProvider {
         private platform: Platform,
         private storage: Storage,
         private http2: HttpClient) {
+            this.cargar_storage();
 
 
 
@@ -94,8 +95,10 @@ export class UsuarioProvider {
                 }).present();
             } else {
                 this.token = body2.token2;
-                this.id_usuario = body2.id;
+                this.id_usuario = body2.user;
+                
                 //guardar storage
+                this.guardar_storage();
             }
         });
     }
@@ -214,5 +217,7 @@ export class UsuarioProvider {
 
 
     }
+
+
 
 }

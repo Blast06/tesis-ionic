@@ -63,7 +63,7 @@
     <div class="pin" *ngFor="let article of articles | async" [navPush]="articuloPage" [navParams]="{articulo: article}">
       <img [src]="article.image_path" alt="" srcset="">
       <p>{{article.name}}</p>
-      <small>{{article.price | currency}}</small>
+      <small>{{article.price | currency:'RD$':true}}</small>
     </div>
   </div>
 
@@ -71,7 +71,7 @@
 
 
 
-  <ion-infinite-scroll (ionInfinite)="siguiente_pagina($event)">
+  <ion-infinite-scroll (ionInfinite)="siguiente_pagina()">
 
     <ion-infinite-scroll-content>
 

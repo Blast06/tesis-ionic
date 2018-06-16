@@ -64,7 +64,7 @@ export class RegistroPage {
 
   }
 
-  //mensajes para los tipos de erroes
+  //mensajes para los tipos de errores
   errorMessages = {
     required: '{$1} requerido',
     minlength: 'AL menos 6 caracteres',

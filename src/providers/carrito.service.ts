@@ -9,16 +9,12 @@ import { UsuarioProvider } from './usuario.service';
 import { CarritoPage, LoginPage } from "../pages/index.paginas";
 
 
-/*
-  Generated class for the CarritoProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class CarritoProvider {
 
   items: any[] = [];
+  total_carrito:number = 0;
 
   constructor(public http: HttpClient,
     private alertCtrl: AlertController,
@@ -28,6 +24,7 @@ export class CarritoProvider {
     private modalCtrl: ModalController) {
     console.log('Hello CarritoProvider Provider');
     this.cargar_storage();
+    this.actualizar_total();
   }
 
   ver_carrito() {
@@ -49,7 +46,7 @@ export class CarritoProvider {
     modal.onDidDismiss((abrirCarrito: boolean) => {
 
       if (abrirCarrito) {
-        this.modalCtrl.create(CarritoPage);
+        this.modalCtrl.create(CarritoPage).present();
       }
     });
 
@@ -79,7 +76,18 @@ export class CarritoProvider {
     }
 
     this.items.push(item_parametro);
+    this.actualizar_total();
     this.guardar_storage();
+  }
+
+  actualizar_total(){
+    this.total_carrito = 0;
+
+    for(let item of this.items){
+      this.total_carrito += Number(item.price);
+    }
+
+
   }
 
 

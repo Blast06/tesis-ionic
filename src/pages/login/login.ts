@@ -45,6 +45,11 @@ export class LoginPage {
       .subscribe(()=>{
           console.log("DATOS A ENVIAR: " + this.correo,this.clave);
 
+          if (this.usuarioService.token_activo()) {
+              this.viewCtrl.dismiss(true);
+              
+          }
+
       });
 
   }
