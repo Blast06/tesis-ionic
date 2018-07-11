@@ -1,3 +1,4 @@
+import { MyApp } from './../../app/app.component';
 
 import { ArticuloPage } from './../index.paginas';
 
@@ -8,7 +9,18 @@ import { Observable } from 'rxjs/Observable';
 import { Article } from './../../app/models/article';
 
 import { Component, Input, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Events } from 'ionic-angular';
+
+//algolia
+import { NgAisModule } from 'angular-instantsearch';
+
+
+import {connectSearchBox} from 'instantsearch.js/es/connectors';
+import instantsearch from 'instantsearch.js/dist-es5-module/src/lib/main';
+
+import {searchBox} from 'instantsearch.js/es/widgets';
+
+
 
 
 @Component({
@@ -16,6 +28,9 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'home.html'
 })
 export class HomePage  implements OnInit{
+
+
+ 
 
 
 
@@ -27,15 +42,32 @@ export class HomePage  implements OnInit{
   
   
   constructor(public navCtrl: NavController,
-    public _us:UsuarioProvider, public _articleService:ArticlesProvider, public carritoService:CarritoProvider) {
+    public _us:UsuarioProvider, 
+    public _articleService:ArticlesProvider, 
+    public carritoService:CarritoProvider,
+    public events:Events,
+    ) {
       
     }
     
+    
     ngOnInit(){
+
+
+      //para cambiar las opciones del menu lateral
+
+      this.actualizar_menu();
+
+
+
+      
+
+      
       
       this.articles = this._articleService.getArticles();
       console.log("cantidad de items:")
       console.log(this.carritoService.items.length)
+      console.log(this._articleService.getArticles())
       
       
     }
@@ -45,6 +77,10 @@ export class HomePage  implements OnInit{
       this._articleService.getArticles();
       
       
+    }
+
+    actualizar_menu(){
+      this.events.publish('user:menu');
     }
     
     

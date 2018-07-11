@@ -1,10 +1,11 @@
-import { UsuarioProvider } from './../providers/usuario.service';
+import { Network } from '@ionic-native/network';
 
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { RegistroPage,HomePage,TabsPage,LoginPage } from "../pages/index.paginas";
+import { RegistroPage, HomePage, TabsPage, LoginPage, PerfilPage, ConfiguracionPage, MensajesPage, MisSitiosPage } from "../pages/index.paginas";
+import { NetworkProvider, UsuarioProvider } from "../providers/index.services";
 
 
 @Component({
@@ -17,45 +18,76 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor( public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public us:UsuarioProvider) {
+  network: Network;
+
+  constructor(public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    public us: UsuarioProvider,
+    public events: Events,
+    public networkProvider: NetworkProvider, ) {
     this.initializeApp();
 
-    
+    // funcion para cambiar las opciones a mostrar
+    this.actualizar_menu();
+
+    //para poder usarla en otros components
+    events.subscribe('user:menu', () => {
+      this.actualizar_menu();
+    });
 
 
 
-    // used for an example of ngFor and navigation
-    if (us.token) {
-      this.pages = [
-        { title: 'Mi perfil', component: LoginPage },
-        { title: 'Configuracion', component: RegistroPage },
-        { title: 'Mis sitios', component: RegistroPage },
-        { title: 'Mensajes', component: RegistroPage },
-  
-      ];
-      
-    }else{
-      this.pages = [
-        { title: 'Login', component: LoginPage },
-        { title: 'Registro', component: RegistroPage },
-  
-      ];
-    }
+
 
   }
 
   initializeApp() {
+
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.networkProvider.initializeNetworkEvents();
+
+      // Offline event
+      this.events.subscribe('network:offline', () => {
+        alert('network:offline ==> ' + this.network.type);
+      });
+
+      // Online event
+      this.events.subscribe('network:online', () => {
+        alert('network:online ==> ' + this.network.type);
+      });
+
     });
   }
+
 
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.push(page.component);
   }
+
+  actualizar_menu() {
+    if (this.us.token) {
+      this.pages = [
+        { title: 'Mi perfil', component: PerfilPage },
+        { title: 'Configuracion', component: ConfiguracionPage },
+        { title: 'Mis sitios', component: MisSitiosPage },
+        { title: 'Mensajes', component: MensajesPage },
+
+      ];
+
+    } else {
+      this.pages = [
+        { title: 'Iniciar sesion', component: LoginPage },
+        { title: 'Registro', component: RegistroPage },
+
+      ];
+    }
+
+  }
+
 }

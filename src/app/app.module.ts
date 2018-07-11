@@ -1,4 +1,7 @@
+import { Network } from '@ionic-native/network';
+
 import { HTTP } from '@ionic-native/http';
+import { NgAisModule } from 'angular-instantsearch';
 
 
 import { HttpModule } from '@angular/http';
@@ -20,7 +23,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
 
 //servicios
-import { CarritoProvider,ArticlesProvider,UsuarioProvider} from "../providers/index.services";
+import { CarritoProvider,ArticlesProvider,UsuarioProvider,WebsiteProvider} from "../providers/index.services";
 
 //paginas
 import { 
@@ -34,8 +37,17 @@ import {
     CarritoPage,
     LoginPage,
     TabsPage,
+    PerfilPage,
+    MensajesPage,
+    MisSitiosPage,
+    ConfiguracionPage,
+    CrearSitiosPage
 
  } from "../pages/index.paginas";
+import { InstantsearchProvider } from '../providers/instantsearch';
+import { NetworkProvider } from '../providers/network/network';
+
+ 
 
 
 
@@ -53,6 +65,13 @@ import {
     CarritoPage,
     LoginPage,
     TabsPage,
+    PerfilPage,
+    MensajesPage,
+    MisSitiosPage,
+    ConfiguracionPage,
+    CrearSitiosPage
+    
+    
   ],
   imports: [ 
     MbscModule, 
@@ -61,6 +80,7 @@ import {
     HttpClientModule,
     HttpModule,
     IonicStorageModule.forRoot(),
+    NgAisModule.forRoot(),
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -76,6 +96,11 @@ import {
     CarritoPage,
     LoginPage,
     TabsPage,
+    PerfilPage,
+    MensajesPage,
+    MisSitiosPage,
+    ConfiguracionPage,
+    CrearSitiosPage
   ],
   providers: [
     StatusBar,
@@ -85,7 +110,11 @@ import {
     IonicStorageModule,
     ArticlesProvider,
     CarritoProvider,
-    HTTP
+    HTTP,
+    InstantsearchProvider,
+    NetworkProvider,
+    Network,
+    WebsiteProvider,
 
   ]
 })

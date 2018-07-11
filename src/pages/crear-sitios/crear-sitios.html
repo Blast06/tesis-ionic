@@ -1,0 +1,44 @@
+
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>CrearSitios</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form [formGroup]="createWebsiteForm">
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          Nombre sitio
+        </ion-label>
+        <ion-input [(ngModel)]="name" type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <!-- <ion-item *ngIf="name.hasError('required') && name.touched">
+        <p>Nombre obligatorio</p>
+      </ion-item> -->
+
+      <ion-item>
+        <ion-label>
+          Nombre usuario
+        </ion-label>
+        <ion-input [(ngModel)]="username" type="text" formControlName="username"></ion-input>
+      </ion-item>
+      <!-- <ion-item *ngIf="username.hasError('required') && username.touched">
+          <p>Usuario obligatorio</p>
+        </ion-item> -->
+
+    </ion-list>
+
+    <button clear ion-button block (click)="crearSitio()">Crear</button>
+  </form>
+
+  <p>{{name}}</p>
+  <p>{{username}}</p>
+
+</ion-content>

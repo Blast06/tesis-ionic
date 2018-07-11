@@ -34,20 +34,7 @@ export class ArticlesProvider {
   articulos: any[] = [];
 
 
-  //headers = new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded');
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
   constructor(public http: Http, 
               private http2: HttpClient,
               private http3: HTTP) {
@@ -56,6 +43,7 @@ export class ArticlesProvider {
 
 
   getArticles(): Observable<Article[]> {
+    
 
 
 
@@ -66,7 +54,7 @@ export class ArticlesProvider {
     // } );
 
     //ESTO ES CON HTTP1
-    return this.http.get(URL_ARTICULOS).map((response: Response) => response.json());
+    return this.http.get(URL_ARTICULOS).map((response: Response) => response.json().data);
 
     // return this.http3.get(URL_ARTICULOS).then( data => {
 

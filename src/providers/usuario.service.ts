@@ -1,25 +1,30 @@
-import { URL_SIGNUP, URL_LOGIN } from './../URLs/url.servicios';
+import { Observable } from 'rxjs/Observable';
+import { URL_SIGNUP, URL_LOGIN, URL_SHOW_USER, URL_LOGOUT } from './../URLs/url.servicios';
 import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 
 import { Injectable } from "@angular/core";
-import { Http, URLSearchParams, HttpModule, Response, Headers } from "@angular/http";
+import { Http, URLSearchParams, HttpModule, Response, Headers, RequestOptions } from "@angular/http";
 import 'rxjs/add/operator/map';
 
 import { Storage } from "@ionic/storage";
 // import { IonicStorageModule } from '@ionic/storage';
 
-import { AlertController, Platform } from "ionic-angular";
+import { AlertController, Platform, ToastController, Events } from "ionic-angular";
 import { FormGroup } from '@angular/forms';
+import { User } from '../app/models/user';
 
 
-const headers = {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-    'Access-Control-Allow-Origin': '*'
-};
+// const headers = {
+//     'Content-Type': 'application/json',
+//     'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
+//     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+//     'Access-Control-Allow-Origin': '*',
+//     'grant_type': 'password',
+//     'client_secret': 'WwiXbLKfq2iZ5KOpVwUOsSq5U4C80AhKPWq928we',
+    
+// };
 
 
 // const httpOptions = {
@@ -31,6 +36,9 @@ const headers = {
 //     })
 // };
 
+const CLIENT_ID = "2" ;
+const SECRET_KEY ="WwiXbLKfq2iZ5KOpVwUOsSq5U4C80AhKPWq928we" ;
+
 @Injectable()
 export class UsuarioProvider {
 
@@ -39,10 +47,16 @@ export class UsuarioProvider {
     // headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
    
+    user: any[] = [];
 
 
 
-    // headers = new Headers();
+    headers = new Headers();
+    headers2 = new Headers();
+
+    private options;
+
+
 
     signupForm: FormGroup;
 
@@ -50,8 +64,22 @@ export class UsuarioProvider {
         private alertCtrl: AlertController,
         private platform: Platform,
         private storage: Storage,
-        private http2: HttpClient) {
+        private http2: HttpClient,
+        private toastCtrl: ToastController,
+        public events:Events) {
             this.cargar_storage();
+
+            //para las peticiones que necesitan user conectado
+            this.headers.append("Content-Type", "Application/json");
+            this.headers.append("Authorization", "Bearer " + this.token);
+
+        
+            //para el login
+            this.headers2.append("Accept","Application/json");
+            this.headers2.append("Content-Type", "Application/json");
+
+            this.options = new RequestOptions({ headers:this.headers2});
+
 
 
 
@@ -68,58 +96,57 @@ export class UsuarioProvider {
     }
 
 
-    ingresar(email: string, password: string) {
+    ingresar(username: string, password: string) {
 
         let body = {
-            email: email,
-            password: password
+            username: username,
+            password: password,
+            client_secret:SECRET_KEY,
+            client_id:CLIENT_ID,
+            grant_type:"password"
+            
+            
         };
 
        
 
         // return this.http2.post(url, body, {headers:headers});
 
-        return this.http.post(URL_LOGIN, body).map(data_resp => {
+        return this.http.post(URL_LOGIN, body, this.options).map(data_resp => {
 
-            console.log("DATOS A ENVIAR(DENTRO DEL USUARIO SERVICE): ");
+            console.log("DATOS A ENVIAR(DENTRO DEL USUARIO en usuarioSERVICE): ");
+
             //convertir el body en json() 
             let body2 = data_resp.json() || {};
             console.log(body2);
+            
 
 
-            if (data_resp["error"]) {
+            if (!data_resp.status ) {
                 this.alertCtrl.create({
                     title: 'Error al iniciar',
-                    subTitle: data_resp["Message"],
+                    subTitle: data_resp["MESSAGE"],
                     buttons: ["OK"]
                 }).present();
             } else {
-                this.token = body2.token2;
-                this.id_usuario = body2.user;
+
+                this.presentToast();
+                
+                this.token = body2.access_token;
+                //this.id_usuario = body2.user;
                 
                 //guardar storage
                 this.guardar_storage();
+                //para actualizar el side menu
+                this.events.publish('user:menu');
             }
         });
     }
 
-    ingresar2(email:string, password:string){
-
-        let data = new URLSearchParams();
-        data.append("email",email);
-        data.append("password",password);
-
-        return this.http.post(URL_LOGIN,data)
-                        .map( resp => {
-                            let data_resp = resp.json();
-                            console.log(data_resp);
-                            
+    
 
 
-                        })
-        
-
-    }
+    
 
     cerrar_sesion() {
         this.token = null;
@@ -127,6 +154,8 @@ export class UsuarioProvider {
 
         //guardar storage
         this.guardar_storage();
+        this.events.publish('user:menu');
+        // return this.http.post(URL_LOGOUT)
     }
 
     private guardar_storage() {
@@ -217,6 +246,28 @@ export class UsuarioProvider {
 
 
     }
+
+    presentToast() {
+        let toast = this.toastCtrl.create({
+          message: 'Bienvenido',
+          duration: 3000,
+          position: 'bottom'
+        });
+      
+        toast.onDidDismiss(() => {
+          console.log('Dismissed toast');
+        });
+      
+        toast.present();
+      }
+
+
+      getUser(id_usuario):Observable<User[]>{
+          id_usuario = this.id_usuario;
+
+        return this.http.post(URL_SHOW_USER,id_usuario).map((response: Response) => response.json());
+
+      }
 
 
 

@@ -20,14 +20,16 @@
       &nbsp; &nbsp;
     </ion-buttons>
   </ion-navbar>
-  <ion-searchbar placeholder="Buscar" (ionInput)="getItems($event)"></ion-searchbar>
+
+
+
 </ion-header>
 
 <ion-content>
 
   <!-- botones iniciales -->
-  <ion-row>
-    <ion-item no-lines>
+  <ion-row custommarging>
+    <ion-item no-lines >
       <ion-scroll scrollX="true">
         <button ion-button>Vehiculos</button>
         <button ion-button>Electrodomesticos</button>
@@ -38,25 +40,6 @@
       </ion-scroll>
     </ion-item>
   </ion-row>
-
-
-  <ion-row>
-    <ion-item no-lines>
-      <ion-title>Recomendados..</ion-title>
-      <ion-scroll scrollX="true">
-
-        <img src="assets/imgs/card-amsterdam.png" />
-
-        <img src="assets/imgs/card-sf.png" />
-
-        <img src="assets/imgs/card-madison.png" />
-
-
-      </ion-scroll>
-    </ion-item>
-  </ion-row>
-
-
 
 
   <div class="pins">

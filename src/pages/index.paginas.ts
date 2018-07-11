@@ -1,3 +1,8 @@
+export { CrearSitiosPage } from './crear-sitios/crear-sitios';
+export { MisSitiosPage } from './mis-sitios/mis-sitios';
+export { ConfiguracionPage } from './configuracion/configuracion';
+export { MensajesPage } from './mensajes/mensajes';
+export { PerfilPage } from './perfil/perfil';
 export { HomePage } from './home/home';
 export { ArticuloPage } from './articulo/articulo';
 export { CategoriasPage } from './categorias/categorias';

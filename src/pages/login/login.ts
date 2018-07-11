@@ -2,7 +2,7 @@ import { UsuarioProvider } from './../../providers/index.services';
 
 import { RegistroPage } from './../registro/registro';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, Events } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { mobiscroll } from '@mobiscroll/angular';
 
@@ -25,6 +25,7 @@ export class LoginPage {
   correo:string = '';
   clave:string = '';
 
+  user:any;
 
   
 
@@ -32,7 +33,8 @@ export class LoginPage {
               private navCtrl: NavController, 
               private navParams: NavParams, 
               private usuarioService: UsuarioProvider,
-              private viewCtrl: ViewController) {
+              private viewCtrl: ViewController,
+              public events:Events,  ) {
     this.loginForm = fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -49,8 +51,15 @@ export class LoginPage {
               this.viewCtrl.dismiss(true);
               
           }
+          
 
       });
+
+    //   this.user =this.usuarioService.getUser();
+
+    //   console.log("Usuario datos" + this.user);
+
+      
 
   }
 
@@ -79,35 +88,8 @@ export class LoginPage {
       }
   }
 
-//   signUp(ev) {
-//       this.attemptedSubmit = true;
-//       if (this.loginForm.valid) {
-//           mobiscroll.toast({
-//               message: 'Signed Up!',
-//               callback: function () {
-//                   this.loginForm.reset();
-//                   this.attemptedSubmit = false;
-//               }.bind(this)
-//           });
-//       } else {
-//           this.markFieldsDirty();
-//       }
-//   }
 
-//   logIn(ev) {
-//       this.attemptedSubmit = true;
-//       if (this.loginForm.valid) {
-//           mobiscroll.toast({
-//               message: 'Logged In!',
-//               callback: function () {
-//                   this.loginForm.reset();
-//                   this.attemptedSubmit = false;
-//               }.bind(this)
-//           });
-//       } else {
-//           this.markFieldsDirty();
-//       }
-//   }
+
 
   //mensajes para los tipos de erroes
   errorMessages = {
