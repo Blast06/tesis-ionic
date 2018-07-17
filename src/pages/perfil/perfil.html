@@ -1,20 +1,51 @@
-<!--
-  Generated template for the ProfilePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>Profile</ion-title>
+<ion-header  class="myHeader" >
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-capitalize>Perfil</ion-title>
+    <ion-buttons class="head-btns" end>
+      <button (click)="presentCartModal()" ion-button icon-only>
+        <ion-icon name="md-cart"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
+  <ion-toolbar color="primary" class="profile-head" text-center *ngIf="user"> 
+    <img src="assets/imgs/profile-img.png" />
+    <h4>{{user.name}}</h4>
+    <p>{{user.email}}</p>
+  </ion-toolbar>
+
+  <ion-segment [(ngModel)]="tabs" >
+      <ion-segment-button value="Likes" (click)="selectTab(0)" value="0" text-uppercase>
+        Favoritos
+      </ion-segment-button>
+      <ion-segment-button value="notification" (click)="selectTab(1)" value="1" text-uppercase>
+        Mis sitios
+      </ion-segment-button>
+  </ion-segment>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content fullscreen (ionScroll)="scrollingFun($event)" [ngSwitch]="tabs">
+    <ion-slides class="app-slider" #pageSlider>
+      <ion-slide  (ionSlideWillChange)="changeWillSlide($event)">
+          <!-- <div class="sub-list">
+          </div>         -->
+          <div>Aqui va Favoritos</div>
+      </ion-slide>
+      <ion-slide  (ionSlideWillChange)="changeWillSlide($event)">
+          <!-- <ion-item class="cart-list" no-lines>
+              <ion-thumbnail item-left>
+                <img src="assets/img/cart-img.png">
+              </ion-thumbnail>
+              <h2>your order arrived <span>$ 150.00</span></h2>
+              <p>30 mins ago</p>
+          </ion-item> -->
 
-  
+          <div>Aqui va Mis sitios</div>
 
+      </ion-slide>
+    </ion-slides>
 </ion-content>

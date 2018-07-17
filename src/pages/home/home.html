@@ -22,13 +22,12 @@
   </ion-navbar>
 
 
-
 </ion-header>
 
 <ion-content>
 
   <!-- botones iniciales -->
-  <ion-row custommarging>
+  <!-- <ion-row custommarging>
     <ion-item no-lines >
       <ion-scroll scrollX="true">
         <button ion-button>Vehiculos</button>
@@ -39,7 +38,7 @@
         <button ion-button>Subastas</button>
       </ion-scroll>
     </ion-item>
-  </ion-row>
+  </ion-row> -->
 
 
   <div class="pins">
@@ -49,9 +48,6 @@
       <small>{{article.price | currency:'RD$':true}}</small>
     </div>
   </div>
-
-
-
 
 
   <ion-infinite-scroll (ionInfinite)="siguiente_pagina()">

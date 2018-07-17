@@ -54,11 +54,6 @@ export class LoginPage {
           
 
       });
-
-    //   this.user =this.usuarioService.getUser();
-
-    //   console.log("Usuario datos" + this.user);
-
       
 
   }
@@ -72,12 +67,7 @@ export class LoginPage {
     theme: 'ios'
   };
 
-  
-
-  ionViewDidLoad() {
-      console.log('ionViewDidLoad LoginPage');
-    }
-
+ 
     irRegistro(){
       this.navCtrl.push(this.registro);
     }

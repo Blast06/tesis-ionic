@@ -44,36 +44,7 @@ export class ArticlesProvider {
 
   getArticles(): Observable<Article[]> {
     
-
-
-
-    // let promesa = new Promise( (resolve, reject) => {
-
-
-
-    // } );
-
-    //ESTO ES CON HTTP1
     return this.http.get(URL_ARTICULOS).map((response: Response) => response.json().data);
-
-    // return this.http3.get(URL_ARTICULOS).then( data => {
-
-    // })
-
-
-
-
-
-
-
-    //ESTA ES CON EL NUEVO HTTPCLIENT
-    // return this.http.get<Article[]>(URL_ARTICULOS)
-    // .pipe(
-    //   tap(heroes => this.log(`fetched users`)),
-    // )
-
-
-
   }
 
 }

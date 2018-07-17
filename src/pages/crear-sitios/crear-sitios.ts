@@ -39,11 +39,6 @@ export class CrearSitiosPage {
 
   crearSitio() {
     console.log("DATOS en crearsitios.ts: " + this.createWebsiteForm.value);
-
-    this.websiteService.crearWebsite(this.name, this.username).subscribe(() => {
-      console.log("DATOS A ENVIAR EN CREARSTIOS.TS: " + this.name, this.username, this.user_id);
-    });
-
   }
 
   getUserId() {

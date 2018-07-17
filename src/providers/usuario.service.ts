@@ -1,12 +1,13 @@
 import { Observable } from 'rxjs/Observable';
-import { URL_SIGNUP, URL_LOGIN, URL_SHOW_USER, URL_LOGOUT } from './../URLs/url.servicios';
+import { URL_SIGNUP, URL_LOGIN, URL_SHOW_USER } from './../URLs/url.servicios';
 import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 
 import { Injectable } from "@angular/core";
 import { Http, URLSearchParams, HttpModule, Response, Headers, RequestOptions } from "@angular/http";
-import 'rxjs/add/operator/map';
+//import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 
 import { Storage } from "@ionic/storage";
 // import { IonicStorageModule } from '@ionic/storage';
@@ -42,9 +43,9 @@ const SECRET_KEY ="WwiXbLKfq2iZ5KOpVwUOsSq5U4C80AhKPWq928we" ;
 @Injectable()
 export class UsuarioProvider {
 
-    token: string;
-    id_usuario: string;
-    // headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    public token: string;
+    public id_usuario: string;
+   
 
    
     user: any[] = [];
@@ -55,6 +56,7 @@ export class UsuarioProvider {
     headers2 = new Headers();
 
     private options;
+    private options2;
 
 
 
@@ -69,18 +71,17 @@ export class UsuarioProvider {
         public events:Events) {
             this.cargar_storage();
 
-            //para las peticiones que necesitan user conectado
-            this.headers.append("Content-Type", "Application/json");
-            this.headers.append("Authorization", "Bearer " + this.token);
 
-        
             //para el login
-            this.headers2.append("Accept","Application/json");
-            this.headers2.append("Content-Type", "Application/json");
+            this.headers.append("Accept","Application/json");
+            this.headers.append("Content-Type", "Application/json");
 
-            this.options = new RequestOptions({ headers:this.headers2});
+            this.options = new RequestOptions({ headers:this.headers});
 
-
+            //para las peticiones que necesitan user conectado
+            this.headers2.append("Accept", "Application/json");
+            this.headers2.append("Authorization", "Bearer " + this.token);
+            this.options2 = new RequestOptions({ headers:this.headers2});
 
 
     }
@@ -143,10 +144,9 @@ export class UsuarioProvider {
         });
     }
 
-    
-
-
-    
+    mostrar_usuario(){
+        return this.http.get(URL_SHOW_USER,this.options2).map((response:Response) =>response.json());
+    }
 
     cerrar_sesion() {
         this.token = null;
@@ -155,7 +155,7 @@ export class UsuarioProvider {
         //guardar storage
         this.guardar_storage();
         this.events.publish('user:menu');
-        // return this.http.post(URL_LOGOUT)
+        
     }
 
     private guardar_storage() {

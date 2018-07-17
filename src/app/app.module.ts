@@ -9,6 +9,7 @@ import { MbscModule } from '@mobiscroll/angular';
 import { FormsModule } from '@angular/forms';
 
 
+
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -48,10 +49,6 @@ import { InstantsearchProvider } from '../providers/instantsearch';
 import { NetworkProvider } from '../providers/network/network';
 
  
-
-
-
-
 @NgModule({
   declarations: [
     MyApp,
@@ -69,7 +66,7 @@ import { NetworkProvider } from '../providers/network/network';
     MensajesPage,
     MisSitiosPage,
     ConfiguracionPage,
-    CrearSitiosPage
+    CrearSitiosPage,
     
     
   ],
@@ -82,6 +79,7 @@ import { NetworkProvider } from '../providers/network/network';
     IonicStorageModule.forRoot(),
     NgAisModule.forRoot(),
     IonicModule.forRoot(MyApp),
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [

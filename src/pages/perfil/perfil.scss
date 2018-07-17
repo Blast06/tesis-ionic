@@ -1,8 +1,68 @@
-page-perfil {
-    .profile-image{
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
+page-profile {
+    ion-segment{
+        margin-top: -2px;
+    }
+    .cart-list{
+        @extend %box-shadow !optional;
+        padding-left: 9px;
+        ion-thumbnail[item-left]{
+            margin: 7px 16px 7px 0;
+        }
+        ion-thumbnail{
+            min-width: 85px;
+            min-height: 80px;
+            img{
+                width: 85px;
+                height: 80px;
+            }
+        }
+        h2{
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+            span{
+                font-size: 1.15rem;
+                color: #757575;
+                margin-left: 10px;
+            }
+        }
+        p{
+            font-size: 1.2rem;
+        }
     }
 }
 
+.profile-head{
+    padding: 4px 50px;
+    img{
+        width: 95px;
+        height: 95px;
+        border-radius: 50%;
+        object-fit: cover;
+        -o-object-fit: cover;
+    }
+    h4{
+        @extend %overflow !optional;
+        margin: 5px 0 0 0;
+        font-size: 1.6rem;
+        font-weight: normal;
+        color: color($colors,light);
+    }
+    p{
+        @extend %overflow !optional;
+        margin: 3px 0 20px 0;
+        font-size: 1.3rem;
+        color: color($colors,light);
+    }
+}
+.myHeader{
+    transition: all .05s ease-in-out;
+}
+.userInfo{
+    .profile-head{
+        h4 , p , img{
+           opacity: 0;
+           transition: opacity .4s ease-in-out;
+        }
+    }
+}

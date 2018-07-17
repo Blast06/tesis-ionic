@@ -1,9 +1,8 @@
-import { MyApp } from './../../app/app.component';
 
 import { ArticuloPage } from './../index.paginas';
 
 //servicios
-import { UsuarioProvider,ArticlesProvider,CarritoProvider } from './../../providers/index.services';
+import { UsuarioProvider,ArticlesProvider,CarritoProvider, WebsiteProvider } from './../../providers/index.services';
 
 import { Observable } from 'rxjs/Observable';
 import { Article } from './../../app/models/article';
@@ -11,14 +10,7 @@ import { Article } from './../../app/models/article';
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController, Events } from 'ionic-angular';
 
-//algolia
-import { NgAisModule } from 'angular-instantsearch';
 
-
-import {connectSearchBox} from 'instantsearch.js/es/connectors';
-import instantsearch from 'instantsearch.js/dist-es5-module/src/lib/main';
-
-import {searchBox} from 'instantsearch.js/es/widgets';
 
 
 
@@ -46,6 +38,7 @@ export class HomePage  implements OnInit{
     public _articleService:ArticlesProvider, 
     public carritoService:CarritoProvider,
     public events:Events,
+    public websiteService:WebsiteProvider
     ) {
       
     }
@@ -55,26 +48,17 @@ export class HomePage  implements OnInit{
 
 
       //para cambiar las opciones del menu lateral
-
       this.actualizar_menu();
+      // this.websiteService.mostrar_articulos_sitios_suscritos().subscribe((data:any) =>{
+      //   console.log(data);
+      // });
 
 
-
-      
-
-      
-      
-      this.articles = this._articleService.getArticles();
-      console.log("cantidad de items:")
-      console.log(this.carritoService.items.length)
-      console.log(this._articleService.getArticles())
-      
-      
     }
     
     siguiente_pagina(infiniteScroll){
       
-      this._articleService.getArticles();
+     
       
       
     }
