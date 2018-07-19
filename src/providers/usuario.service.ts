@@ -17,37 +17,19 @@ import { FormGroup } from '@angular/forms';
 import { User } from '../app/models/user';
 
 
-// const headers = {
-//     'Content-Type': 'application/json',
-//     'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
-//     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-//     'Access-Control-Allow-Origin': '*',
-//     'grant_type': 'password',
-//     'client_secret': 'WwiXbLKfq2iZ5KOpVwUOsSq5U4C80AhKPWq928we',
-    
-// };
 
 
-// const httpOptions = {
-//     headers: new HttpHeaders({
-//         'Access-Control-Allow-Origin': '*',
-//         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-//         'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
-//         'Access-Control-Allow-Credentials': true,
-//     })
-// };
-
-const CLIENT_ID = "2" ;
-const SECRET_KEY ="WwiXbLKfq2iZ5KOpVwUOsSq5U4C80AhKPWq928we" ;
+const CLIENT_ID = "1";
+const SECRET_KEY = "hpeqZRvjM3yAyRL9cFzDclV6y2k5JqxdvU5wupvC";
 
 @Injectable()
 export class UsuarioProvider {
 
     public token: string;
     public id_usuario: string;
-   
 
-   
+
+
     user: any[] = [];
 
 
@@ -68,20 +50,20 @@ export class UsuarioProvider {
         private storage: Storage,
         private http2: HttpClient,
         private toastCtrl: ToastController,
-        public events:Events) {
-            this.cargar_storage();
+        public events: Events) {
+        this.cargar_storage();
 
 
-            //para el login
-            this.headers.append("Accept","Application/json");
-            this.headers.append("Content-Type", "Application/json");
+        //para el login
+        this.headers.append("Accept", "Application/json");
+        this.headers.append("Content-Type", "Application/json");
 
-            this.options = new RequestOptions({ headers:this.headers});
+        this.options = new RequestOptions({ headers: this.headers });
 
-            //para las peticiones que necesitan user conectado
-            this.headers2.append("Accept", "Application/json");
-            this.headers2.append("Authorization", "Bearer " + this.token);
-            this.options2 = new RequestOptions({ headers:this.headers2});
+        //para las peticiones que necesitan user conectado
+        this.headers2.append("Accept", "Application/json");
+        this.headers2.append("Authorization", "Bearer " + this.token);
+        this.options2 = new RequestOptions({ headers: this.headers2 });
 
 
     }
@@ -102,50 +84,51 @@ export class UsuarioProvider {
         let body = {
             username: username,
             password: password,
-            client_secret:SECRET_KEY,
-            client_id:CLIENT_ID,
-            grant_type:"password"
-            
-            
+            client_secret: SECRET_KEY,
+            client_id: CLIENT_ID,
+            grant_type: "password"
         };
 
-       
-
-        // return this.http2.post(url, body, {headers:headers});
+        let body2;
 
         return this.http.post(URL_LOGIN, body, this.options).map(data_resp => {
 
             console.log("DATOS A ENVIAR(DENTRO DEL USUARIO en usuarioSERVICE): ");
 
             //convertir el body en json() 
-            let body2 = data_resp.json() || {};
-            console.log(body2);
-            
+            body2 = data_resp.json() || {};
+            console.log("body2 hola");
 
 
-            if (!data_resp.status ) {
+            if (body2.status) {
                 this.alertCtrl.create({
                     title: 'Error al iniciar',
-                    subTitle: data_resp["MESSAGE"],
+                    subTitle: "Revise su informacion",
                     buttons: ["OK"]
                 }).present();
+
+                console.log("body2");
             } else {
 
                 this.presentToast();
-                
+
                 this.token = body2.access_token;
                 //this.id_usuario = body2.user;
-                
+
                 //guardar storage
                 this.guardar_storage();
                 //para actualizar el side menu
                 this.events.publish('user:menu');
             }
+
         });
+
+
     }
 
-    mostrar_usuario(){
-        return this.http.get(URL_SHOW_USER,this.options2).map((response:Response) =>response.json());
+    mostrar_usuario() {
+        return this.http.get(URL_SHOW_USER, this.options2).map((response: Response) => response.json());
+        
     }
 
     cerrar_sesion() {
@@ -155,7 +138,7 @@ export class UsuarioProvider {
         //guardar storage
         this.guardar_storage();
         this.events.publish('user:menu');
-        
+
     }
 
     private guardar_storage() {
@@ -239,7 +222,7 @@ export class UsuarioProvider {
 
         };
 
-        return this.http.post( URL_SIGNUP, form).subscribe(
+        return this.http.post(URL_SIGNUP, form).subscribe(
             data => console.log(data),
             error => console.log(error)
         )
@@ -249,25 +232,25 @@ export class UsuarioProvider {
 
     presentToast() {
         let toast = this.toastCtrl.create({
-          message: 'Bienvenido',
-          duration: 3000,
-          position: 'bottom'
+            message: 'Bienvenido',
+            duration: 3000,
+            position: 'bottom'
         });
-      
+
         toast.onDidDismiss(() => {
-          console.log('Dismissed toast');
+            console.log('Dismissed toast');
         });
-      
+
         toast.present();
-      }
+    }
 
 
-      getUser(id_usuario):Observable<User[]>{
-          id_usuario = this.id_usuario;
+    getUser(id_usuario): Observable<User[]> {
+        id_usuario = this.id_usuario;
 
-        return this.http.post(URL_SHOW_USER,id_usuario).map((response: Response) => response.json());
+        return this.http.post(URL_SHOW_USER, id_usuario).map((response: Response) => response.json());
 
-      }
+    }
 
 
 

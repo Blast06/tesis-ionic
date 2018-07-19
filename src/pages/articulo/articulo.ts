@@ -16,15 +16,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ArticuloPage {
 
-  articulo: any = {};
+  article: any[] = [];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public carritoService: CarritoProvider) {
 
 
-    this.articulo = navParams.get("articulo");
-    console.log(this.articulo);
+    this.article = navParams.get("singleArticle");
+    console.log(this.article);
   }
 
 

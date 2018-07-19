@@ -76,7 +76,6 @@ export class MyApp {
         { title: 'Mi perfil', component: PerfilPage },
         { title: 'Configuracion', component: ConfiguracionPage },
         { title: 'Mis sitios', component: MisSitiosPage },
-        { title: 'Mensajes', component: MensajesPage },
 
       ];
 

@@ -1,3 +1,4 @@
+import { MainListPage } from './../pages/main-list/main-list';
 import { Network } from '@ionic-native/network';
 
 import { HTTP } from '@ionic-native/http';
@@ -67,6 +68,7 @@ import { NetworkProvider } from '../providers/network/network';
     MisSitiosPage,
     ConfiguracionPage,
     CrearSitiosPage,
+    MainListPage,
     
     
   ],
@@ -98,7 +100,8 @@ import { NetworkProvider } from '../providers/network/network';
     MensajesPage,
     MisSitiosPage,
     ConfiguracionPage,
-    CrearSitiosPage
+    CrearSitiosPage,
+    MainListPage,
   ],
   providers: [
     StatusBar,

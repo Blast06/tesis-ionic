@@ -7,12 +7,6 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { mobiscroll } from '@mobiscroll/angular';
 
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 
 @Component({
@@ -26,8 +20,6 @@ export class LoginPage {
   clave:string = '';
 
   user:any;
-
-  
 
   constructor(private fb: FormBuilder, 
               private navCtrl: NavController, 
@@ -98,9 +90,6 @@ export class LoginPage {
       }
       return null;
   }
-
-  
-
 
 
 }

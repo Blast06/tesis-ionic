@@ -1,13 +1,65 @@
+page-home {
+  [menuToggle]{
+      display: inline-block !important;
+  }
+  .scroll-content{
+      padding-bottom: 15px;
+  }
+  .searchbar-md{
+      position: absolute;
+      top: 185px;
+      padding: 8px 13px;
+      .searchbar-input{
+          background-color: color($colors,primary);
+      }
+      input::-webkit-input-placeholder {
+          font-size: 1.4rem;
+          font-weight: 100;
+          color: white;
+      }
+  }
+}
 
-  ion-scroll[scrollX] {
-    white-space: nowrap;
-    height: 120px;
-    overflow: hidden;
 
-    .scroll-item {
-      display: inline-block;
-    }
-    
+.home-content{
+  .new-collection{
+      height: 165px;
+      width: 100%;
+      margin-bottom: 25px;
+      object-fit: cover;
+      @extend %box-shadow;
+  }
+}
+
+.products{
+  padding: 7px 13px 13px 13px;
+  p{
+      margin-top: 0;
+      margin-bottom: 6px;
+  }
+}
+
+.sub-header{
+  .searchbar-md{
+      transition: all .8s ease-in-out;
+      top: 33px !important;
+      color: #488aff;
+  }
+}
+
+
+ 
+
+  .iSearchbar::-moz-placeholder {
+    color: white;
+  }
+  
+  .iSearchbar::-ms-input-placeholder {
+    color: white;
+  }
+  
+  .iSearchbar::-webkit-input-placeholder {
+    color: white;
   }
 
   
@@ -28,14 +80,4 @@
 
 
 
-  ion-scroll[scroll-avatar]{
-    height: 60px;
-  }
-  ion-title{
-    position: left;
-  }
-
-  /* Hide ion-content scrollbar */
-  ::-webkit-scrollbar{
-    display:none;
-  } 
+ 

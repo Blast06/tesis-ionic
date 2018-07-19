@@ -1,4 +1,4 @@
-import { URL_ARTICULOS } from './../URLs/url.servicios';
+import { URL_ARTICULOS, URL_SHOW_SINGLE_ARTICLE } from './../URLs/url.servicios';
 import { Article } from './../app/models/article';
 import { Http } from '@angular/http';
 
@@ -11,20 +11,6 @@ import { tap } from 'rxjs/operators';
 import { HTTP } from '@ionic-native/http';
 
 
-
-/*
-  Generated class for the ArticlesProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
-
-// const headers = {
-//   'Content-Type': 'application/json',
-//   'Access-Control-Allow-Headers': 'Content-Type',
-//   'Access-Control-Allow-Methods': 'GET',
-//   'Access-Control-Allow-Origin': '*'
-// };
 
 
 @Injectable()
@@ -42,9 +28,16 @@ export class ArticlesProvider {
   }
 
 
-  getArticles(): Observable<Article[]> {
+  getArticles(){
     
-    return this.http.get(URL_ARTICULOS).map((response: Response) => response.json().data);
+    return this.http.get(URL_ARTICULOS).map((response: Response) => response.json())
+    .catch(error => Observable.throw("Error en article service"));
   }
+
+  getSingleArticle(slug){
+    return this.http.get(URL_SHOW_SINGLE_ARTICLE + slug).map((response:Response) => response.json());
+  }
+
+  
 
 }

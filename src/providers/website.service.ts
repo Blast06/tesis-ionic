@@ -10,9 +10,6 @@ import { UsuarioProvider } from './usuario.service';
 
 
 
-
-
-
 @Injectable()
 export class WebsiteProvider {
 
@@ -42,8 +39,8 @@ export class WebsiteProvider {
   }
 
 
-  mostrar_sitio(slug) {
-    return this.http2.get(URL_SHOW_WEBSITE + slug, this.options).map((response: Response) => response.json());
+  mostrar_sitio_articles(username) { 
+    return this.http2.get(URL_SHOW_WEBSITE + username, this.options).map((response: Response) => response.json());
   }
 
   mostrar_articulos_sitios_suscritos() {

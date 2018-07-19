@@ -1,18 +1,18 @@
 <ion-header>
   <ion-navbar>
-      <ion-title>{{articulo.name}}</ion-title>
+      <ion-title>articulo</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content >
 
-  <img [src]="articulo.image_path" alt="" srcset="">
+  <img src="assets/imgs/03.png" >
 
   <div class="padding">
-    <h5>{{articulo.name}}</h5>
-    <p>{{articulo.description}}</p>
-    <p>Precio: <strong>{{articulo.price | currency:'RD$':true}}</strong></p>
+    <h5>name</h5>
+    <p>descripcion</p>
+    <p>Precio: <strong>560</strong></p>
 
     <button ion-button block icon-left (click)="carritoService.agregar_carrito(articulo)" > <ion-icon name="cart" ></ion-icon>
        Agregar al carrito</button>

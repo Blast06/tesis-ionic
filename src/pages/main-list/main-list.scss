@@ -1,0 +1,66 @@
+.app-card{
+    width: calc(50% - 6px);
+    margin: 12px 0 0 0;
+    float: left;
+    position: relative;
+    img{
+        height: 180px;
+        object-fit: cover;
+        -o-object-fit: cover;
+    }
+    &:nth-child(2n+1){
+        margin-right: 6px;
+    }
+    &:nth-child(2n){
+        margin-left: 6px;
+    }
+    h4 , p{
+        color: color($colors,light);
+    }
+}
+.card-md + ion-card{
+    margin-top: 12px;
+}
+
+.det{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(66, 66, 66, .5);
+    padding: 12px 10px 3px 10px;
+    .col{
+        display: flex;
+        align-items: center;
+        ion-icon{
+            font-size: 1.7rem;
+        }
+    }
+    [col-3]{
+        justify-content: center;
+    }
+    h4{
+        @extend %overflow;
+        font-size: 1.35rem;
+    }
+    p{
+        @extend %overflow;
+        font-size: 1.2rem;
+        span{
+            position: relative;
+            margin-right: 7px;
+            font-size: 12px;
+        }
+    }
+    .button{
+        height: 24px;
+        width: 55px;
+        padding: 0 5px;
+        font-size: 1rem !important;
+        background-color: color($colors,secondary);
+        color: color($colors,dark); 
+    }
+}
+
+.activeColor{
+    color: color($colors,danger) !important;
+}

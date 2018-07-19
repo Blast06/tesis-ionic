@@ -1,9 +1,13 @@
+import { Platform } from 'ionic-angular';
 
 import { Component, ViewChild, Renderer, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, Slides, Content, ModalController } from 'ionic-angular';
 import { UsuarioProvider } from '../../providers/index.services';
 import { User } from '../../app/models/user';
 import { Observable } from 'rxjs/Observable';
+import { MisSitiosPage } from '../mis-sitios/mis-sitios';
+import { Storage } from "@ionic/storage";
+
 
 
 
@@ -28,12 +32,55 @@ export class PerfilPage {
 
   user: User;
 
+  websites: any[] = [];
 
-  constructor(public navCtrl: NavController, public renderer: Renderer, public zone: NgZone, public modalCtrl: ModalController,
-    public navParams: NavParams,
-    public _us: UsuarioProvider, ) {
+  page = MisSitiosPage;
 
-      this.getUserInfo();
+
+
+  constructor(public navCtrl: NavController, 
+              public renderer: Renderer, 
+              public zone: NgZone, 
+              public modalCtrl: ModalController,
+              public navParams: NavParams,
+              public _us: UsuarioProvider,
+              public platform:Platform,
+              public storage:Storage) {
+
+
+    _us.mostrar_usuario().subscribe((data: any) => {
+      console.log(data);
+      this.user = data.data;
+      console.log(data.data.websites);
+      this.websites = this.user.websites;
+
+      if (this.platform.is("cordova")) {
+        //dispositivo
+        
+        this.storage.set('websites', JSON.stringify(this.websites));
+    } else {
+        //computadora
+        if (this.websites) {
+
+            localStorage.setItem('websites', JSON.stringify(this.websites));
+            
+            
+
+        } else {
+            localStorage.removeItem("websites");
+
+        }
+
+      }
+      
+
+    });
+
+
+  }
+
+  goTowebsite(){
+    this.navCtrl.push(this.page);
   }
 
   getUserInfo() {
@@ -42,10 +89,6 @@ export class PerfilPage {
       this.user = data.data;
       console.log(data.data.email);
       console.log(data.data.name);
-      console.log(data.data.id);
-      console.log(data.data.websites);
-      console.log(this.user.name );
-      console.log(this.user.name );
 
     });
 
@@ -75,11 +118,7 @@ export class PerfilPage {
     });
   }
 
-  presentCartModal() {
-    let modal = this.modalCtrl.create('Cart');
-    modal.present();
-  }
-
+ 
 
   ngAfterViewInit() {
     var length = document.getElementsByClassName("myHeader").length - 1;
@@ -100,5 +139,5 @@ export class PerfilPage {
     }, 200)
   }
 
-  
+
 }

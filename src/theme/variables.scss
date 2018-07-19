@@ -54,12 +54,14 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
+  primary:    #f7705f,
   secondary:  #32db64,
+  third:      #488aff,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222
 );
+
 
 
 // App iOS Variables
@@ -106,3 +108,31 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+%main-bg{
+  background: url(../assets/imgs/bg.png) !important;
+}
+
+
+%cover{
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+}
+
+%box-shadow{
+  -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3) !important;
+  -moz-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3) !important;
+}
+
+%linear-gradient{
+  background: -webkit-linear-gradient(to bottom, rgba(236,64,122,0) 0%,rgba(236,64,122,0.02) 1%,rgba(color($colors,primary),0.77) 37%,rgba(color($colors,primary),0.94) 90%,rgba(color($colors,primary),0.94) 100%) !important; /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(236,64,122,0) 0%,rgba(236,64,122,0.02) 1%,rgba(color($colors,primary),0.77) 37%,rgba(color($colors,primary),0.94) 90%,rgba(color($colors,primary),0.94) 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+%overflow{
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+}

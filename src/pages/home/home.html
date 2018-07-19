@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="header_home">
   <ion-navbar color="primary">
     <ion-buttons start>
       <button *ngIf="_us.token_activo()" ion-button (click)="_us.cerrar_sesion()">
@@ -8,7 +8,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Inicio</ion-title>
+    <ion-title>Enjoy Shopping</ion-title>
 
     <ion-buttons end>
       <button ion-button icon-only (click)="carritoService.ver_carrito()">
@@ -21,43 +21,40 @@
     </ion-buttons>
   </ion-navbar>
 
-
+  <ion-searchbar class="iSearchbar" color="third"  placeholder="Buscar.."></ion-searchbar>
 </ion-header>
 
-<ion-content>
-
-  <!-- botones iniciales -->
-  <!-- <ion-row custommarging>
-    <ion-item no-lines >
-      <ion-scroll scrollX="true">
-        <button ion-button>Vehiculos</button>
-        <button ion-button>Electrodomesticos</button>
-        <button ion-button>Celulares</button>
-        <button ion-button>Casas</button>
-        <button ion-button>Favoritos</button>
-        <button ion-button>Subastas</button>
-      </ion-scroll>
-    </ion-item>
-  </ion-row> -->
 
 
-  <div class="pins">
+<ion-content class="home-content" fullscreen (ionScroll)="scrollingFun($event)">
+
+  <img src="assets/imgs/new.png" class="new-collection" />
+
+  <div class="products">
+    <p text-uppercase>Articulos</p>
+
+    <page-main-list></page-main-list>
+  </div>
+
+
+
+  <!-- <div class="pins">
     <div class="pin" *ngFor="let article of articles | async" [navPush]="articuloPage" [navParams]="{articulo: article}">
       <img [src]="article.image_path" alt="" srcset="">
       <p>{{article.name}}</p>
       <small>{{article.price | currency:'RD$':true}}</small>
     </div>
-  </div>
+  </div> -->
 
 
-  <ion-infinite-scroll (ionInfinite)="siguiente_pagina()">
+  <!-- <ion-infinite-scroll (ionInfinite)="siguiente_pagina()">
 
     <ion-infinite-scroll-content>
 
 
     </ion-infinite-scroll-content>
 
-  </ion-infinite-scroll>
+  </ion-infinite-scroll> -->
 
 
 </ion-content>

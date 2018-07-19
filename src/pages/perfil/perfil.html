@@ -36,15 +36,13 @@
           <div>Aqui va Favoritos</div>
       </ion-slide>
       <ion-slide  (ionSlideWillChange)="changeWillSlide($event)">
-          <!-- <ion-item class="cart-list" no-lines>
+          <ion-item class="cart-list" no-lines *ngFor="let website of websites">
               <ion-thumbnail item-left>
-                <img src="assets/img/cart-img.png">
+                <img src="assets/imgs/cart-img.png" (click)="goTowebsite()">
               </ion-thumbnail>
-              <h2>your order arrived <span>$ 150.00</span></h2>
-              <p>30 mins ago</p>
-          </ion-item> -->
-
-          <div>Aqui va Mis sitios</div>
+              <h2>{{website.name}}</h2>
+              <p>10 articulos</p>
+          </ion-item>
 
       </ion-slide>
     </ion-slides>
