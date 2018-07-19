@@ -50,15 +50,15 @@ export class WebsiteProvider {
   }
 
   getToken() {
-    // if (this.platform.is("cordova")) {
-    //   this.storage.get('token').then((t) => {
-    //     this.token = t;
-    //   })
+    if (this.platform.is("cordova")) {
+      this.storage.get('token').then((t) => {
+        this.token = t;
+      })
 
-    // }
-    // else {
-    //   this.token = localStorage.getItem("token");
-    // }
+    }
+    else {
+      this.token = localStorage.getItem("token");
+    }
 
   }
 

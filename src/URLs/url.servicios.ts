@@ -11,9 +11,9 @@ export const URL_LOGOUT=  URL_BASE + "logout";
 export const URL_SHOW_WEBSITE= URL_BASE + "/"; //-> MAS EL SLUG DEL WEBSITE =  /{sitio-slug} ->(que es el username)
 
 export const URL_WEBSITE_SUSCRIBE = URL_BASE + "/"; //ESTA SERIA URL_BASE{website}/suscribe
-export const URL_WEBSITE_UNSUSCRIBE = URL_BASE; //ESTA SERIA URL_BASE{website}/unsuscribe
+export const URL_WEBSITE_UNSUSCRIBE = URL_BASE + "/"; //ESTA SERIA URL_BASE{website}/unsuscribe
 
-export const URL_ARTICLE_FAVORITE = URL_BASE ; // ESTA VA ASI tesis.test/1/favorite
+export const URL_ARTICLE_FAVORITE = URL_BASE + "/" ; // ESTA VA ASI tesis.test/1/favorite
 export const URL_ARTICLE_UNFAVORITE = URL_BASE ; // ESTA VA ASI tesis.test/1/unfavorite
 export const URL_CREATE_ARTICLE = URL_BASE ; //ESTA FUNCIONA ASI -> api/my-sitio/articles 
 export const URL_SEND_ARTICLE_IMAGE = URL_BASE ; //DESPUES DE LA URL BASE, SE LE AGREGA EL ID DEL ARTICULO, ASI -> api/{mi-website}/articles/images

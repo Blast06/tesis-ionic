@@ -108,7 +108,6 @@ import { NetworkProvider } from '../providers/network/network';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UsuarioProvider,
-    IonicStorageModule,
     ArticlesProvider,
     CarritoProvider,
     HTTP,
@@ -116,6 +115,7 @@ import { NetworkProvider } from '../providers/network/network';
     NetworkProvider,
     Network,
     WebsiteProvider,
+    IonicStorageModule,
 
   ]
 })

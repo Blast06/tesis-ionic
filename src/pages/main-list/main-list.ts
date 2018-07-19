@@ -24,6 +24,8 @@ export class MainListPage {
   singleArticle:any[]=[];
   slug:any;
 
+  id:any;
+
 
 
 
@@ -37,6 +39,7 @@ export class MainListPage {
                 articleService.getArticles().subscribe((data)=>{
                   this.articles = data;
                   console.log(this.articles);
+                  
 
                 });
   }
@@ -49,6 +52,19 @@ export class MainListPage {
 
   like(article){
     article.activeLike = !article.activeLike;
+    console.log(article.id);
+    if(article.activeLike){
+      this.articleService.addToFavorite(article.id).subscribe((data) =>{
+        console.log(data);
+        
+      });
+    }else{
+      this.articleService.removeToFavorite(article.id).subscribe((data) =>{
+        console.log(data);
+        
+      });
+
+    }
   }
 // shareModal
   presentshareModal() {
