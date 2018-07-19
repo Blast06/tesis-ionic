@@ -1,21 +1,69 @@
-<ion-header>
-  <ion-navbar>
-      <ion-title>articulo</ion-title>
+<ion-header >
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-capitalize >Articulo</ion-title>
+    <ion-buttons class="head-btns" end>
+      <button (click)="presentCartModal()" ion-button icon-only>
+        <ion-icon name="md-cart"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content >
+<ion-content class="detail-content">
+  <!-- <ion-spinner name="circles" paused="activated"></ion-spinner> -->
+  <img src="{{article.image_path}}" class="det-img" />
+  <ion-card>
+    <ion-item>
+      {{article.name}}
+      <button color="grayColor" ion-button item-right>{{article.price | currency:'RD$'}}</button>
+    </ion-item>
+  </ion-card>
 
-  <img src="assets/imgs/03.png" >
+  <ion-card>
+    <ion-card-header>
+      Descripcion
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        {{article.description}}
+      </p>
+    </ion-card-content>
 
-  <div class="padding">
-    <h5>name</h5>
-    <p>descripcion</p>
-    <p>Precio: <strong>560</strong></p>
+    <!-- <ion-card-header>
+      Choose a colour for item
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col text-center col-3 *ngFor="let item of colors">
+            <span class="color" [ngStyle]="{'background-color':  item.color }" (click)="activeSelect(item)" [ngClass]="{'activeBorder': selectColor==item}"></span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content> -->
 
-    <button ion-button block icon-left (click)="carritoService.agregar_carrito(articulo)" > <ion-icon name="cart" ></ion-icon>
-       Agregar al carrito</button>
-  </div>
+    <ion-card-content>
+        <ion-item class="select-size" no-lines>
+          <ion-label color="dark">Cantidad</ion-label>
+          <ion-select [(ngModel)]="Quantity">
+            <ion-option value="SM">SM</ion-option>
+            <ion-option value="M">M</ion-option>
+            <ion-option value="L">L</ion-option>
+          </ion-select>
+        </ion-item>
+    </ion-card-content>    
+  </ion-card>
 
+  <button (click)="presentCartModal()" ion-button block text-uppercase color="secondary" class="app-btn">
+    <ion-icon name="md-cart" color="light"></ion-icon>
+    Agregar al carrito
+  </button>
+  <button (click)="presentCartModal()" ion-button block text-uppercase color="primary" class="app-btn">
+    <ion-icon name="md-cart" color="light"></ion-icon>
+    Agregar favorito
+  </button>
 </ion-content>

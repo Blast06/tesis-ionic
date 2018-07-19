@@ -1,3 +1,73 @@
 page-articulo {
+    ion-spinner * {
+        width: 28px;
+        height: 28px;
+        stroke: #444;
+        fill: #222;
+      }
+      .select-size{
+        margin-bottom: 13px;
+    }
 
+}
+
+.det-img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    -o-object-fit: cover;
+    @extend %box-shadow;
+}
+
+.detail-content{
+    .card-md{
+        margin: 10px 0;
+        width: 100%;
+        @extend %box-shadow;
+    }
+    .card-header-md{
+        font-weight: 500;
+        padding-bottom: 10px;
+        padding-top: 13px;
+    }
+    .card-content-md{
+        padding-bottom: 0;
+        p{
+            font-size: 1.3rem;
+            line-height: 1.3;
+            color: gray;
+            border-bottom: 1px solid #757575;
+            padding-bottom: 15px;
+        }
+        ion-grid{
+            border-bottom: 1px solid #757575;
+        }
+    }
+    .item-md{
+        .item-button{
+            width: 80px;
+            height: 37px;
+            box-shadow: none;
+        }
+    }
+    .color{
+        width: 35px;
+        height: 35px;
+        border: none;
+    }
+}
+
+.two-btns{
+    .button-md{
+        width: 100%;
+        font-size: 1.15rem;
+        height: 4rem;
+    }
+}
+
+.app-btn{
+    font-size: 1.35rem;
+    ion-icon{
+        margin-right: 11px;
+    }
 }

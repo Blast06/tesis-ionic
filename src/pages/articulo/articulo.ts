@@ -1,13 +1,9 @@
 import { CarritoProvider } from './../../providers/carrito.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Loading, LoadingController } from 'ionic-angular';
+import { ArticlesProvider } from '../../providers/index.services';
 
-/**
- * Generated class for the ArticuloPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -17,15 +13,58 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ArticuloPage {
 
   article: any[] = [];
+  activated:boolean = false;
+  slug:any;
+  relatedArticles:any[]=[];
+
+
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public carritoService: CarritoProvider) {
+    public carritoService: CarritoProvider,
+    public modalCtrl: ModalController,
+    public loadingCtrl: LoadingController,
+    public articleService:ArticlesProvider, ) {
+
+    this.slug = navParams.get('slug');
+    console.log("en articulo.ts");
+    console.log(this.slug);
+
+    articleService.getSingleArticle(this.slug).subscribe((data) =>{
+      this.article = data.data.article;
+      console.log(this.article);
+      console.log(data.data);
+      this.relatedArticles = data.data.relateds;
+      console.log(this.relatedArticles);
+    });
 
 
-    this.article = navParams.get("singleArticle");
-    console.log(this.article);
+    
+   
+
   }
+
+  presentLoading() {
+    const loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    loader.present();
+  }
+
+
+
+
+
+  presentCartModal() {
+    let modal = this.modalCtrl.create('Cart');
+    modal.present();
+  }
+
+
+
+
+
 
 
 

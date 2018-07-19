@@ -1,3 +1,4 @@
+import { LoadingController } from 'ionic-angular';
 import { URL_ARTICULOS, URL_SHOW_SINGLE_ARTICLE } from './../URLs/url.servicios';
 import { Article } from './../app/models/article';
 import { Http } from '@angular/http';
@@ -23,7 +24,8 @@ export class ArticlesProvider {
   
   constructor(public http: Http, 
               private http2: HttpClient,
-              private http3: HTTP) {
+              private http3: HTTP,
+              public loadingCtrl:LoadingController,) {
     console.log('Hello ArticlesProvider Provider');
   }
 
@@ -36,8 +38,8 @@ export class ArticlesProvider {
 
   getSingleArticle(slug){
     return this.http.get(URL_SHOW_SINGLE_ARTICLE + slug).map((response:Response) => response.json());
-  }
 
+  }
   
 
 }

@@ -2,7 +2,7 @@
 
 import { ArticlesProvider } from './../../providers/article.service';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { Nav, Platform, Events } from 'ionic-angular';
 import { ArticuloPage } from "../index.paginas";
 
@@ -19,8 +19,10 @@ export class MainListPage {
   
 
   articles:any[]=[];
+  relatedArticles:any[]=[];
 
   singleArticle:any[]=[];
+  slug:any;
 
 
 
@@ -28,7 +30,8 @@ export class MainListPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public articleService:ArticlesProvider,
-              public modalCtrl:ModalController,) {
+              public modalCtrl:ModalController,
+              public loadingCtrl:LoadingController) {
 
                 
                 articleService.getArticles().subscribe((data)=>{
@@ -53,20 +56,19 @@ export class MainListPage {
     shareModal.present();
   }
 
-  // irArticuloPage(){
-  //   this.navCtrl.push(ArticuloPage);
-  // }
+
 
   goToSingleArticle(slug){
-    this.articleService.getSingleArticle(slug).subscribe((data) =>{
-      console.log(data);
-      this.singleArticle = data;
-      
-    } );
+    this.slug = slug;
+    console.log(slug);
+    console.log(this.slug);
+    
+    this.navCtrl.push(this.articuloPage, {slug:this.slug});
 
-    this.navCtrl.push(this.articuloPage, this.singleArticle);
 
   }
+
+  
 
   
 
