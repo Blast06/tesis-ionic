@@ -13,58 +13,22 @@
 
   <ion-toolbar color="primary" class="profile-head" text-center> 
     <img src="assets/imgs/profile-img.png" />
-    <h4>Julio celulares</h4>
-    <p>iphone's,tables,etc</p>
+    <h4>{{website.name}}</h4>
+    <p>{{website.description | pipesNullfields}}</p>
   </ion-toolbar>
 <!-- 
-  <ion-segment [(ngModel)]="tabs" >
-      <ion-segment-button value="Likes" (click)="selectTab(0)" value="0" text-uppercase>
-        Favoritos
-      </ion-segment-button>
-      <ion-segment-button value="notification" (click)="selectTab(1)" value="1" text-uppercase>
-        Mis sitios
-      </ion-segment-button>
-  </ion-segment>
-</ion-header> -->
-
-<!-- 
-<ion-content fullscreen (ionScroll)="scrollingFun($event)" [ngSwitch]="tabs">
-    <ion-slides class="app-slider" #pageSlider>
-      <ion-slide  (ionSlideWillChange)="changeWillSlide($event)">
+  <ion-card class="app-card" *ngFor="let article of articles" >
+    <img src="{{article.image_path}}" (click)="goToSingleArticle(article.slug)"/>
+    <div class="det">
+      <h4 no-margin>{{article.name | slice:0:5}}</h4>
+      <p no-margin>{{article.price | currency:'RD$'}}</p>
+      <ion-grid no-padding>
+        <ion-row>
          
-          <div>Aqui va Favoritos</div>
-      </ion-slide>
-      <ion-slide  (ionSlideWillChange)="changeWillSlide($event)">
-          <ion-item class="cart-list" no-lines *ngFor="let website of websites">
-              <ion-thumbnail item-left>
-                <img src="assets/imgs/cart-img.png">
-              </ion-thumbnail>
-              <h2>{{website.name}}</h2>
-              <p>10 articulos</p>
-          </ion-item>
-
-      </ion-slide>
-    </ion-slides>
-</ion-content> -->
-
-
-<ion-card class="app-card" *ngFor="let article of articles">
-  <img src="{{item.img}}" [navPush]="'DetailPage'" />
-  <div class="det">
-    <h4 no-margin>Camisa</h4>
-    <p no-margin>$ 50.00</p>
-    <ion-grid no-padding>
-      <ion-row>
-        <ion-col col-6>
-          <!-- <button ion-button block>Ordenar</button> -->
-        </ion-col>
-        <ion-col col-3 (click)="like(item)">
-          <ion-icon name="md-heart" color="light" [ngClass]="{'activeColor': item.activeLike }"></ion-icon>
-        </ion-col>
-        <ion-col col-3 (click)="presentshareModal()">
-          <ion-icon name="md-share" color="light"></ion-icon>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
-</ion-card>
+          <ion-col col-3 (click)="presentshareModal()">
+            <ion-icon name="md-share" color="light"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-card> -->

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { NgAisModule } from 'angular-instantsearch';
 
 /**
@@ -15,6 +15,7 @@ import { NgAisModule } from 'angular-instantsearch';
   templateUrl: 'buscar.html',
 })
 export class BuscarPage {
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

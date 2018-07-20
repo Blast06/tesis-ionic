@@ -1,5 +1,5 @@
 import { LoadingController } from 'ionic-angular';
-import { URL_ARTICULOS, URL_SHOW_SINGLE_ARTICLE, URL_ARTICLE_FAVORITE } from './../URLs/url.servicios';
+import { URL_ARTICULOS, URL_SHOW_SINGLE_ARTICLE, URL_ARTICLE_FAVORITE, URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED } from './../URLs/url.servicios';
 import { Article } from './../app/models/article';
 import { Http } from '@angular/http';
 import { Storage } from "@ionic/storage";
@@ -56,6 +56,11 @@ export class ArticlesProvider {
   getSingleArticle(slug) {
     return this.http.get(URL_SHOW_SINGLE_ARTICLE + slug).map((response: Response) => response.json());
 
+  }
+
+  getArticlesFromSubscribed(){
+    return this.http.get(URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED,this.options).map((response:Response) =>response.json());
+    
   }
 
   addToFavorite(id) {

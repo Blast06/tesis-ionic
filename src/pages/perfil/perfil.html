@@ -38,12 +38,11 @@
       <ion-slide  (ionSlideWillChange)="changeWillSlide($event)">
           <ion-item class="cart-list" no-lines *ngFor="let website of websites">
               <ion-thumbnail item-left>
-                <img src="assets/imgs/cart-img.png" (click)="goTowebsite()">
+                <img src="assets/imgs/cart-img.png" (click)="goTowebsite(website.username)">
               </ion-thumbnail>
               <h2>{{website.name}}</h2>
               <p>10 articulos</p>
           </ion-item>
-
       </ion-slide>
     </ion-slides>
 </ion-content>

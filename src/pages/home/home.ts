@@ -26,20 +26,33 @@ export class HomePage implements OnInit {
   headerbg: any;
   darkHeader: any;
 
+  articlesFromSubscribed:any[]=[];
+
+  detector:boolean;
+
   
-  // articles: Observable<Article[]>;
 
   @ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController,
     public _us: UsuarioProvider,
-    public _articleService: ArticlesProvider,
+    public articleService: ArticlesProvider,
     public carritoService: CarritoProvider,
     public events: Events,
     public websiteService: WebsiteProvider,
     public renderer: Renderer,
     public zone: NgZone,
   ) {
+
+    articleService.getArticlesFromSubscribed().subscribe((data) => {
+      console.log(data.data);
+      this.articlesFromSubscribed = data.data;
+      
+    })
+
+    this.changeDetector();
+
+    
 
   }
 
@@ -63,6 +76,16 @@ export class HomePage implements OnInit {
 
   siguiente_pagina(infiniteScroll) {
 
+  }
+
+  changeDetector(){
+    if (this.articlesFromSubscribed.length == 0 || this.articlesFromSubscribed == null) {
+      this.detector = true;
+      
+    }
+    else{
+      this.detector = false;
+    }
   }
 
   actualizar_menu() {

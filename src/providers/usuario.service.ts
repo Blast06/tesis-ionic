@@ -127,6 +127,11 @@ export class UsuarioProvider {
     }
 
     mostrar_usuario() {
+        console.log(this.token);
+        return this.http.get(URL_SHOW_USER, this.options2).map((response: Response) => response.json());
+        
+    }
+    mostrar_sitios() {
         return this.http.get(URL_SHOW_USER, this.options2).map((response: Response) => response.json());
         
     }

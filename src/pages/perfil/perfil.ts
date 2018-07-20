@@ -36,6 +36,8 @@ export class PerfilPage {
 
   page = MisSitiosPage;
 
+  username:any;
+
 
 
   constructor(public navCtrl: NavController, 
@@ -79,8 +81,9 @@ export class PerfilPage {
 
   }
 
-  goTowebsite(){
-    this.navCtrl.push(this.page);
+  goTowebsite(username){
+    this.username = username
+    this.navCtrl.push(this.page, {username:this.username});
   }
 
   getUserInfo() {
@@ -137,6 +140,11 @@ export class PerfilPage {
     setTimeout(() => {
       this.content.scrollToTop();
     }, 200)
+  }
+
+  presentCartModal() {
+    let modal = this.modalCtrl.create('Cart');
+    modal.present();
   }
 
 

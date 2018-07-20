@@ -75,7 +75,7 @@ export class MyApp {
       this.pages = [
         { title: 'Mi perfil', component: PerfilPage },
         { title: 'Configuracion', component: ConfiguracionPage },
-        { title: 'Mis sitios', component: MisSitiosPage },
+        
 
       ];
 

@@ -39,7 +39,7 @@ export class WebsiteProvider {
   }
 
 
-  mostrar_sitio_articles(username) { 
+  mostrar_info_sitio(username) { 
     return this.http2.get(URL_SHOW_WEBSITE + username, this.options).map((response: Response) => response.json());
   }
 

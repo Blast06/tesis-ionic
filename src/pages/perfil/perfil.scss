@@ -42,14 +42,14 @@ page-profile {
         -o-object-fit: cover;
     }
     h4{
-        @extend %overflow !optional;
+        @extend %overflow;
         margin: 5px 0 0 0;
         font-size: 1.6rem;
         font-weight: normal;
         color: color($colors,light);
     }
     p{
-        @extend %overflow !optional;
+        @extend %overflow;
         margin: 3px 0 20px 0;
         font-size: 1.3rem;
         color: color($colors,light);

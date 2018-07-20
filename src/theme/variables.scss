@@ -136,3 +136,35 @@ $colors: (
     text-overflow: ellipsis !important;
     overflow: hidden !important;
 }
+
+
+$toolbar-md-title-font-size: 1.7rem;
+$toolbar-md-height: 48px;
+$text-input-md-highlight-color: rgba(color($colors,light),.8);
+
+$button-md-font-size: 1.8rem;
+$button-md-font-weight: normal;
+
+$searchbar-md-input-clear-icon-color: color($colors,light);
+$searchbar-md-input-placeholder-color: color($colors,light);
+$searchbar-md-input-text-color: color($colors,light);
+$searchbar-md-input-search-icon-color: color($colors,light);
+
+$fab-size: 50px;
+
+$range-md-bar-height: 3px;
+$range-md-knob-width: 25px;
+$range-md-bar-background-color: rgba(0,0,0,.27);
+$range-md-bar-active-background-color: color($colors,light);
+
+$item-md-thumbnail-size: 90px;
+
+$toggle-md-track-height: 10px;
+$toggle-md-handle-height: 15px;
+$toggle-md-handle-width: 15px;
+$toggle-md-handle-background-color-off: #f1f1f1;
+$toggle-md-track-width: 26px;
+$toggle-md-track-background-color-off: #b9b8b8;
+$toggle-md-item-left-padding: 12px 0px 12px 16px;
+
+$alert-md-title-font-size:1.7rem;

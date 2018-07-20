@@ -4,14 +4,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { CrearSitiosPage } from "../index.paginas";
 import { Storage } from "@ionic/storage";
+import { ArticuloPage } from '../articulo/articulo';
+import { UsuarioProvider } from '../../providers/index.services';
 
 
-/**
- * Generated class for the MisSitiosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -25,24 +22,35 @@ export class MisSitiosPage {
   articulos: any[] =[];
   webSitesCollection: any[] = [];
 
+  website:any[]=[];
+
   username:string
+
+  slug:any;
+  articuloPage = ArticuloPage
+ 
 
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              public website:WebsiteProvider,
               public modalCtrl:ModalController,
               public storage:Storage,
               public platform:Platform,
+              public usuarioService:UsuarioProvider,
+              public websiteService:WebsiteProvider,
               ) {
 
-                //aqui tengo que enviar el username del sitio, pero primero tengo que coger el id del sitio que se ha 
-                //clickeado, nota: con el navparams para mandar desde perfil.ts la posicion clickeada del sitio, y asi obtener
-                //el username del sitio para despues mandarlo por aqui
-                // website.mostrar_sitio_articles().subscribe((data:any) =>{
+                
 
+                this.username = navParams.get('username');
 
-                // });
+                websiteService.mostrar_info_sitio(this.username).subscribe((data) => {
+                  console.log(data);
+                  this.website = data.data;
+                  console.log(this.website);
+                });
+
+                
 
                 
   }
@@ -54,6 +62,16 @@ export class MisSitiosPage {
 
   irCrear(){
     this.navCtrl.push(this.Page);
+  }
+
+  goToSingleArticle(slug){
+    this.slug = slug;
+    console.log(slug);
+    console.log(this.slug);
+    
+    this.navCtrl.push(this.articuloPage, {slug:this.slug});
+
+
   }
 
   // active like fun

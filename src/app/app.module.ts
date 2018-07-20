@@ -1,3 +1,4 @@
+import { BuscarPage } from './../pages/buscar/buscar';
 import { MainListPage } from './../pages/main-list/main-list';
 import { Network } from '@ionic-native/network';
 
@@ -48,6 +49,7 @@ import {
  } from "../pages/index.paginas";
 import { InstantsearchProvider } from '../providers/instantsearch';
 import { NetworkProvider } from '../providers/network/network';
+import { PipesNullfieldsPipe } from '../pipes/pipes-nullfields/pipes-nullfields';
 
  
 @NgModule({
@@ -69,6 +71,8 @@ import { NetworkProvider } from '../providers/network/network';
     ConfiguracionPage,
     CrearSitiosPage,
     MainListPage,
+    BuscarPage,
+    PipesNullfieldsPipe,
     
     
   ],
@@ -102,6 +106,7 @@ import { NetworkProvider } from '../providers/network/network';
     ConfiguracionPage,
     CrearSitiosPage,
     MainListPage,
+    BuscarPage
   ],
   providers: [
     StatusBar,
