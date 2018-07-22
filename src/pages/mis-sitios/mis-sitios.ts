@@ -28,6 +28,8 @@ export class MisSitiosPage {
 
   slug:any;
   articuloPage = ArticuloPage
+
+  articles:any[] =[];
  
 
 
@@ -48,8 +50,11 @@ export class MisSitiosPage {
                   console.log(data);
                   this.website = data.data;
                   console.log(this.website);
+                  this.articles = data.data.articles;
+                  console.log(this.articles);
                 });
 
+                
                 
 
                 

@@ -1,9 +1,9 @@
 export const URL_BASE= "http://127.0.0.1:8000/api";
-export const URL_ARTICULOS = URL_BASE + "/articles/all";
+export const URL_ARTICULOS = "http://178.128.183.171/api/articles/all";
 export const URL_WEBSITE= "http://127.0.0.1:8000/api";
 
 export const URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED= URL_BASE + "/articles/subscribed"; //RETORNA LISTA DE ARTICULOS DONDE USER ESTA SUSCRITO(PARA EL HOME)
-export const URL_SHOW_SINGLE_ARTICLE = URL_BASE + "/articles/"; //MAS EL SLUG DEL ARTICULO = /{slug}.
+export const URL_SHOW_SINGLE_ARTICLE = "http://178.128.183.171/api/articles/"; //MAS EL SLUG DEL ARTICULO = /{slug}.
 export const URL_SIGNUP= "signup";
 export const URL_LOGIN= "http://127.0.0.1:8000/oauth/token";
 export const URL_SHOW_USER= "http://127.0.0.1:8000/api/user";

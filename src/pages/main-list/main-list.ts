@@ -26,6 +26,8 @@ export class MainListPage {
 
   id:any;
 
+   url = 'http://178.128.183.171';
+
 
 
 
@@ -39,6 +41,7 @@ export class MainListPage {
                 articleService.getArticles().subscribe((data)=>{
                   this.articles = data;
                   console.log(this.articles);
+                  console.log("ARTICULOS");
                   
 
                 });
@@ -83,11 +86,6 @@ export class MainListPage {
 
 
   }
-
-  
-
-  
-
 
 
 }

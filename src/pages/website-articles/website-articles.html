@@ -1,0 +1,18 @@
+<ion-card class="app-card" *ngFor="let article of articles" >
+  <img src="{{article.image_path}}" (click)="goToSingleArticle(article.slug)"/>
+  <div class="det">
+    <h4 no-margin>{{article.name | slice:0:5}}</h4>
+    <p no-margin>{{article.price | currency:'RD$'}}</p>
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col col-6>
+          <!-- <button ion-button block>Ordenar</button> -->
+        </ion-col>
+        
+        <ion-col col-3 (click)="presentshareModal()">
+          <ion-icon name="md-share" color="light"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-card>
