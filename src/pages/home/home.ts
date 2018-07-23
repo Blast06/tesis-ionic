@@ -1,3 +1,4 @@
+import { LoginPage } from './../login/login';
 
 import { ArticuloPage } from './../index.paginas';
 
@@ -9,6 +10,7 @@ import { Article } from './../../app/models/article';
 
 import { Component, Input, OnInit, Renderer, ViewChild, NgZone } from '@angular/core';
 import { NavController, Events, Content } from 'ionic-angular';
+import { CreararticuloPage } from '../creararticulo/creararticulo';
 
 
 
@@ -29,6 +31,8 @@ export class HomePage implements OnInit {
   articlesFromSubscribed:any[]=[];
 
   detector:boolean;
+
+  token:boolean = this._us.token_activo();
 
   
 
@@ -96,6 +100,16 @@ export class HomePage implements OnInit {
     ev.domWrite(() => {
       this.updateHeader(ev);
     });
+  }
+
+  goTo(){
+    if (this.token) {
+      this.navCtrl.push(CreararticuloPage);
+      
+    }
+    else{
+      this.navCtrl.push(LoginPage);
+    }
   }
 
   updateHeader(ev) {

@@ -1,4 +1,4 @@
-<ion-card class="app-card" *ngFor="let article of articles" >
+<ion-card class="app-card" *ngFor="let article of websiteArticles" >
   <img src="{{article.image_path}}" (click)="goToSingleArticle(article.slug)"/>
   <div class="det">
     <h4 no-margin>{{article.name | slice:0:5}}</h4>
