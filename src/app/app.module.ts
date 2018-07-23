@@ -1,4 +1,4 @@
-import { BuscarPage } from './../pages/buscar/buscar';
+
 import { MainListPage } from './../pages/main-list/main-list';
 import { Network } from '@ionic-native/network';
 
@@ -44,7 +44,9 @@ import {
     MensajesPage,
     MisSitiosPage,
     ConfiguracionPage,
-    CrearSitiosPage
+    CrearSitiosPage,
+    CreararticuloPage,
+    BuscarPage
 
  } from "../pages/index.paginas";
 import { InstantsearchProvider } from '../providers/instantsearch';
@@ -73,6 +75,7 @@ import { PipesNullfieldsPipe } from '../pipes/pipes-nullfields/pipes-nullfields'
     MainListPage,
     BuscarPage,
     PipesNullfieldsPipe,
+    CreararticuloPage,
     
     
   ],
@@ -106,7 +109,8 @@ import { PipesNullfieldsPipe } from '../pipes/pipes-nullfields/pipes-nullfields'
     ConfiguracionPage,
     CrearSitiosPage,
     MainListPage,
-    BuscarPage
+    BuscarPage,
+    CreararticuloPage,
   ],
   providers: [
     StatusBar,

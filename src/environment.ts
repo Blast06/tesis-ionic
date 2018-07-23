@@ -7,4 +7,6 @@ export const environment = {
         urlSync: false
 
     }
+
+
 }

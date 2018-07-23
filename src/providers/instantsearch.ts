@@ -5,12 +5,6 @@ import { InstantSearchInstance } from 'angular-instantsearch/instantsearch/insta
 // import instantsearch from 'instantsearch.js/es';
 
 
-/*
-  Generated class for the ProvidersInstantsearchProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class InstantsearchProvider {
 

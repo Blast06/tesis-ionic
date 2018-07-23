@@ -1,3 +1,4 @@
+export { CreararticuloPage } from './creararticulo/creararticulo';
 export { CrearSitiosPage } from './crear-sitios/crear-sitios';
 export { MisSitiosPage } from './mis-sitios/mis-sitios';
 export { ConfiguracionPage } from './configuracion/configuracion';
@@ -13,3 +14,4 @@ export { PedidosDetallePage } from './pedidos-detalle/pedidos-detalle';
 export { CarritoPage } from './carrito/carrito';
 export { LoginPage } from './login/login';
 export { TabsPage } from './tabs/tabs';
+export { BuscarPage } from './../pages/buscar/buscar';

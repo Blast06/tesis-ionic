@@ -4,7 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { RegistroPage, HomePage, TabsPage, LoginPage, PerfilPage, ConfiguracionPage, MensajesPage, MisSitiosPage } from "../pages/index.paginas";
+import { RegistroPage, HomePage, TabsPage, LoginPage, PerfilPage, ConfiguracionPage, MensajesPage, MisSitiosPage, CreararticuloPage, CrearSitiosPage } from "../pages/index.paginas";
 import { NetworkProvider, UsuarioProvider } from "../providers/index.services";
 
 
@@ -75,14 +75,15 @@ export class MyApp {
       this.pages = [
         { title: 'Mi perfil', component: PerfilPage },
         { title: 'Configuracion', component: ConfiguracionPage },
+        { title: 'Crear Sitio', component: CrearSitiosPage },
+        { title: 'Crear Articulo', component: CreararticuloPage },
         
 
       ];
 
     } else {
       this.pages = [
-        { title: 'Iniciar sesion', component: LoginPage },
-        { title: 'Registro', component: RegistroPage },
+        { title: 'Iniciar sesion', component: LoginPage }
 
       ];
     }

@@ -25,6 +25,8 @@ export class PerfilPage {
   slides: any;
   tabs: any = '0';
 
+  searching: any = false;
+
   header: any;
   headerHeight: any;
   translateAmt: any;
@@ -36,54 +38,62 @@ export class PerfilPage {
 
   page = MisSitiosPage;
 
-  username:any;
+  username: any;
 
 
 
-  constructor(public navCtrl: NavController, 
-              public renderer: Renderer, 
-              public zone: NgZone, 
-              public modalCtrl: ModalController,
-              public navParams: NavParams,
-              public _us: UsuarioProvider,
-              public platform:Platform,
-              public storage:Storage) {
+  constructor(public navCtrl: NavController,
+    public renderer: Renderer,
+    public zone: NgZone,
+    public modalCtrl: ModalController,
+    public navParams: NavParams,
+    public _us: UsuarioProvider,
+    public platform: Platform,
+    public storage: Storage) {
 
 
+    
     _us.mostrar_usuario().subscribe((data: any) => {
+      
       console.log(data);
       this.user = data.data;
       console.log(data.data.websites);
       this.websites = this.user.websites;
 
+      if (this.user) {
+        this.searching = false;
+        
+      }
+      
+
       if (this.platform.is("cordova")) {
         //dispositivo
-        
+
         this.storage.set('websites', JSON.stringify(this.websites));
-    } else {
+      } else {
         //computadora
         if (this.websites) {
 
-            localStorage.setItem('websites', JSON.stringify(this.websites));
-            
-            
+          localStorage.setItem('websites', JSON.stringify(this.websites));
+
+
 
         } else {
-            localStorage.removeItem("websites");
+          localStorage.removeItem("websites");
 
         }
 
       }
-      
+
 
     });
 
 
   }
 
-  goTowebsite(username){
+  goTowebsite(username) {
     this.username = username
-    this.navCtrl.push(this.page, {username:this.username});
+    this.navCtrl.push(this.page, { username: this.username });
   }
 
   getUserInfo() {
@@ -121,7 +131,7 @@ export class PerfilPage {
     });
   }
 
- 
+
 
   ngAfterViewInit() {
     var length = document.getElementsByClassName("myHeader").length - 1;
