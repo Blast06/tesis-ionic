@@ -27,6 +27,8 @@ export class LoginPage {
               private usuarioService: UsuarioProvider,
               private viewCtrl: ViewController,
               public events:Events,  ) {
+
+                
     this.loginForm = fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]

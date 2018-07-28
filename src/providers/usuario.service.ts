@@ -19,8 +19,8 @@ import { User } from '../app/models/user';
 
 
 
-const CLIENT_ID = "1";
-const SECRET_KEY = "hpeqZRvjM3yAyRL9cFzDclV6y2k5JqxdvU5wupvC";
+const CLIENT_ID = "2";
+const SECRET_KEY = "4iePfltyExYRbbHpp1eLNISZ3Y66ACKk7uQy1RzL";
 
 @Injectable()
 export class UsuarioProvider {

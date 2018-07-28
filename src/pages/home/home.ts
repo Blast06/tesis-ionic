@@ -1,3 +1,4 @@
+
 import { LoginPage } from './../login/login';
 
 import { ArticuloPage } from './../index.paginas';
@@ -94,6 +95,10 @@ export class HomePage implements OnInit {
 
   actualizar_menu() {
     this.events.publish('user:menu');
+  }
+
+  isConnected(){
+    this.events.publish('network:conexion');
   }
 
   scrollingFun(ev) {

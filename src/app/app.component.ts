@@ -1,3 +1,4 @@
+import { ToastController } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
 
 import { Component, ViewChild } from '@angular/core';
@@ -25,7 +26,12 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public us: UsuarioProvider,
     public events: Events,
-    public networkProvider: NetworkProvider, ) {
+    public networkProvider: NetworkProvider,
+    public checkNetwork: Network,
+    public toastCtrl: ToastController) {
+
+
+
     this.initializeApp();
 
     // funcion para cambiar las opciones a mostrar
@@ -37,10 +43,46 @@ export class MyApp {
     });
 
 
-
-
+    this.isConnected();
+    //evento para chequear conexion a internet
+    events.subscribe('network:conexion', () => {
+      this.isConnected();
+    });
 
   }
+
+  /**
+   * presentToast
+   */
+  public presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Telefono no conectado a internet, por favor, revisa tu conexion',
+      duration: 3000,
+      position: 'bottom',
+      showCloseButton: true,
+      closeButtonText: 'Ok'
+
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
+
+  /**
+   * Funcion Para chequear conexion a interente en toda la app
+   */
+  public isConnected(): void {
+    this.checkNetwork.onDisconnect()
+      .subscribe(() => {
+        this.presentToast();
+      });
+
+  }
+
+
 
   initializeApp() {
 
@@ -49,16 +91,8 @@ export class MyApp {
       this.splashScreen.hide();
 
       this.networkProvider.initializeNetworkEvents();
+      this.isConnected();
 
-      // Offline event
-      this.events.subscribe('network:offline', () => {
-        alert('network:offline ==> ' + this.network.type);
-      });
-
-      // Online event
-      this.events.subscribe('network:online', () => {
-        alert('network:online ==> ' + this.network.type);
-      });
 
     });
   }
@@ -77,7 +111,7 @@ export class MyApp {
         { title: 'Configuracion', component: ConfiguracionPage },
         { title: 'Crear Sitio', component: CrearSitiosPage },
         { title: 'Crear Articulo', component: CreararticuloPage },
-        
+
 
       ];
 

@@ -87,7 +87,11 @@ import { PipesNullfieldsPipe } from '../pipes/pipes-nullfields/pipes-nullfields'
     HttpModule,
     IonicStorageModule.forRoot(),
     NgAisModule.forRoot(),
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      scrollPadding:false,
+      scrollAssist:true,
+      autoFocusAssits:false
+    }),
     
   ],
   bootstrap: [IonicApp],
