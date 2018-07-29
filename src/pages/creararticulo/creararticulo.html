@@ -15,11 +15,22 @@
 
 
 <ion-content padding>
-  
-  
-  
-  <!-- <ion-icon name="remove-circle" (click)="decrement()">
-    {{currentNumber}}
-    <ion-icon name="add-circle" (click)="increment()"> -->
+
+  <h4 *ngIf="!show">Selecciona el sitio:</h4>
+
+  <div *ngIf="!websites" class="spinner-container">
+    <ion-spinner name="circles"></ion-spinner>
+  </div>
+
+  <!-- lista de sitios -->
+  <div *ngIf="!show">
+    <ion-card class="app-card" *ngFor="let website of websites">
+      <img src="{{website.image_path}}" (click)="sendId(website.username)" />
+      <div class="det">
+        <h4 no-margin>{{website.name | slice:0:12}}</h4>
+      </div>
+    </ion-card>
+  </div>
+
 
 </ion-content>

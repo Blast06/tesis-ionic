@@ -1,3 +1,4 @@
+import { URL_CREATE_ARTICLE, URL_CREATE_WEBSITE } from './../URLs/url.servicios';
 import { Headers, RequestOptions, Response } from '@angular/http';
 
 import { HttpClient } from '@angular/common/http';
@@ -44,8 +45,21 @@ export class WebsiteProvider {
   }
 
   mostrar_articulos_sitios_suscritos() {
-    this.getToken();
+    
     return this.http2.get(URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED, this.options).map((response: Response) => response.json());
+
+  }
+
+  crear_sitio(name:string,username:string){
+
+    let body = {
+      name: name,
+      username: username,
+
+    }
+
+   return this.http2.post(URL_CREATE_WEBSITE,body, this.options).map( (response:Response) => response.json());
+
 
   }
 

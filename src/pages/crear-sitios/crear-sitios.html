@@ -11,6 +11,11 @@
 
 <ion-content padding>
 
+
+  
+
+  
+
   <form [formGroup]="createWebsiteForm">
     <ion-list>
       <ion-item>
@@ -35,7 +40,7 @@
 
     </ion-list>
 
-    <button clear ion-button block >Crear</button>
+    <button clear ion-button block (click)="crearSitio()" [disabled]="name.length < 4 || username.length < 4" >Crear</button>
   </form>
 
   <p></p>

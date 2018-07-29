@@ -19,7 +19,6 @@
 
   
   <!--aqui van la lista de articulos-->
-
   <ion-card class="app-card" *ngFor="let article of articles" >
     <img src="{{article.image_path}}" (click)="goToSingleArticle(article.slug)"/>
     <div class="det">

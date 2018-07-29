@@ -20,7 +20,9 @@ import { User } from '../app/models/user';
 
 
 const CLIENT_ID = "2";
-const SECRET_KEY = "4iePfltyExYRbbHpp1eLNISZ3Y66ACKk7uQy1RzL";
+const CLIENT_ID2 = "4";
+const SECRET_KEY = "DOX6LS7TvN5iuTp23ozz0tLlPWbQEIEKsichpDxh";
+const SECRET_KEY2 = "5xzoaNAR4VUrsHRGAJRKLi2LYT9pQH75d75oe8Lx";
 
 @Injectable()
 export class UsuarioProvider {
@@ -127,6 +129,10 @@ export class UsuarioProvider {
     }
 
     mostrar_usuario() {
+
+        this.cargar_storage();
+        
+        console.log("token desde metodo mostar_usuario");
         console.log(this.token);
         return this.http.get(URL_SHOW_USER, this.options2).map((response: Response) => response.json());
         
