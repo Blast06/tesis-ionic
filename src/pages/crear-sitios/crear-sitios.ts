@@ -19,8 +19,9 @@ export class CrearSitiosPage {
   username: string = '';
   user_id: number = 118;
   createWebsiteForm: FormGroup;
+  datos: any;
 
-  
+
 
 
   constructor(public navCtrl: NavController,
@@ -29,21 +30,16 @@ export class CrearSitiosPage {
     public websiteService: WebsiteProvider,
     public storage: Storage,
     public _us: UsuarioProvider,
-    public platform:Platform,) {
+    public platform: Platform, ) {
 
-    
+
 
 
 
     this.createWebsiteForm = fb.group({
-      name: ['', [Validators.required, Validators.minLength(4)]],
-      username: ['', [Validators.required, Validators.minLength(4)]]
+      name: ['', [Validators.required, Validators.minLength(4),Validators.maxLength(40),Validators.pattern('[a-zA-Z0-9]*')]],
+      username: ['', [Validators.required, Validators.minLength(4),Validators.maxLength(40),Validators.pattern('[a-zA-Z0-9]*')]]
     });
-
-
-
-
-
   }
 
   crearSitio() {
@@ -53,11 +49,15 @@ export class CrearSitiosPage {
 
     //imprimir esos datos para ver como estan
     console.log("DATOS en crearsitios.ts: " + this.name, this.username);
+    
+
     //hacer la peticion post para crear el sitio
-    this.websiteService.crear_sitio(this.name, this.username).subscribe((data: any) => {
-      console.log("METODO CREAR SITIO");
-      console.log(data);
+    this.websiteService.crear_sitio(this.name, this.username).subscribe( (data) => {
+    
     })
+
+    
+
   }
 
   getUserId() {

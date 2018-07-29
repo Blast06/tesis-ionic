@@ -1,4 +1,4 @@
-import { URL_CREATE_ARTICLE, URL_CREATE_WEBSITE } from './../URLs/url.servicios';
+import {  URL_CREATE_WEBSITE } from './../URLs/url.servicios';
 import { Headers, RequestOptions, Response } from '@angular/http';
 
 import { HttpClient } from '@angular/common/http';
@@ -8,6 +8,19 @@ import { Storage } from "@ionic/storage";
 import { Platform } from 'ionic-angular'
 import { URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED, URL_SHOW_WEBSITE } from '../URLs/url.servicios';
 import { UsuarioProvider } from './usuario.service';
+import { Observable } from '../../node_modules/rxjs';
+import {  tap } from 'rxjs/operators';
+
+
+export interface Res {
+  headers:any,
+  ok:boolean,
+  status:number,
+  statusText:string,
+  url:string,
+  _body:string
+  
+}
 
 
 
@@ -50,6 +63,7 @@ export class WebsiteProvider {
 
   }
 
+
   crear_sitio(name:string,username:string){
 
     let body = {
@@ -58,8 +72,7 @@ export class WebsiteProvider {
 
     }
 
-   return this.http2.post(URL_CREATE_WEBSITE,body, this.options).map( (response:Response) => response.json());
-
+   return this.http2.post(URL_CREATE_WEBSITE,body, this.options).map( (response: Response) => response.json());
 
   }
 

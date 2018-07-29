@@ -24,9 +24,12 @@
         </ion-label>
         <ion-input [(ngModel)]="name" type="text" formControlName="name"></ion-input>
       </ion-item>
-      <!-- <ion-item *ngIf="name.hasError('required') && name.touched">
-        <p>Nombre obligatorio</p>
-      </ion-item> -->
+
+      <ion-item *ngIf="!createWebsiteForm.controls.name.valid">
+          <p>No caracteres especiales, espacios, puntos y comas</p>
+  
+        </ion-item>
+      
 
       <ion-item>
         <ion-label>
@@ -34,13 +37,16 @@
         </ion-label>
         <ion-input [(ngModel)]="username" type="text" formControlName="username"></ion-input>
       </ion-item>
-      <!-- <ion-item *ngIf="username.hasError('required') && username.touched">
-          <p>Usuario obligatorio</p>
-        </ion-item> -->
+
+      <ion-item *ngIf="!createWebsiteForm.controls.username.valid">
+          <p>No caracteres especiales, espacios, puntos y comas</p>
+  
+        </ion-item>
+     
 
     </ion-list>
 
-    <button clear ion-button block (click)="crearSitio()" [disabled]="name.length < 4 || username.length < 4" >Crear</button>
+    <button clear ion-button block (click)="crearSitio()" *ngIf="createWebsiteForm.controls.name.valid && createWebsiteForm.controls.username.valid" >Crear</button>
   </form>
 
   <p></p>
