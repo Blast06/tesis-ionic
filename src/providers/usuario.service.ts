@@ -100,6 +100,7 @@ export class UsuarioProvider {
             //convertir el body en json() 
             body2 = data_resp.json() || {};
             console.log("body2 hola");
+            console.log(body2);
 
 
             if (body2.status) {

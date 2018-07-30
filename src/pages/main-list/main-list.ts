@@ -5,6 +5,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { Nav, Platform, Events } from 'ionic-angular';
 import { ArticuloPage } from "../index.paginas";
+import { WebsiteProvider } from '../../providers/index.services';
 
 
 @IonicPage()
@@ -28,6 +29,8 @@ export class MainListPage {
 
    url = 'http://178.128.183.171';
 
+   posts:any[]=[];
+
 
 
 
@@ -35,7 +38,8 @@ export class MainListPage {
               public navParams: NavParams,
               public articleService:ArticlesProvider,
               public modalCtrl:ModalController,
-              public loadingCtrl:LoadingController) {
+              public loadingCtrl:LoadingController,
+              public websiteServ:WebsiteProvider,) {
 
                 
                 articleService.getArticles().subscribe((data)=>{
@@ -43,6 +47,12 @@ export class MainListPage {
                   console.log(this.articles);
                   console.log("ARTICULOS");
                   
+
+                });
+
+                websiteServ.prueba_api().subscribe( (data) =>{
+                  console.log(data);
+                  this.posts = data;
 
                 });
   }

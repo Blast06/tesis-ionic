@@ -12,10 +12,14 @@ import { ArticlesProvider } from '../../providers/index.services';
 })
 export class ArticuloPage {
 
+  articuloPage = ArticuloPage;
+
   article: any[] = [];
-  activated:boolean = false;
-  slug:any;
-  relatedArticles:any[]=[];
+  activated: boolean = false;
+  slug: any;
+  relatedArticles: any[] = [];
+  cantidad: number;
+
 
 
 
@@ -24,13 +28,13 @@ export class ArticuloPage {
     public carritoService: CarritoProvider,
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController,
-    public articleService:ArticlesProvider, ) {
+    public articleService: ArticlesProvider, ) {
 
     this.slug = navParams.get('slug');
     console.log("en articulo.ts");
     console.log(this.slug);
 
-    articleService.getSingleArticle(this.slug).subscribe((data) =>{
+    articleService.getSingleArticle(this.slug).subscribe((data) => {
       this.article = data.data.article;
       console.log(this.article);
       console.log(data.data);
@@ -39,8 +43,8 @@ export class ArticuloPage {
     });
 
 
-    
-   
+
+
 
   }
 
@@ -50,6 +54,33 @@ export class ArticuloPage {
       duration: 3000
     });
     loader.present();
+  }
+
+  goToSingleArticle(slug) {
+    this.slug = slug;
+    console.log(slug);
+    console.log(this.slug);
+
+    this.navCtrl.push(this.articuloPage, { slug: this.slug });
+
+
+  }
+
+  increment() {
+    // if (this.cantidad == this.article.stock) {
+
+    // } else {
+    //   this.cantidad++;
+
+    // }
+  }
+
+  decrement(){
+    // if (this.cantidad == 1 ) {
+      
+    // }else{
+    //   this.cantidad--;
+    // }
   }
 
 

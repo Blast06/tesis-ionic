@@ -25,26 +25,30 @@
 </ion-header>
 
 
-
 <ion-content class="home-content" fullscreen (ionScroll)="scrollingFun($event)">
+
+
 
   <img src="assets/imgs/new.png" class="new-collection" />
 
   <div class="products">
-    <p text-uppercase><strong>Articulos</strong></p> <p *ngIf="detector">No sigues a ningun sitio? o no estas logueado, ve a la tercera imagen y suscribete a algunos!</p>
+    <p text-uppercase>
+      <strong>Articulos</strong>
+    </p>
+    <p *ngIf="detector">No sigues a ningun sitio? o no estas logueado, ve a la tercera imagen y suscribete a algunos!</p>
 
 
   </div>
 
 
-  <ion-card  (click)="goTo()">
+  <ion-card (click)="goTo()">
     <img src="assets/imgs/ecommerce.jpg" />
     <div class="card-title">Quieres vender?</div>
     <div class="card-subtitle">Publica tu anuncio, gratis!</div>
   </ion-card>
 
   <ion-card>
-    <img src="assets/imgs/ecommerce2.jpg"  />
+    <img src="assets/imgs/ecommerce2.jpg" />
     <div class="card-title">Buscas algo?</div>
     <div class="card-subtitle">Navega por los diferentes sitios o categorias</div>
   </ion-card>

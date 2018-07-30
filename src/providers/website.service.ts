@@ -89,5 +89,9 @@ export class WebsiteProvider {
 
   }
 
+  prueba_api(){
+    return this.http2.get("https://jsonplaceholder.typicode.com/posts").map((response: Response) =>response.json());
+
+  }
 
 }

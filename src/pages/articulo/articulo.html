@@ -1,9 +1,9 @@
-<ion-header >
+<ion-header>
   <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title text-capitalize >Articulo</ion-title>
+    <ion-title text-capitalize>Articulo</ion-title>
     <ion-buttons class="head-btns" end>
       <button (click)="presentCartModal()" ion-button icon-only>
         <ion-icon name="md-cart"></ion-icon>
@@ -15,7 +15,7 @@
 
 <ion-content class="detail-content">
   <!-- <ion-spinner name="circles" paused="activated"></ion-spinner> -->
-  <img src="http://178.128.183.171{{article.image_path}}" class="det-img" />
+  <img src="http://178.128.183.171/{{article.image_path}}" class="det-img" />
   <ion-card>
     <ion-item>
       {{article.name}}
@@ -33,29 +33,12 @@
       </p>
     </ion-card-content>
 
-    <!-- <ion-card-header>
-      Choose a colour for item
-    </ion-card-header>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col text-center col-3 *ngFor="let item of colors">
-            <span class="color" [ngStyle]="{'background-color':  item.color }" (click)="activeSelect(item)" [ngClass]="{'activeBorder': selectColor==item}"></span>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content> -->
+  
 
-    <ion-card-content>
-        <ion-item class="select-size" no-lines>
-          <ion-label color="dark">Cantidad</ion-label>
-          <ion-select [(ngModel)]="Quantity">
-            <ion-option value="SM">SM</ion-option>
-            <ion-option value="M">M</ion-option>
-            <ion-option value="L">L</ion-option>
-          </ion-select>
-        </ion-item>
-    </ion-card-content>    
+    <ion-card-header>Cantidad: </ion-card-header> <p>{{cantidad}}</p>
+    <ion-icon name="remove-circle" (click)="decrement()" > </ion-icon>
+    <ion-icon name="add-circle" (click)="increment()" > </ion-icon>
+
   </ion-card>
 
   <button (click)="presentCartModal()" ion-button block text-uppercase color="secondary" class="app-btn">
@@ -66,4 +49,27 @@
     <ion-icon name="md-cart" color="light"></ion-icon>
     Agregar favorito
   </button>
+
+  <!-- articulos relacionados en scroll horizontal -->
+  <ion-row>
+    <ion-item no-lines>
+      <ion-scroll scrollX="true">
+        <!-- lista de articulos relacionados -->
+        <ion-card class="app-card" *ngFor="let relatedArticle of relatedArticles">
+          <img src="{{relatedArticle.image_path}}" (click)="goToSingleArticle(relatedArticle.slug)" />
+          <div class="det">
+            <h4 no-margin>{{relatedArticle.name | slice:0:5}}</h4>
+            <p no-margin>{{relatedArticle.price | currency:'RD$'}}</p>
+            <ion-grid no-padding>
+              <ion-row>
+                <ion-col col-6>
+                  <!-- <button ion-button block>Ordenar</button> -->
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </ion-card>
+      </ion-scroll>
+    </ion-item>
+  </ion-row>
 </ion-content>
