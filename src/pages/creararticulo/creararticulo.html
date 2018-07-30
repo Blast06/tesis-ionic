@@ -36,14 +36,215 @@
 
   <form [formGroup]="todo" (ngSubmit)="logForm()" *ngIf="show">
     <ion-item>
-      <ion-label>Todo</ion-label>
-      <ion-input type="text" formControlName="title"></ion-input>
+      <ion-label>Titulo</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Description</ion-label>
+      <ion-label>Descripcion</ion-label>
       <ion-textarea formControlName="description"></ion-textarea>
     </ion-item>
-    <button ion-button type="submit" [disabled]="!todo.valid">Submit</button>
+
+
+    <h6>Categorias</h6>
+
+    <p>
+      <b>Electrónicos, computadoras y oficina</b>
+    </p>
+
+    <ion-row radio-group formControlName="sub_category_id">
+      <ion-col>
+        <ion-item>
+          <ion-icon name="tv" item-start></ion-icon>
+          <ion-label>TV y Video</ion-label>
+          <ion-radio value="1"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="smartphone" item-start></ion-icon>
+          <ion-label>Celulares y accesorios</ion-label>
+          <ion-radio value="2"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="compuacces" item-start></ion-icon>
+          <ion-label>Computadoras y accesorios</ion-label>
+          <ion-radio value="3"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="computadoras" item-start></ion-icon>
+          <ion-label>Componentes para computadoras</ion-label>
+          <ion-radio value="4"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <br>
+
+      <p>
+        <b>
+          Deportes y Aire libre
+        </b>
+      </p>
+      <br>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="deportes" item-start></ion-icon>
+          <ion-label>Deportes y actividad fisica</ion-label>
+          <ion-radio value="5"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="deportesropa" item-start></ion-icon>
+          <ion-label>Ropa deportiva</ion-label>
+          <ion-radio value="6"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <br>
+
+      <p>
+        <b>
+          Hogar, Jardín y Herramientas
+        </b>
+      </p>
+      <br>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="muebles" item-start></ion-icon>
+          <ion-label>Muebles</ion-label>
+          <ion-radio value="7"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <br>
+
+      <p>
+        <b>
+          Comida y Víveres
+        </b>
+      </p>
+      <br>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="restaurantes" item-start></ion-icon>
+          <ion-label>Restaurantes</ion-label>
+          <ion-radio value="8"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="pizza" item-start></ion-icon>
+          <ion-label>Pizza</ion-label>
+          <ion-radio value="9"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <br>
+
+      <p>
+        <b>
+          Belleza y salud
+        </b>
+      </p>
+      <br>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="mujeres" item-start></ion-icon>
+          <ion-label>Mujeres</ion-label>
+          <ion-radio value="10"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="hombres" item-start></ion-icon>
+          <ion-label>Hombres</ion-label>
+          <ion-radio value="11"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="ninos" item-start></ion-icon>
+          <ion-label>Niños</ion-label>
+          <ion-radio value="12"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="ninas" item-start></ion-icon>
+          <ion-label>Niñas</ion-label>
+          <ion-radio value="13"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <br>
+
+      <p>
+        <b>
+          Ropa, calzado y joyeria
+        </b>
+      </p>
+      <br>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="salonspa" item-start></ion-icon>
+          <ion-label>Salon y spa</ion-label>
+          <ion-radio value="14"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <br>
+
+      <p>
+        <b>
+          Automotriz e industrial
+        </b>
+      </p>
+      <br>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="partesyaccesorios" item-start></ion-icon>
+          <ion-label>Partes y Accesorios automotrices</ion-label>
+          <ion-radio value="15"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <br>
+
+      <p>
+        <b>
+          Servicios para el hogar, empresas y organizacion
+        </b>
+      </p>
+      <br>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="serviciolimpieza" item-start></ion-icon>
+          <ion-label>Servicios de Limpieza</ion-label>
+          <ion-radio value="16"></ion-radio>
+        </ion-item>
+      </ion-col>
+
+      <ion-item>
+        <ion-label>Precio</ion-label>
+        <ion-input type="number" formControlName="price"></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>Cantidad</ion-label>
+        <ion-input type="number" formControlName="stock"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Estatus</ion-label>
+        <ion-select [(ngModel)]="estatus" formControlName="status">
+          <ion-option value="Disponible">Disponible</ion-option>
+          <ion-option value="nodisponible">No Disponible</ion-option>
+          <ion-option value="privado">Privado</ion-option>
+        </ion-select>
+      </ion-item>
+
+
+
+    </ion-row>
+    <button ion-button block type="submit" [disabled]="!todo.valid">Crear</button>
   </form>
 
 

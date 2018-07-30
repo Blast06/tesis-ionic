@@ -3,7 +3,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>CrearSitios</ion-title>
+    <ion-title>Crear Sitios</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -46,7 +46,7 @@
 
     </ion-list>
 
-    <button clear ion-button block (click)="crearSitio()" *ngIf="createWebsiteForm.controls.name.valid && createWebsiteForm.controls.username.valid" >Crear</button>
+    <button ion-button block (click)="crearSitio()" [disabled]="!createWebsiteForm.controls.name.valid && !createWebsiteForm.controls.username" >Crear</button>
   </form>
 
   

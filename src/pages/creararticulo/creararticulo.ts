@@ -34,8 +34,11 @@ export class CreararticuloPage {
 
   title: string;
   price: number;
-  autoManufacturers: boolean;
+  estatus:any;
+  
   public todo: FormGroup;
+
+ 
 
 
   constructor(public navCtrl: NavController,
@@ -46,19 +49,15 @@ export class CreararticuloPage {
     public fb: FormBuilder) {
 
     this.todo = this.fb.group({
-      title: ['', Validators.required],
-      description: [''],
+      name: ['', [Validators.required,Validators.minLength(4),Validators.maxLength(30)]],
+      price: ['', [Validators.required]],
+      stock: ['',[Validators.required]],
+      sub_category_id:['', [Validators.required]],
+      status: ['',[Validators.required]],
+      description: ['', [Validators.required,Validators.minLength(20)]],
     });
 
 
-
-
-
-    this.form = fb.group({
-      title: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(40), Validators.pattern('[a-zA-Z0-9]*')]],
-      price: ['', [Validators.required]]
-
-    });
 
 
 
@@ -101,7 +100,10 @@ export class CreararticuloPage {
   }
 
   logForm() {
-    console.log(this.todo.value)
+    console.log(this.todo.value);
+    console.log(this.todo.value.name);
+
+    // console.log(th);
   }
 
   createWebsiteForm() {

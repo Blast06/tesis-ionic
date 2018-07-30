@@ -50,11 +50,11 @@ export class MainListPage {
 
                 });
 
-                websiteServ.prueba_api().subscribe( (data) =>{
-                  console.log(data);
-                  this.posts = data;
+                // websiteServ.prueba_api().subscribe( (data) =>{
+                //   console.log(data);
+                //   this.posts = data;
 
-                });
+                // });
   }
 
   
