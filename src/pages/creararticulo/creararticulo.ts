@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { User } from '../../app/models/user';
 import { Storage } from "@ionic/storage";
-import { UsuarioProvider } from '../../providers/index.services';
+import { UsuarioProvider, ArticlesProvider } from '../../providers/index.services';
 import { Validators, FormGroup, FormBuilder } from '../../../node_modules/@angular/forms';
 import { FormControl } from '../../../node_modules/@mobiscroll/angular/src/js/classes/form-control';
 
@@ -21,7 +21,7 @@ import { FormControl } from '../../../node_modules/@mobiscroll/angular/src/js/cl
 })
 export class CreararticuloPage {
 
-  form: FormGroup;
+  
 
   public currentNumber = 0;
 
@@ -46,7 +46,8 @@ export class CreararticuloPage {
     public storage: Storage,
     public platform: Platform,
     public _us: UsuarioProvider,
-    public fb: FormBuilder) {
+    public fb: FormBuilder,
+    public articleService:ArticlesProvider,) {
 
     this.todo = this.fb.group({
       name: ['', [Validators.required,Validators.minLength(4),Validators.maxLength(30)]],
@@ -103,12 +104,10 @@ export class CreararticuloPage {
     console.log(this.todo.value);
     console.log(this.todo.value.name);
 
-    // console.log(th);
+    
   }
 
-  createWebsiteForm() {
-    console.log(this.form.value);
-  }
+  
 
 
 
@@ -119,6 +118,16 @@ export class CreararticuloPage {
   }
 
 
+  createArticle(){
+    console.log(this.website_slug);
+    this.articleService.createArticle(this.todo.value,this.website_slug).subscribe((data) =>{
+      console.log(data);
+    });
+  }
+
+  
+
+
   private increment() {
     this.currentNumber++;
   }
@@ -126,6 +135,8 @@ export class CreararticuloPage {
   private decrement() {
     this.currentNumber--;
   }
+
+  
 
 
   ionViewDidLoad() {
