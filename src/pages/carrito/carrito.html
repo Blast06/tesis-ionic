@@ -12,17 +12,17 @@
 
 <ion-content padding>
 
-  <div text-center class="carrito_vacio" *ngIf="!cart_articles">
+  <div text-center class="carrito_vacio" *ngIf="cart_articles.length == 0">
 
     <ion-icon name="ios-cart-outline" class="icon-5x"></ion-icon>
     <br> Su carrito esta vacio
   </div>
 
 
-  <div *ngIf="cart_articles">
+  <div *ngIf="cart_articles.length != 0">
 
     <ion-grid>
-      <ion-row *ngFor="let article of cart_articles">
+      <ion-row *ngFor="let article of cart_articles; let i = index">
         <ion-col>
           <img src="http://178.128.183.171{{article.image_path}}" alt="" srcset="">
         </ion-col>
@@ -50,9 +50,6 @@
     </ion-grid>
 
     <button ion-button block>Realizar pedido</button>
-
-
-
 
 
   </div>
