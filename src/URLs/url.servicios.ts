@@ -22,6 +22,8 @@ export const URL_CREATE_ARTICLE = "http://178.128.183.171/client/"  ; //ESTA FUN
 export const URL_SEND_ARTICLE_IMAGE = URL_BASE ; //DESPUES DE LA URL BASE, SE LE AGREGA EL ID DEL ARTICULO, ASI -> api/{mi-website}/articles/images
 export const URL_SHOPPING_CART = URL_BASE + "/shopping/cart" ; //PARA OBTENER  los items del shopping cart + los favoritos
 export const URL_SHOPPING_CART_COUNT = URL_BASE + "/shopping/cart/count" ; //PARA OBTENER la cantidad de items
+export const URL_REMOVE_ARTICLE_SHOPPING_CART = URL_BASE ; //PARA eliminar articulo del carrito
+export const URL_ADD_ARTICLE_SHOPPING_CART = URL_BASE ; //PARA agregar articulo
 
 
 

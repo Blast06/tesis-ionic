@@ -10,14 +10,29 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class CarritoPage {
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              public carritoService:CarritoProvider,
-              public viewCtrl: ViewController) {
+  cart_articles: any[] = [];
+
+
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public carritoService: CarritoProvider,
+    public viewCtrl: ViewController, ) {
+
+    carritoService.getCart().subscribe((data: any) => {
+      console.log("DATOS EN EL CONSTRUCTOR");
+      console.log(data);
+      this.cart_articles = data.data.cart_article;
+      console.log(this.cart_articles);
+      console.log(this.cart_articles.length);
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CarritoPage');
   }
-
+  remove(id) {
+    this.carritoService.removeFromCart(id).subscribe((data: any) => {
+      console.log(data);
+    });
+  }
 }

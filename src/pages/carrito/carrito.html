@@ -12,26 +12,26 @@
 
 <ion-content padding>
 
-  <div text-center class="carrito_vacio" *ngIf="carritoService.items.length === 0">
+  <div text-center class="carrito_vacio" *ngIf="!cart_articles">
 
     <ion-icon name="ios-cart-outline" class="icon-5x"></ion-icon>
     <br> Su carrito esta vacio
   </div>
 
 
-  <div *ngIf="carritoService.items.length > 0">
+  <div *ngIf="cart_articles">
 
     <ion-grid>
-      <ion-row *ngFor="let item of carritoService.items">
+      <ion-row *ngFor="let article of cart_articles">
         <ion-col>
-          <img [src]="item.image_path" alt="" srcset="">
+          <img src="http://178.128.183.171{{article.image_path}}" alt="" srcset="">
         </ion-col>
 
         <ion-col>
-          <p>{{item.name}}</p>
-          <p>{{item.price | currency}}</p>
+          <p>{{article.name}}</p>
+          <p>{{article.price | currency}}</p>
 
-          <button ion-button color="danger" outline small>Eliminar</button>
+          <button ion-button color="danger" outline small (click)="remove(article.id)">Eliminar</button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -42,7 +42,7 @@
         <ion-col>
           <h3>
             <strong>Total:</strong>
-            {{carritoService.total_carrito | currency: 'RD$':true}}
+            4356
           </h3>
 
         </ion-col>

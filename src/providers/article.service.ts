@@ -1,6 +1,6 @@
 import { LoadingController } from 'ionic-angular';
 import { URL_ARTICULOS, URL_SHOW_SINGLE_ARTICLE, URL_ARTICLE_FAVORITE, URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED, URL_CREATE_ARTICLE } from './../URLs/url.servicios';
-import { Article } from './../app/models/article';
+
 import { Http } from '@angular/http';
 import { Storage } from "@ionic/storage";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 import "rxjs/Rx";
 import { Observable } from 'rxjs/Observable';
 import { Headers, RequestOptions, Response } from '@angular/http';
-import { tap } from 'rxjs/operators';
+
 import { HTTP } from '@ionic-native/http';
 import { Platform } from 'ionic-angular'
 
@@ -79,9 +79,7 @@ export class ArticlesProvider {
 
   }
 
- getCart(){
-   
- }
+ 
 
   
 
