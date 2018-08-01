@@ -16,14 +16,19 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 export class LoginPage {
 
     registro = RegistroPage;
-    correo: string = '';
-    clave: string = '';
+    email: string = '';
+    password: string = '';
 
     user: any;
 
-    constructor(private fb: FormBuilder,
+    loginForm: FormGroup;
+
+    isLogin: boolean = false;
+    attemptedSubmit: boolean = false;
+
+
+    constructor(public fb: FormBuilder,
         private navCtrl: NavController,
-        private navParams: NavParams,
         private usuarioService: UsuarioProvider,
         private viewCtrl: ViewController,
         public events: Events, ) {
@@ -37,9 +42,9 @@ export class LoginPage {
 
     }
     ingresar() {
-        this.usuarioService.ingresar(this.correo, this.clave)
+        this.usuarioService.ingresar(this.email, this.password)
             .subscribe(() => {
-                console.log("DATOS A ENVIAR: " + this.correo, this.clave);
+                console.log("DATOS A ENVIAR: " + this.email, this.password);
 
                 if (this.usuarioService.token_activo()) {
                     this.viewCtrl.dismiss(true);
@@ -52,10 +57,6 @@ export class LoginPage {
 
     }
 
-    loginForm: FormGroup;
-
-    isLogin: boolean = false;
-    attemptedSubmit: boolean = false;
 
     formSettings = {
         theme: 'ios'
@@ -75,7 +76,7 @@ export class LoginPage {
 
 
 
-    //mensajes para los tipos de erroes
+    //mensajes para los tipos de errores
     errorMessages = {
         required: '{$1} requerido',
         minlength: 'AL menos 6 caracteres',

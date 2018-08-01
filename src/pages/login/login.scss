@@ -1,23 +1,11 @@
-page-login {
-    .toolbar-background,
-    ion-navbar,
-    ion-header {
-      background: transparent !important;
-      background-color: transparent !important;
-      border: none !important;
+page-login{
+    .scroll-content{
+        padding: 16px !important;
+        margin-bottom: 0 !important;
     }
+}
 
-    .md-login-form .md-logo {
-      display: inline-block;
-      width: 100%;
-      font-size: 80px;
-      text-align: center;
-      height: 46px;
-      margin: 170px 0 30px 0;
-      color: #1c75bc;
-  }
-
-  .app-bg{
+.app-bg{
     @extend %main-bg;
     @extend %cover;
     &::before{
@@ -34,91 +22,86 @@ page-login {
 }
 
 .Loginpage{
-  width: 100%;
-  min-height: calc(100% - 75px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 100%;
+    min-height: calc(100% - 75px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .formContainer{
-  width: 100%;
+    width: 100%;
 }
 
 .app-form{
-  margin-top: 80px;
-  h4{
-      font-size: 1.2rem;
-      color: color($colors,light);
-  }
-  .title-form{
-      font-size: 2rem;
-      font-weight: normal;
-      margin: 0;
-  }
-  .item-md{
-      background-color: transparent;
-  }
-  .list-md{
-      .item-input{ 
-          padding-left: 0;
-          &:last-child{
-              padding-left: 0;
-              border-bottom: none !important;
-          }
-          &.input-has-focus{
-              &::first-child{
-                  box-shadow: inset 0 -1px 0 rgba(color($colors,light),.8);
-              }
-              .item-inner{
-                  box-shadow: inset 0 -1px 0 rgba(color($colors,light),.8) !important;
-              }
-          }
-          .label-md{
-              color: rgba(255,255,255,.8);
-              font-size: 1.4rem;
-              margin-bottom: 5px;
-          }
-      }
-      .item-block{
-          .item-inner{
-              border-bottom: 0.55px solid rgba(color($colors,light),.8);
-          }
-      }
-  }
-  .item-block{
-      border-top: 0;
-      &:first-child{
-          padding-left: 0;
-      }
-  }
-  .text-input-md{
-      margin-bottom: 0px;
-      margin-left: 0px;
-      color: white;
-      font-size: 1.7rem;
-  }
-  .button-md{
-      margin: 4rem .2rem 1rem .2rem;
-  }
+    margin-top: 80px;
+    h4{
+        font-size: 1.2rem;
+        color: color($colors,light);
+    }
+    .title-form{
+        font-size: 2rem;
+        font-weight: normal;
+        margin: 0;
+    }
+    .item-md{
+        background-color: transparent;
+    }
+    .list-md{
+        .item-input{ 
+            padding-left: 0;
+            &:last-child{
+                padding-left: 0;
+                border-bottom: none !important;
+            }
+            &.input-has-focus{
+                &::first-child{
+                    box-shadow: inset 0 -1px 0 rgba(color($colors,light),.8);
+                }
+                .item-inner{
+                    box-shadow: inset 0 -1px 0 rgba(color($colors,light),.8) !important;
+                }
+            }
+            .label-md{
+                color: rgba(255,255,255,.8);
+                font-size: 1.4rem;
+                margin-bottom: 5px;
+            }
+        }
+        .item-block{
+            .item-inner{
+                border-bottom: 0.55px solid rgba(color($colors,light),.8);
+            }
+        }
+    }
+    .item-block{
+        border-top: 0;
+        &:first-child{
+            padding-left: 0;
+        }
+    }
+    .text-input-md{
+        margin-bottom: 0px;
+        margin-left: 0px;
+        color: white;
+        font-size: 1.7rem;
+    }
+    .button-md{
+        margin: 4rem .2rem 1rem .2rem;
+    }
 }
 
 .option-sign{
-  color: white;
-  margin: 0 auto;
-  p{
-      color: rgba(255,255,255,.7);
-      margin-bottom: 10px;
-  }
-  ion-grid{
-      width: 160px;
-      margin: 0 auto;
-      color: white;
-      font-size: 25px;
-  }
-
+    color: white;
+    margin: 0 auto;
+    p{
+        color: rgba(255,255,255,.7);
+        margin-bottom: 10px;
+    }
+    ion-grid{
+        width: 160px;
+        margin: 0 auto;
+        color: white;
+        font-size: 25px;
+    }
 }
-
-}
-
-

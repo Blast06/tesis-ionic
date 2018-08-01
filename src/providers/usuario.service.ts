@@ -5,14 +5,14 @@ import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http'
 
 
 import { Injectable } from "@angular/core";
-import { Http, URLSearchParams, HttpModule, Response, Headers, RequestOptions } from "@angular/http";
+import { Http, Response, Headers, RequestOptions } from "@angular/http";
 //import 'rxjs/add/operator/map';
 import { map } from 'rxjs/operators';
 
 import { Storage } from "@ionic/storage";
-// import { IonicStorageModule } from '@ionic/storage';
 
-import { AlertController, Platform, ToastController, Events } from "ionic-angular";
+
+import { AlertController, Platform, ToastController, Events, LoadingController } from "ionic-angular";
 import { FormGroup } from '@angular/forms';
 import { User } from '../app/models/user';
 
@@ -52,7 +52,8 @@ export class UsuarioProvider {
         private storage: Storage,
         private http2: HttpClient,
         private toastCtrl: ToastController,
-        public events: Events) {
+        public events: Events,
+        public loadingCtrl:LoadingController,) {
         this.cargar_storage();
 
 
@@ -113,6 +114,9 @@ export class UsuarioProvider {
                 console.log("body2");
             } else {
 
+                
+                this.presentLoadingDefault('Iniciando sesion..');
+
                 this.presentToast();
 
                 this.token = body2.access_token;
@@ -122,6 +126,7 @@ export class UsuarioProvider {
                 this.guardar_storage();
                 //para actualizar el side menu
                 this.events.publish('user:menu');
+                
             }
 
         });
@@ -132,18 +137,18 @@ export class UsuarioProvider {
     mostrar_usuario() {
 
         this.cargar_storage();
-        
+
         console.log("token desde metodo mostar_usuario");
         console.log(this.token);
         return this.http.get(URL_SHOW_USER, this.options2).map((response: Response) => response.json());
-        
+
     }
 
 
-    
+
     mostrar_sitios() {
         return this.http.get(URL_SHOW_USER, this.options2).map((response: Response) => response.json());
-        
+
     }
 
     cerrar_sesion() {
@@ -153,6 +158,7 @@ export class UsuarioProvider {
         //guardar storage
         this.guardar_storage();
         this.events.publish('user:menu');
+        this.presentLoadingDefault('Cerrando sesion..');
 
     }
 
@@ -265,6 +271,18 @@ export class UsuarioProvider {
 
         return this.http.post(URL_SHOW_USER, id_usuario).map((response: Response) => response.json());
 
+    }
+
+    presentLoadingDefault(message:string) {
+        let loading = this.loadingCtrl.create({
+            content: message
+        });
+
+        loading.present();
+
+        setTimeout(() => {
+            loading.dismiss();
+        }, 2000);
     }
 
 

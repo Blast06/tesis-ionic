@@ -1,50 +1,29 @@
-<ion-header>
-    <ion-navbar>
-        <ion-buttons>
-            <button ion-button (click)="viewCtrl.dismiss(false)"> Cerrar</button>
-        </ion-buttons>
-    </ion-navbar>
-</ion-header>
-
-
-<mbsc-form class="md-login-form app-bg" [options]="formSettings"  >
-  <form [formGroup]="loginForm" novalidate>
-      <div class="md-logo micons icon-mbsc-logo"> <H4>ENJOY SHOPPING</H4></div>
-      <div class="mbsc-form-group-inset">
-          <mbsc-input [(ngModel)]="correo" formControlName="email" name="Email" placeholder="Email" [error]="loginForm.controls.email.invalid && loginForm.controls.email.dirty" [errorMessage]="errorFor('email')"></mbsc-input>
-          <mbsc-input [(ngModel)]="clave" formControlName="password" name="password" type="text" placeholder="Password" password-toggle="true" icon="none" icon-align="right" [error]="loginForm.controls.password.invalid && loginForm.controls.password.dirty" [errorMessage]="errorFor('password')"></mbsc-input>
-      </div>
-      
-      <div class="mbsc-form-group-inset mbsc-padding">
-          <mbsc-button block *ngIf="isLogin" [disabled]="loginForm.invalid && attemptedSubmit" (click)="logIn()">Sign in</mbsc-button>
-          
-          <button class="mbsc-form-group-inset mbsc-padding block" ion-button [disabled]="correo.length < 5 || clave.length < 4" (click)="ingresar()">INGRESAR</button>
-      </div>
-
-  </form>
-</mbsc-form> 
-
-
-<!-- <ion-content class="app-bg" padding>
+<ion-content class="app-bg" padding>
     <div class="Loginpage">
-      <div class="formContainer">
-          
-          <form class="app-form" padding>
-            <h4 class="title-form" color="light" text-uppercase>Enjoy Shopping</h4>
-            <ion-list>
-              <ion-item>
-                <ion-label floating>correo</ion-label>
-                <ion-input [(ngModel)]="correo" formControlName="email" name="Email" placeholder="Email" [error]="loginForm.controls.email.invalid && loginForm.controls.email.dirty" [errorMessage]="errorFor('email')" type="text"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label floating>contrasena</ion-label>
-                <ion-input type="password"></ion-input>
-              </ion-item>
-            </ion-list>
-            <button ion-button block text-uppercase color="third" [disabled]="correo.length < 5 || clave.length < 4" (click)="ingresar()">ENTRAR</button>
+        <div class="formContainer">
 
-          </form>
-      </div>
+            <form class="app-form" [formGroup]="loginForm" padding>
+                <h4 class="title-form" color="light" text-uppercase>Enjoy Shopping</h4>
+                <ion-list>
+                    <ion-item>
+                        <ion-label floating >Correo</ion-label>
+                        <ion-input [(ngModel)]="email" type="text" formControlName="email"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="!loginForm.controls.email.valid">
+                        <p>correo no valido</p>
+
+                    </ion-item>
+
+
+                    <ion-item>
+                        <ion-label floating >Contrasena</ion-label>
+                        <ion-input [(ngModel)]="password"  formControlName="password" type="password"></ion-input>
+                    </ion-item>
+                </ion-list>
+                <button ion-button block text-uppercase color="third" [disabled]="!loginForm.controls.email.valid && !loginForm.controls.password.valid" (click)="ingresar()">ENTRAR</button>
+
+            </form>
+        </div>
     </div>
-    
-</ion-content> -->
+
+</ion-content>

@@ -1,7 +1,9 @@
 import { CarritoProvider } from './../../providers/carrito.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Loading, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController, AlertController } from 'ionic-angular';
 import { ArticlesProvider } from '../../providers/index.services';
+
+
 
 
 
@@ -18,7 +20,7 @@ export class ArticuloPage {
   activated: boolean = false;
   slug: any;
   relatedArticles: any[] = [];
-  cantidad: number;
+  cantidad: number = 0;
 
 
 
@@ -28,7 +30,9 @@ export class ArticuloPage {
     public carritoService: CarritoProvider,
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController,
-    public articleService: ArticlesProvider, ) {
+    public articleService: ArticlesProvider,
+    public alertCtrl:AlertController
+  ) {
 
     this.slug = navParams.get('slug');
     console.log("en articulo.ts");
@@ -48,13 +52,7 @@ export class ArticuloPage {
 
   }
 
-  presentLoading() {
-    const loader = this.loadingCtrl.create({
-      content: "Please wait...",
-      duration: 3000
-    });
-    loader.present();
-  }
+
 
   goToSingleArticle(slug) {
     this.slug = slug;
@@ -75,12 +73,19 @@ export class ArticuloPage {
     // }
   }
 
-  decrement(){
-    // if (this.cantidad == 1 ) {
-      
-    // }else{
-    //   this.cantidad--;
-    // }
+  decrement() {
+    if (this.cantidad < 2) {
+
+    } else {
+      this.cantidad--;
+    }
+  }
+
+  addToCart(id, cantidad) {
+    this.carritoService.addToCart(id, cantidad).subscribe((data: any) => {
+      console.log(data);
+      this.presentAlert();
+    });
   }
 
 
@@ -92,14 +97,14 @@ export class ArticuloPage {
     modal.present();
   }
 
-
-
-
-
-
-
-
-
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Articulo agregado',
+      subTitle: 'Has agregado este articulo al carrito',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 
 
 }

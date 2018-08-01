@@ -12,6 +12,10 @@
 
 <ion-content padding>
 
+  <div *ngIf="!cart_articles.length" class="spinner-container">
+    <ion-spinner name="circles"></ion-spinner>
+  </div>
+
   <div text-center class="carrito_vacio" *ngIf="cart_articles.length == 0">
 
     <ion-icon name="ios-cart-outline" class="icon-5x"></ion-icon>
@@ -30,19 +34,20 @@
         <ion-col>
           <p>{{article.name}}</p>
           <p>{{article.price | currency}}</p>
+          <p>Cantidad: {{article.pivot.quantity}}</p>
 
           <button ion-button color="danger" outline small (click)="remove(article.id)">Eliminar</button>
         </ion-col>
       </ion-row>
     </ion-grid>
-    
+
     <hr>
     <ion-grid>
       <ion-row>
         <ion-col>
           <h3>
             <strong>Total:</strong>
-            4356
+            {{totalPrice}}
           </h3>
 
         </ion-col>

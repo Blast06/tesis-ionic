@@ -16,7 +16,7 @@
    </div>
 
   <ion-toolbar color="primary" class="profile-head" text-center *ngIf="user"> 
-    <img src="assets/imgs/profile-img.png" />
+    <img src="{{user.avatar}}" />
     <h4>{{user.name}}</h4>
     <p>{{user.email}}</p>
   </ion-toolbar>
