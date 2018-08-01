@@ -29,13 +29,13 @@ export class HomePage implements OnInit {
   headerbg: any;
   darkHeader: any;
 
-  articlesFromSubscribed:any[]=[];
+  articlesFromSubscribed: any[] = [];
 
-  detector:boolean;
+  detector: boolean;
 
-  token:boolean = this._us.token_activo();
+  token: boolean = this._us.token_activo();
 
-  
+
 
   @ViewChild(Content) content: Content;
 
@@ -49,15 +49,15 @@ export class HomePage implements OnInit {
     public zone: NgZone,
   ) {
 
-    articleService.getArticlesFromSubscribed().subscribe((data) => {
+    websiteService.getArticlesFromSubscribed().subscribe((data) => {
       console.log(data.data);
       this.articlesFromSubscribed = data.data;
-      
+
     })
 
     this.changeDetector();
 
-    
+
 
   }
 
@@ -83,12 +83,12 @@ export class HomePage implements OnInit {
 
   }
 
-  changeDetector(){
+  changeDetector() {
     if (this.articlesFromSubscribed.length == 0 || this.articlesFromSubscribed == null) {
       this.detector = true;
-      
+
     }
-    else{
+    else {
       this.detector = false;
     }
   }
@@ -97,7 +97,7 @@ export class HomePage implements OnInit {
     this.events.publish('user:menu');
   }
 
-  isConnected(){
+  isConnected() {
     this.events.publish('network:conexion');
   }
 
@@ -107,12 +107,12 @@ export class HomePage implements OnInit {
     });
   }
 
-  goTo(){
+  goTo() {
     if (this.token) {
       this.navCtrl.push(CreararticuloPage);
-      
+
     }
-    else{
+    else {
       this.navCtrl.push(LoginPage);
     }
   }
@@ -124,9 +124,9 @@ export class HomePage implements OnInit {
     } else this.renderer.setElementClass(this.headerbg, 'sub-header', false);
   }
 
-  
 
-  
+
+
 
 
 

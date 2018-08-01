@@ -12,10 +12,11 @@ export const URL_SHOW_WEBSITE= URL_BASE + "/"; //-> MAS EL SLUG DEL WEBSITE =  /
 
 export const URL_WEBSITE_SUSCRIBE = URL_BASE + "/"; //ESTA SERIA URL_BASE{website}/suscribe
 export const URL_WEBSITE_UNSUSCRIBE = URL_BASE + "/"; //ESTA SERIA URL_BASE{website}/unsuscribe
+export const URL_WEBSITE_IS_SUSCRIBED = URL_BASE + "/"; //ESTA SERIA URL_BASE{website}/unsuscribe
 
+export const URL_CREATE_WEBSITE = URL_BASE + "/websites"; // ESTA VA ASI tesis.test/1/unfavorite
 export const URL_ARTICLE_FAVORITE = URL_BASE + "/" ; // ESTA VA ASI tesis.test/1/favorite
 export const URL_ARTICLE_UNFAVORITE = URL_BASE ; // ESTA VA ASI tesis.test/1/unfavorite
-export const URL_CREATE_WEBSITE = URL_BASE + "/websites"; // ESTA VA ASI tesis.test/1/unfavorite
 
 
 export const URL_CREATE_ARTICLE = "http://178.128.183.171/client/"  ; //ESTA FUNCIONA ASI -> client/my-sitio/articles 

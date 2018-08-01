@@ -1,4 +1,4 @@
-import {  URL_CREATE_WEBSITE } from './../URLs/url.servicios';
+import { URL_CREATE_WEBSITE, URL_WEBSITE_SUSCRIBE } from './../URLs/url.servicios';
 import { Headers, RequestOptions, Response } from '@angular/http';
 
 import { HttpClient } from '@angular/common/http';
@@ -9,17 +9,17 @@ import { Platform } from 'ionic-angular'
 import { URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED, URL_SHOW_WEBSITE } from '../URLs/url.servicios';
 import { UsuarioProvider } from './usuario.service';
 import { Observable } from '../../node_modules/rxjs';
-import {  tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 
 export interface Res {
-  headers:any,
-  ok:boolean,
-  status:number,
-  statusText:string,
-  url:string,
-  _body:string
-  
+  headers: any,
+  ok: boolean,
+  status: number,
+  statusText: string,
+  url: string,
+  _body: string
+
 }
 
 
@@ -38,7 +38,7 @@ export class WebsiteProvider {
     public http2: Http,
     public _userService: UsuarioProvider,
     public storage: Storage,
-    public platform:Platform,) {
+    public platform: Platform, ) {
 
 
     //sacar token del storage
@@ -53,18 +53,18 @@ export class WebsiteProvider {
   }
 
 
-  mostrar_info_sitio(username) { 
+  mostrar_info_sitio(username) {
     return this.http2.get(URL_SHOW_WEBSITE + username, this.options).map((response: Response) => response.json());
   }
 
-  mostrar_articulos_sitios_suscritos() {
-    
+  getArticlesFromSubscribed() {
+
     return this.http2.get(URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED, this.options).map((response: Response) => response.json());
 
   }
 
 
-  crear_sitio(name:string,username:string){
+  crear_sitio(name: string, username: string) {
 
     let body = {
       name: name,
@@ -72,9 +72,23 @@ export class WebsiteProvider {
 
     }
 
-   return this.http2.post(URL_CREATE_WEBSITE,body, this.options).map( (response: Response) => response.json());
+    return this.http2.post(URL_CREATE_WEBSITE, body, this.options).map((response: Response) => response.json());
 
   }
+
+  subscribeToWebsite(slug){
+    return this.http2.get(URL_WEBSITE_SUSCRIBE + "/" + slug + "/subscribe",this.options).map((response:Response) => response.json());
+  }
+
+  unSubscribeToWebsite(slug){
+    return this.http2.get(URL_WEBSITE_SUSCRIBE + "/" + slug + "/unsubscribe",this.options).map((response:Response) => response.json());
+  }
+  isSubscribedTo(slug){
+    return this.http2.get(URL_WEBSITE_SUSCRIBE + "/" + slug + "/isSubscribedTo",this.options).map((response:Response) => response.json());
+  }
+
+
+
 
   getToken() {
     if (this.platform.is("cordova")) {
@@ -89,8 +103,8 @@ export class WebsiteProvider {
 
   }
 
-  prueba_api(){
-    return this.http2.get("https://jsonplaceholder.typicode.com/posts").map((response: Response) =>response.json());
+  prueba_api() {
+    return this.http2.get("https://jsonplaceholder.typicode.com/posts").map((response: Response) => response.json());
 
   }
 

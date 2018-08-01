@@ -60,16 +60,16 @@ export class ArticlesProvider {
 
   getArticlesFromSubscribed(){
     return this.http.get(URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED,this.options).map((response:Response) =>response.json());
-    
+    //
   }
 
-  addToFavorite(id) {
+  addToFavorite(slug) {
     console.log(this.token);
-    return this.http.get(URL_ARTICLE_FAVORITE + id + "/favorite", this.options).map((response:Response) =>response.json());
+    return this.http.get(URL_ARTICLE_FAVORITE + slug + "/favorite", this.options).map((response:Response) =>response.json());
   }
 
-  removeToFavorite(id) {
-    return this.http.get(URL_ARTICLE_FAVORITE + id + "/unfavorite", this.options).map((response:Response) =>response.json());
+  removeToFavorite(slug) {
+    return this.http.get(URL_ARTICLE_FAVORITE + slug + "/unfavorite", this.options).map((response:Response) =>response.json());
   }
 
   createArticle(parameters,websiteslug){
