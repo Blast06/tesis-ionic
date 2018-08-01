@@ -1,3 +1,4 @@
+import { HomePage } from './../home/home';
 import { CarritoProvider } from "../../providers/index.services";
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
@@ -14,13 +15,15 @@ export class CarritoPage {
 
   totalPrice: number;
 
+  homepage = HomePage;
+
 
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public carritoService: CarritoProvider,
-    public viewCtrl: ViewController, 
-    public alertCtrl:AlertController,) {
+    public viewCtrl: ViewController,
+    public alertCtrl: AlertController, ) {
 
     carritoService.getCart().subscribe((data: any) => {
       console.log("DATOS EN EL CONSTRUCTOR");
@@ -29,10 +32,7 @@ export class CarritoPage {
       this.cart_articles = data.data.cart_article;
       console.log(this.cart_articles);
       console.log(this.cart_articles.length);
-
-
-
-
+      carritoService.carritoBadgeCounter = this.cart_articles.length;
 
     });
 
@@ -49,8 +49,7 @@ export class CarritoPage {
     });
     this.removeFromArticlesArray(idx);
     this.presentAlert();
-
-
+    this.carritoService.carritoBadgeCounter--;
   }
 
   removeFromArticlesArray(idx: number) {

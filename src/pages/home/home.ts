@@ -1,7 +1,5 @@
 
-import { LoginPage } from './../login/login';
-
-import { ArticuloPage } from './../index.paginas';
+import { ArticuloPage, LoginPage, BuscarPage } from './../index.paginas';
 
 //servicios
 import { UsuarioProvider, ArticlesProvider, CarritoProvider, WebsiteProvider } from './../../providers/index.services';
@@ -12,11 +10,6 @@ import { Article } from './../../app/models/article';
 import { Component, Input, OnInit, Renderer, ViewChild, NgZone } from '@angular/core';
 import { NavController, Events, Content } from 'ionic-angular';
 import { CreararticuloPage } from '../creararticulo/creararticulo';
-
-
-
-
-
 
 
 
@@ -32,6 +25,9 @@ export class HomePage implements OnInit {
   articlesFromSubscribed: any[] = [];
 
   detector: boolean;
+  slug: any;
+  articuloPage = ArticuloPage;
+  cartItemsCounter: number = 0;
 
   token: boolean = this._us.token_activo();
 
@@ -46,14 +42,26 @@ export class HomePage implements OnInit {
     public events: Events,
     public websiteService: WebsiteProvider,
     public renderer: Renderer,
-    public zone: NgZone,
-  ) {
+    public zone: NgZone, ) {
 
-    websiteService.getArticlesFromSubscribed().subscribe((data) => {
-      console.log(data.data);
-      this.articlesFromSubscribed = data.data;
 
-    })
+
+
+    if (this.token) {
+      websiteService.getArticlesFromSubscribed().subscribe((data) => {
+        console.log(data.data);
+        this.articlesFromSubscribed = data.data;
+
+      });
+
+      this.getTotalItemsCart();
+
+    }
+
+
+
+
+
 
     this.changeDetector();
 
@@ -69,17 +77,24 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
 
-
     //para cambiar las opciones del menu lateral
     this.actualizar_menu();
-    // this.websiteService.mostrar_articulos_sitios_suscritos().subscribe((data:any) =>{
-    //   console.log(data);
-    // });
-
-
   }
 
   siguiente_pagina(infiniteScroll) {
+
+  }
+
+  getTotalItemsCart() {
+    this.carritoService.getCart().subscribe((data: any) => {
+      console.log("DATOS EN EL CONSTRUCTOR");
+      console.log(data);
+
+      this.cartItemsCounter = data.data.cart_article.length;
+      console.log(this.cartItemsCounter);
+
+    });
+
 
   }
 
@@ -115,6 +130,46 @@ export class HomePage implements OnInit {
     else {
       this.navCtrl.push(LoginPage);
     }
+  }
+  goTo2() {
+    this.navCtrl.push(BuscarPage);
+  }
+
+  goToSignIn() {
+    this.navCtrl.push(LoginPage);
+
+  }
+
+  goToSingleArticle(slug) {
+    this.slug = slug;
+    console.log(slug);
+    console.log(this.slug);
+
+    this.navCtrl.push(this.articuloPage, { slug: this.slug });
+
+
+  }
+
+  like(article) {
+    article.activeLike = !article.activeLike;
+    console.log(article.id);
+    if (article.activeLike) {
+      this.articleService.addToFavorite(article.id).subscribe((data) => {
+        console.log(data);
+
+      });
+    } else {
+      this.articleService.removeToFavorite(article.id).subscribe((data) => {
+        console.log(data);
+
+      });
+
+    }
+  }
+
+  cerrarSesion() {
+    this._us.cerrar_sesion();
+    this.articlesFromSubscribed = null;
   }
 
   updateHeader(ev) {

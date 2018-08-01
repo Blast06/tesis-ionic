@@ -10,7 +10,7 @@ import { UsuarioProvider } from './usuario.service';
 import { Headers, RequestOptions, Response } from '@angular/http';
 
 import { CarritoPage, LoginPage } from "../pages/index.paginas";
-import { URL_SHOPPING_CART, URL_REMOVE_ARTICLE_SHOPPING_CART, URL_ADD_ARTICLE_SHOPPING_CART } from '../URLs/url.servicios';
+import { URL_SHOPPING_CART, URL_REMOVE_ARTICLE_SHOPPING_CART, URL_ADD_ARTICLE_SHOPPING_CART, URL_SHOPPING_CART_COUNT } from '../URLs/url.servicios';
 
 
 
@@ -24,6 +24,7 @@ export class CarritoProvider {
 
   items: any[] = [];
   total_carrito: number = 0;
+  carritoBadgeCounter: number = 0;
 
   public token: any;
 
@@ -41,6 +42,8 @@ export class CarritoProvider {
     // sacar token del storage
     this.getToken();
 
+    this.getCarritoCounter();
+
 
     //config de headers para la peticion
     this.headers.append("Accept", "Application/json");
@@ -51,12 +54,24 @@ export class CarritoProvider {
 
   }
 
+
+  getCarritoCounter(){
+    this.getCart().subscribe((data:any) =>{
+      console.log(data);
+    });
+    
+
+  }
+
   ver_carrito() {
 
     let modal: any;
 
     if (this.usuarioService.token) {
       modal = this.modalCtrl.create(CarritoPage);
+      // this.getCartItemsCount().subscribe((data:any) =>{
+      //   console.log(data);
+      // });
 
 
     } else {
@@ -86,25 +101,25 @@ export class CarritoProvider {
   }
 
 
-  agregar_carrito(item_parametro: any) {
+  // agregar_carrito(item_parametro: any) {
 
-    for (let item of this.items) {
-      if (item.id == item_parametro.id) {
+  //   for (let item of this.items) {
+  //     if (item.id == item_parametro.id) {
 
-        this.alertCtrl.create({
-          title: "Item existe",
-          subTitle: item_parametro.name + ", ya se encuentra en su carrito de compras",
-          buttons: ["OK"]
-        }).present();
+  //       this.alertCtrl.create({
+  //         title: "Item existe",
+  //         subTitle: item_parametro.name + ", ya se encuentra en su carrito de compras",
+  //         buttons: ["OK"]
+  //       }).present();
 
-        return;
-      }
-    }
+  //       return;
+  //     }
+  //   }
 
-    this.items.push(item_parametro);
-    this.actualizar_total();
-    this.guardar_storage();
-  }
+  //   this.items.push(item_parametro);
+  //   this.actualizar_total();
+  //   this.guardar_storage();
+  // }
 
   actualizar_total() {
     this.total_carrito = 0;
@@ -124,6 +139,10 @@ export class CarritoProvider {
 
   }
 
+  getCartItemsCount(){
+    return this.http2.get(URL_SHOPPING_CART_COUNT,this.options).map((response:Response) => response.json());
+  }
+
   addToCart(id, cantidad) {
     console.log("TOKEN EN ADDTOCART - CARRITOSERVICE.TS");
     console.log(this.token);
@@ -136,7 +155,7 @@ export class CarritoProvider {
     console.log("TOKEN EN REMOVEFROMCART - CARRITOSERVICE.TS");
     console.log(this.token);
     return this.http2.get(URL_REMOVE_ARTICLE_SHOPPING_CART + "/" + id + "/remove/car", this.options).map((response: Response) => response.json());
-  //http://178.128.183.171/api/2/remove/car
+  
   }
 
 
@@ -199,15 +218,17 @@ export class CarritoProvider {
   }
 
   getToken() {
-    if (this.platform.is("cordova")) {
-      this.storage.get('token').then((t) => {
-        this.token = t;
-      })
+    // if (this.platform.is("cordova")) {
+    //   this.storage.get('token').then((t) => {
+    //     this.token = t;
+    //   })
 
-    }
-    else {
-      this.token = localStorage.getItem("token");
-    }
+    // }
+    // else {
+    //   this.token = localStorage.getItem("token");
+    // }
+
+    this.token = this.usuarioService.token;
 
   }
 

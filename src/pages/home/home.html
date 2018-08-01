@@ -1,7 +1,7 @@
 <ion-header class="header_home">
   <ion-navbar color="primary">
     <ion-buttons start>
-      <button *ngIf="_us.token_activo()" ion-button (click)="_us.cerrar_sesion()">
+      <button *ngIf="_us.token_activo()" ion-button (click)="cerrarSesion()">
         Salir
       </button>
     </ion-buttons>
@@ -13,7 +13,7 @@
     <ion-buttons end>
       <button ion-button icon-only (click)="carritoService.ver_carrito()">
         <ion-icon name="cart"></ion-icon>
-        <ion-badge color="danger" class="carrito-numero" *ngIf="carritoService.items.length > 0">{{carritoService.items.length}}
+        <ion-badge color="danger" class="carrito-numero" *ngIf="carritoService.carritoBadgeCounter > 0">{{carritoService.carritoBadgeCounter}}
         </ion-badge>
 
       </button>
@@ -31,45 +31,66 @@
 
   <img src="assets/imgs/new.png" class="new-collection" />
 
-  <div class="products">
-    <p text-uppercase>
-      <strong>Articulos</strong>
-    </p>
-    <p *ngIf="detector">No sigues a ningun sitio? o no estas logueado, ve a la tercera imagen y suscribete a algunos!</p>
+  <div class="products" *ngIf="!articlesFromSubscribed">
+    <p>No sigues a ningun sitio?, ve a la tercera imagen y suscribete a algunos!</p>
+  </div>
 
+  <div class="products" *ngIf="!_us.token_activo()">
+    <p>Inicia sesion para una mejor experiencia de usuario</p>
+    <button ion-button (click)="goToSignIn()"> ENTRAR</button>
 
   </div>
 
 
-  <ion-card (click)="goTo()">
-    <img src="assets/imgs/ecommerce.jpg" />
-    <div class="card-title">Quieres vender?</div>
-    <div class="card-subtitle">Publica tu anuncio, gratis!</div>
-  </ion-card>
+  <div *ngIf="articlesFromSubscribed" class="products">
 
-  <ion-card>
-    <img src="assets/imgs/ecommerce2.jpg" />
-    <div class="card-title">Buscas algo?</div>
-    <div class="card-subtitle">Navega por los diferentes sitios o categorias</div>
-  </ion-card>
+    <p text-uppercase>
+      <strong>Articulos</strong>
+    </p>
 
-  <ion-card>
-    <img src="assets/imgs/ecommerce5.png" />
-    <div class="card-title">Sencillo, facil de usar</div>
-    <div class="card-subtitle">Con una interfaz amigable al usuario</div>
-  </ion-card>
+    <ion-card class="app-card" *ngFor="let article of articlesFromSubscribed">
+      <img src="{{article.image_path}}" (click)="goToSingleArticle(article.slug)" />
+      <div class="det">
+        <h4 no-margin>{{article.name | slice:0:5}}</h4>
+        <p no-margin>{{article.price | currency:'RD$'}}</p>
+        <ion-grid no-padding>
+          <ion-row>
+            <ion-col col-6>
+              <!-- <button ion-button block>Ordenar</button> -->
+            </ion-col>
+            <ion-col col-3 (click)="like(article)">
+              <ion-icon name="md-heart" color="light" [ngClass]="{'activeColor': article.activeLike }"></ion-icon>
+            </ion-col>
 
-  <ion-card>
-    <img src="assets/imgs/ecommerce5.png" />
-    <div class="card-title">Estadisticas</div>
-    <div class="card-subtitle">Con metricas para medir tu negocio(version web)</div>
-  </ion-card>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-card>
+
+  </div>
 
 
 
 
+  <div class="products" *ngIf="!articlesFromSubscribed || !_us.token_activo() ">
+    <ion-card (click)="goTo()">
+      <img src="assets/imgs/ecommerce.jpg" />
+      <div class="card-title">Quieres vender?</div>
+      <div class="card-subtitle">Publica tu anuncio, gratis!</div>
+    </ion-card>
 
+    <ion-card>
+      <img src="assets/imgs/ecommerce2.jpg" (click)="goTo2()" />
+      <div class="card-title">Buscas algo?</div>
+      <div class="card-subtitle">Busca por sitios o por articulos</div>
+    </ion-card>
 
+    <ion-card>
+      <img src="assets/imgs/ecommerce5.png" />
+      <div class="card-title">Sencillo, facil de usar</div>
+      <div class="card-subtitle">Con una interfaz amigable al usuario</div>
+    </ion-card>
+  </div>
 
 
 
