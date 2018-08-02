@@ -10,7 +10,7 @@ import { UsuarioProvider } from './usuario.service';
 import { Headers, RequestOptions, Response } from '@angular/http';
 
 import { CarritoPage, LoginPage } from "../pages/index.paginas";
-import { URL_SHOPPING_CART, URL_REMOVE_ARTICLE_SHOPPING_CART, URL_ADD_ARTICLE_SHOPPING_CART, URL_SHOPPING_CART_COUNT } from '../URLs/url.servicios';
+import { URL_SHOPPING_CART, URL_REMOVE_ARTICLE_SHOPPING_CART, URL_ADD_ARTICLE_SHOPPING_CART, URL_SHOPPING_CART_COUNT, URL_MAKE_ORDER } from '../URLs/url.servicios';
 
 
 
@@ -156,6 +156,12 @@ export class CarritoProvider {
     console.log(this.token);
     return this.http2.get(URL_REMOVE_ARTICLE_SHOPPING_CART + "/" + id + "/remove/car", this.options).map((response: Response) => response.json());
   
+  }
+
+  makeOrder(){
+    console.log("TOKEN EN MAKEORDER - CARRITOSERVICE.TS");
+    console.log(this.token);
+    return this.http2.post(URL_MAKE_ORDER,this.options).map((response:Response) => response.json());
   }
 
 

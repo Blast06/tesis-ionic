@@ -20,7 +20,7 @@ export class ArticuloPage {
   activated: boolean = false;
   slug: any;
   relatedArticles: any[] = [];
-  cantidad: number = 0;
+  cantidad: number = 1;
 
 
 
@@ -31,7 +31,7 @@ export class ArticuloPage {
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController,
     public articleService: ArticlesProvider,
-    public alertCtrl:AlertController
+    public alertCtrl: AlertController
   ) {
 
     this.slug = navParams.get('slug');
@@ -82,6 +82,11 @@ export class ArticuloPage {
   }
 
   addToCart(id, cantidad) {
+    if (cantidad < 1) {
+      this.presentAlert2();
+
+
+    }
     this.carritoService.addToCart(id, cantidad).subscribe((data: any) => {
       console.log(data);
       this.presentAlert();
@@ -101,6 +106,15 @@ export class ArticuloPage {
     let alert = this.alertCtrl.create({
       title: 'Articulo agregado',
       subTitle: 'Has agregado este articulo al carrito',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  presentAlert2() {
+    let alert = this.alertCtrl.create({
+      title: 'Error',
+      subTitle: 'Debes especificar una cantidad!',
       buttons: ['OK']
     });
     alert.present();

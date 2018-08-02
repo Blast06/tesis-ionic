@@ -25,6 +25,7 @@ export const URL_SHOPPING_CART = URL_BASE + "/shopping/cart" ; //PARA OBTENER  l
 export const URL_SHOPPING_CART_COUNT = URL_BASE + "/shopping/cart/count" ; //PARA OBTENER la cantidad de items
 export const URL_REMOVE_ARTICLE_SHOPPING_CART = URL_BASE ; //PARA eliminar articulo del carrito
 export const URL_ADD_ARTICLE_SHOPPING_CART = URL_BASE ; //PARA agregar articulo
+export const URL_MAKE_ORDER = URL_BASE + "/orders" ; //PARA agregar articulo
 
 
 

@@ -12,11 +12,11 @@
 
 <ion-content padding>
 
-  <div *ngIf="!cart_articles.length" class="spinner-container">
+  <div *ngIf="!cart_articles" class="spinner-container">
     <ion-spinner name="circles"></ion-spinner>
   </div>
 
-  <div text-center class="carrito_vacio" *ngIf="cart_articles.length == 0">
+  <div text-center class="carrito_vacio" *ngIf="cart_articles.length < 1">
 
     <ion-icon name="ios-cart-outline" class="icon-5x"></ion-icon>
     <br> Su carrito esta vacio
