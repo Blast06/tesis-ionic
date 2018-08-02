@@ -64,6 +64,12 @@ export class CarritoPage {
 
   }
 
+  makeOrder(){
+    this.carritoService.makeOrder().subscribe((data) =>{
+      console.log(data);
+    });
+  }
+
   presentAlert() {
     let alert = this.alertCtrl.create({
       title: 'Articulo eliminado',

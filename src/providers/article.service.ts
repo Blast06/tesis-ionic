@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { LoadingController } from 'ionic-angular';
 import { URL_ARTICULOS, URL_SHOW_SINGLE_ARTICLE, URL_ARTICLE_FAVORITE, URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED, URL_CREATE_ARTICLE } from './../URLs/url.servicios';
 
@@ -11,6 +12,7 @@ import { Headers, RequestOptions, Response } from '@angular/http';
 
 import { HTTP } from '@ionic-native/http';
 import { Platform } from 'ionic-angular'
+// import { map } from '../../node_modules/rxjs/operator/map';
 
 
 
@@ -55,6 +57,11 @@ export class ArticlesProvider {
 
   getSingleArticle(slug) {
     return this.http.get(URL_SHOW_SINGLE_ARTICLE + slug).map((response: Response) => response.json());
+
+  }
+
+  getSingleArticleRelateds(slug) {
+    return this.http.get(URL_SHOW_SINGLE_ARTICLE + slug).map((response:Response) =>response.toString());
 
   }
 

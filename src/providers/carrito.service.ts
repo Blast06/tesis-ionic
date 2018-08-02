@@ -55,11 +55,11 @@ export class CarritoProvider {
   }
 
 
-  getCarritoCounter(){
-    this.getCart().subscribe((data:any) =>{
+  getCarritoCounter() {
+    this.getCart().subscribe((data: any) => {
       console.log(data);
     });
-    
+
 
   }
 
@@ -139,15 +139,15 @@ export class CarritoProvider {
 
   }
 
-  getCartItemsCount(){
-    return this.http2.get(URL_SHOPPING_CART_COUNT,this.options).map((response:Response) => response.json());
+  getCartItemsCount() {
+    return this.http2.get(URL_SHOPPING_CART_COUNT, this.options).map((response: Response) => response.json());
   }
 
   addToCart(id, cantidad) {
     console.log("TOKEN EN ADDTOCART - CARRITOSERVICE.TS");
     console.log(this.token);
     return this.http2.get(URL_ADD_ARTICLE_SHOPPING_CART + "/" + id + "/add/" + cantidad + "/car", this.options).map((response: Response) => response.json());
-  
+
 
   }
 
@@ -155,13 +155,19 @@ export class CarritoProvider {
     console.log("TOKEN EN REMOVEFROMCART - CARRITOSERVICE.TS");
     console.log(this.token);
     return this.http2.get(URL_REMOVE_ARTICLE_SHOPPING_CART + "/" + id + "/remove/car", this.options).map((response: Response) => response.json());
-  
+
   }
 
-  makeOrder(){
+  makeOrder() {
     console.log("TOKEN EN MAKEORDER - CARRITOSERVICE.TS");
     console.log(this.token);
-    return this.http2.post(URL_MAKE_ORDER,this.options).map((response:Response) => response.json());
+    return this.http2.post(URL_MAKE_ORDER, this.options).map((response: Response) => response.json());
+  }
+
+  getOrders() {
+    console.log("TOKEN EN GETORDER - CARRITOSERVICE.TS");
+    console.log(this.token);
+    return this.http2.post(URL_MAKE_ORDER, this.options).map((response: Response) => response.json());
   }
 
 

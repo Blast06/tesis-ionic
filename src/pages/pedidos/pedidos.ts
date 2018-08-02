@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { CarritoProvider } from '../../providers/index.services';
 
 /**
  * Generated class for the PedidosPage page.
@@ -15,7 +16,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PedidosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public carritoService: CarritoProvider,
+  ) {
+
+    carritoService.getOrders().subscribe((data) => {
+      console.log(data);
+
+    });
+
   }
 
   ionViewDidLoad() {

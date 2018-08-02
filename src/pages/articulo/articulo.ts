@@ -19,8 +19,11 @@ export class ArticuloPage {
   article: any[] = [];
   activated: boolean = false;
   slug: any;
-  relatedArticles: any[] = [];
+  relatedArticles:any[] = [];
+  relatedArticles2 = []
   cantidad: number = 1;
+
+  evilResponseProps;
 
 
 
@@ -40,19 +43,21 @@ export class ArticuloPage {
 
     articleService.getSingleArticle(this.slug).subscribe((data) => {
       this.article = data.data.article;
+      console.log(data);
       console.log(this.article);
       console.log(data.data);
       this.relatedArticles = data.data.relateds;
       console.log(this.relatedArticles);
     });
+    this.getRelatedArtsArray();
+    console.log(this.relatedArticles2);
 
-
-
-
-
+    articleService.getSingleArticleRelateds(this.slug).subscribe((data) =>{
+      console.log(data);
+    });
   }
 
-
+  
 
   goToSingleArticle(slug) {
     this.slug = slug;
@@ -60,6 +65,16 @@ export class ArticuloPage {
     console.log(this.slug);
 
     this.navCtrl.push(this.articuloPage, { slug: this.slug });
+  }
+
+  getRelatedArtsArray(){
+    let evilResponse;
+    this.evilResponseProps = this.relatedArticles.keys();
+
+    for (const prop of this.evilResponseProps) {
+      this.relatedArticles2.push(this.evilResponseProps[prop]);
+      
+    }
 
 
   }
@@ -98,8 +113,7 @@ export class ArticuloPage {
 
 
   presentCartModal() {
-    let modal = this.modalCtrl.create('Cart');
-    modal.present();
+    this.carritoService.ver_carrito();
   }
 
   presentAlert() {
