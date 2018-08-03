@@ -4,7 +4,8 @@ import { User } from '../../app/models/user';
 import { Storage } from "@ionic/storage";
 import { UsuarioProvider, ArticlesProvider } from '../../providers/index.services';
 import { Validators, FormGroup, FormBuilder } from '../../../node_modules/@angular/forms';
-import { FormControl } from '../../../node_modules/@mobiscroll/angular/src/js/classes/form-control';
+// import { FormControl } from '../../../node_modules/@mobiscroll/angular/src/js/classes/form-control';
+import { CrearSitiosPage } from '../crear-sitios/crear-sitios';
 
 
 /**
@@ -134,6 +135,10 @@ export class CreararticuloPage {
 
   private decrement() {
     this.currentNumber--;
+  }
+
+  crearSitio(){
+    this.navCtrl.push(CrearSitiosPage);
   }
 
   

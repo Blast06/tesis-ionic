@@ -22,6 +22,13 @@
     <ion-spinner name="circles"></ion-spinner>
   </div>
 
+  <h5 *ngIf="!websites">No tienes sitios?</h5>
+  <p (click)="crearSitio()">
+    <b>
+      Create uno aqui
+    </b>
+  </p>
+
   <!-- lista de sitios -->
   <div *ngIf="!show">
     <ion-card class="app-card" *ngFor="let website of websites">

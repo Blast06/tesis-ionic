@@ -1,12 +1,13 @@
 import { Observable } from 'rxjs/Observable';
 import { URL_SIGNUP, URL_LOGIN, URL_SHOW_USER } from './../URLs/url.servicios';
-import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 
 
 import { Injectable } from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 //import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import { map } from 'rxjs/operators';
 
 import { Storage } from "@ionic/storage";
@@ -14,33 +15,47 @@ import { Storage } from "@ionic/storage";
 
 import { AlertController, Platform, ToastController, Events, LoadingController } from "ionic-angular";
 import { FormGroup } from '@angular/forms';
-import { User } from '../app/models/user';
 
+
+interface APIErrorResponse extends HttpErrorResponse {
+    error: {
+        id?: string
+        links?: { about: string }
+        status: string
+        code?: string
+        title: string
+        detail: string
+        source?: {
+            pointer?: string
+            parameter?: string
+        }
+        meta?: any
+    }
+}
 
 
 
 const CLIENT_ID = "2";
-const CLIENT_ID2 = "4";
-const SECRET_KEY = "DOX6LS7TvN5iuTp23ozz0tLlPWbQEIEKsichpDxh";
-const SECRET_KEY2 = "5xzoaNAR4VUrsHRGAJRKLi2LYT9pQH75d75oe8Lx";
+
+const SECRET_KEY = "HdcAKuH3XhxzvZxyNI6isj9z1NT0AGdu0of4ufKK";
+
+
+
+
 
 @Injectable()
 export class UsuarioProvider {
 
     public token: string;
     public id_usuario: string;
-
-
-
     user: any[] = [];
-
-
-
     headers = new Headers();
     headers2 = new Headers();
 
     private options;
     private options2;
+
+    body3:APIErrorResponse;
 
 
 
@@ -53,7 +68,7 @@ export class UsuarioProvider {
         private http2: HttpClient,
         private toastCtrl: ToastController,
         public events: Events,
-        public loadingCtrl:LoadingController,) {
+        public loadingCtrl: LoadingController, ) {
         this.cargar_storage();
 
 
@@ -94,27 +109,42 @@ export class UsuarioProvider {
 
         let body2;
 
-        return this.http.post(URL_LOGIN, body, this.options).map(data_resp => {
+       
+    
+
+   
+
+        
+
+        return this.http.post(URL_LOGIN, body, this.options).map((data_resp:Response) => {
 
             console.log("DATOS A ENVIAR(DENTRO DEL USUARIO en usuarioSERVICE): ");
 
+            console.log(this.body3.statusText);
+
+
             //convertir el body en json() 
-            body2 = data_resp.json() || {};
+            body2 = data_resp.json();
             console.log("body2 hola");
+
             console.log(body2);
 
 
             if (body2.status) {
-                this.alertCtrl.create({
-                    title: 'Error al iniciar',
-                    subTitle: "Revise su informacion",
-                    buttons: ["OK"]
-                }).present();
+
+
+                let alert = this.alertCtrl.create({
+                    title: 'Error',
+                    subTitle: 'Correo o contrasena incorrecta!',
+                    buttons: ['OK']
+                });
+                alert.present();
+
 
                 console.log("body2");
             } else {
 
-                
+
                 this.presentLoadingDefault('Iniciando sesion..');
 
                 this.presentToast();
@@ -126,17 +156,19 @@ export class UsuarioProvider {
                 this.guardar_storage();
                 //para actualizar el side menu
                 this.events.publish('user:menu');
-                
+
             }
 
         });
+
+
 
 
     }
 
     mostrar_usuario() {
 
-        this.cargar_storage();
+        // this.cargar_storage();
 
         console.log("token desde metodo mostar_usuario");
         console.log(this.token);
@@ -266,14 +298,9 @@ export class UsuarioProvider {
     }
 
 
-    getUser(id_usuario): Observable<User[]> {
-        id_usuario = this.id_usuario;
 
-        return this.http.post(URL_SHOW_USER, id_usuario).map((response: Response) => response.json());
 
-    }
-
-    presentLoadingDefault(message:string) {
+    presentLoadingDefault(message: string) {
         let loading = this.loadingCtrl.create({
             content: message
         });

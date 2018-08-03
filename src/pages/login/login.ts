@@ -26,6 +26,8 @@ export class LoginPage {
     isLogin: boolean = false;
     attemptedSubmit: boolean = false;
 
+    error = null;
+
 
     constructor(public fb: FormBuilder,
         private navCtrl: NavController,
@@ -43,7 +45,8 @@ export class LoginPage {
     }
     ingresar() {
         this.usuarioService.ingresar(this.email, this.password)
-            .subscribe(() => {
+            .subscribe(() =>  {
+                
                 console.log("DATOS A ENVIAR: " + this.email, this.password);
 
                 if (this.usuarioService.token_activo()) {
@@ -54,7 +57,18 @@ export class LoginPage {
 
             });
 
+        
 
+
+    }
+
+    handleData(data){
+        this.usuarioService.token = data;
+        console.log(data);
+    }
+    handleError(error){
+        this.error = error;
+        console.log(error);
     }
 
 

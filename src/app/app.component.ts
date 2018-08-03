@@ -111,8 +111,6 @@ export class MyApp {
         { title: 'Configuracion', component: ConfiguracionPage },
         { title: 'Crear Sitio', component: CrearSitiosPage },
         { title: 'Crear Articulo', component: CreararticuloPage },
-
-
       ];
 
     } else {

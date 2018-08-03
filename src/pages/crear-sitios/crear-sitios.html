@@ -1,5 +1,3 @@
-
-
 <ion-header>
 
   <ion-navbar>
@@ -12,9 +10,9 @@
 <ion-content padding>
 
 
-  
 
-  
+
+
 
   <form [formGroup]="createWebsiteForm">
     <ion-list>
@@ -25,11 +23,18 @@
         <ion-input [(ngModel)]="name" type="text" formControlName="name"></ion-input>
       </ion-item>
 
-      <ion-item *ngIf="!createWebsiteForm.controls.name.valid">
-          <p>No caracteres especiales, espacios, puntos y comas</p>
-  
-        </ion-item>
-      
+      <ion-item *ngIf="createWebsiteForm.controls.name.errors?.required && createWebsiteForm.controls.name.dirty">
+        <p>Campo requerido</p>
+      </ion-item>
+
+      <ion-item *ngIf="createWebsiteForm.controls.name.errors?.minLength && createWebsiteForm.controls.name.dirty">
+        <p>Minimo 4 caracteres</p>
+      </ion-item>
+
+      <ion-item *ngIf="createWebsiteForm.controls.name.errors?.pattern && createWebsiteForm.controls.name.dirty">
+        <p>No espacios, comas, puntos o caracteres especiales</p>
+      </ion-item>
+
 
       <ion-item>
         <ion-label>
@@ -38,17 +43,22 @@
         <ion-input [(ngModel)]="username" type="text" formControlName="username"></ion-input>
       </ion-item>
 
-      <ion-item *ngIf="!createWebsiteForm.controls.username.valid">
-          <p>No caracteres especiales, espacios, puntos y comas</p>
-  
-        </ion-item>
-     
+      <ion-item *ngIf="createWebsiteForm.controls.username.errors?.required && createWebsiteForm.controls.username.dirty">
+        <p>Campo requerido</p>
+      </ion-item>
+
+      <ion-item *ngIf="createWebsiteForm.controls.username.errors?.minLength && createWebsiteForm.controls.username.dirty">
+        <p>Minimo 4 caracteres</p>
+      </ion-item>
+
+      <ion-item *ngIf="createWebsiteForm.controls.username.errors?.pattern && createWebsiteForm.controls.username.dirty">
+        <p>No espacios, comas, puntos o caracteres especiales</p>
+      </ion-item>
+
 
     </ion-list>
 
-    <button ion-button block (click)="crearSitio()" [disabled]="!createWebsiteForm.controls.name.valid && !createWebsiteForm.controls.username" >Crear</button>
+    <button ion-button block (click)="crearSitio()" [disabled]="!createWebsiteForm.valid">CREAR</button>
   </form>
-
-  
 
 </ion-content>
