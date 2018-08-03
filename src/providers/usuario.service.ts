@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { URL_SIGNUP, URL_LOGIN, URL_SHOW_USER } from './../URLs/url.servicios';
+import { URL_SIGNUP, URL_LOGIN, URL_SHOW_USER, URL_SHOPPING_CART } from './../URLs/url.servicios';
 import { HttpClientModule, HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 
@@ -97,6 +97,11 @@ export class UsuarioProvider {
     }
 
 
+    getFavorites(){
+        return this.http.get(URL_SHOPPING_CART,this.options2).map((response:Response) => response.json());
+    }
+
+
     ingresar(username: string, password: string) {
 
         let body = {
@@ -109,22 +114,15 @@ export class UsuarioProvider {
 
         let body2;
 
-       
-    
-
-   
-
-        
-
         return this.http.post(URL_LOGIN, body, this.options).map((data_resp:Response) => {
 
             console.log("DATOS A ENVIAR(DENTRO DEL USUARIO en usuarioSERVICE): ");
 
-            console.log(this.body3.statusText);
+            // console.log(this.body3.statusText);
 
 
             //convertir el body en json() 
-            body2 = data_resp.json();
+            body2 = data_resp.json() || {};
             console.log("body2 hola");
 
             console.log(body2);

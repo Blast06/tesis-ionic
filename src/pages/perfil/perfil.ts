@@ -1,3 +1,4 @@
+import { ArticuloPage } from './../articulo/articulo';
 import { Platform } from 'ionic-angular';
 
 import { Component, ViewChild, Renderer, NgZone } from '@angular/core';
@@ -35,10 +36,15 @@ export class PerfilPage {
   user: User;
 
   websites: any[] = [];
+  favorites: any[] = [];
 
   page = MisSitiosPage;
 
   username: any;
+
+  articuloPage = ArticuloPage;
+
+  slug:any
 
 
 
@@ -51,10 +57,12 @@ export class PerfilPage {
     public platform: Platform,
     public storage: Storage) {
 
+    this.getFavorites();
 
-    
+
+
     _us.mostrar_usuario().subscribe((data: any) => {
-      
+
       console.log(data);
       this.user = data.data;
       console.log(data.data.websites);
@@ -62,9 +70,9 @@ export class PerfilPage {
 
       if (this.user) {
         this.searching = false;
-        
+
       }
-      
+
 
       if (this.platform.is("cordova")) {
         //dispositivo
@@ -96,16 +104,24 @@ export class PerfilPage {
     this.navCtrl.push(this.page, { username: this.username });
   }
 
-  getUserInfo() {
-    this._us.mostrar_usuario().subscribe((data: any) => {
+  getFavorites() {
+    this._us.getFavorites().subscribe((data: any) => {
       console.log(data);
-      this.user = data.data;
-      console.log(data.data.email);
-      console.log(data.data.name);
-
+      this.favorites = data.data.favorite_article;
+      console.log(this.favorites);
     });
 
   }
+
+  goToSingleArticle(slug) {
+    this.slug = slug;
+    console.log(slug);
+    console.log(this.slug);
+
+    this.navCtrl.push(this.articuloPage, { slug: this.slug });
+  }
+
+
 
   scrollingFun(ev) {
     ev.domWrite(() => {
