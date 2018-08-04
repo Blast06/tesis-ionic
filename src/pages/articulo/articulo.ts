@@ -19,10 +19,9 @@ export class ArticuloPage {
   article: any[] = [];
   activated: boolean = false;
   slug: any;
-  relatedArticles:any[] = [];
+  relatedArticles: any[] = [];
   relatedArticles2 = []
   cantidad: number = 1;
-
   evilResponseProps;
 
 
@@ -38,8 +37,11 @@ export class ArticuloPage {
   ) {
 
     this.slug = navParams.get('slug');
+
     console.log("en articulo.ts");
     console.log(this.slug);
+
+  
 
     articleService.getSingleArticle(this.slug).subscribe((data) => {
       this.article = data.data.article;
@@ -52,12 +54,12 @@ export class ArticuloPage {
     this.getRelatedArtsArray();
     console.log(this.relatedArticles2);
 
-    articleService.getSingleArticleRelateds(this.slug).subscribe((data) =>{
+    articleService.getSingleArticleRelateds(this.slug).subscribe((data) => {
       console.log(data);
     });
   }
 
-  
+
 
   goToSingleArticle(slug) {
     this.slug = slug;
@@ -67,13 +69,13 @@ export class ArticuloPage {
     this.navCtrl.push(this.articuloPage, { slug: this.slug });
   }
 
-  getRelatedArtsArray(){
+  getRelatedArtsArray() {
     let evilResponse;
     this.evilResponseProps = this.relatedArticles.keys();
 
     for (const prop of this.evilResponseProps) {
       this.relatedArticles2.push(this.evilResponseProps[prop]);
-      
+
     }
 
 
@@ -123,6 +125,14 @@ export class ArticuloPage {
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  addToFavorite(id) {
+
+    this.articleService.addToFavorite(id).subscribe((data) => {
+      console.log(data);
+
+    });
   }
 
   presentAlert2() {

@@ -1,5 +1,9 @@
+<div *ngIf="!articles" class="spinner-container">
+  <ion-spinner name="circles"></ion-spinner>
+</div>
+
 <ion-card class="app-card" *ngFor="let article of articles">
-  <img src="{{article.image_path}}" (click)="goToSingleArticle(article.slug)" />
+  <img src="http://178.128.183.171/{{article.image_path}}" (click)="goToSingleArticle(article.slug)" />
   <div class="det">
     <h4 no-margin>{{article.name | slice:0:5}}</h4>
     <p no-margin>{{article.price | currency:'RD$'}}</p>
@@ -18,7 +22,3 @@
     </ion-grid>
   </div>
 </ion-card>
-
-<!-- <div *ngFor="let post of posts">
-  <p>{{post.title}}</p>
-</div> -->

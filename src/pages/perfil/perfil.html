@@ -4,11 +4,6 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title text-capitalize *ngIf="user">Perfil</ion-title>
-    <ion-buttons class="head-btns" end>
-      <button (click)="presentCartModal()" ion-button icon-only>
-        <ion-icon name="md-cart"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 
   <div *ngIf="!user" class="spinner-container">
@@ -39,17 +34,18 @@
           </div>         -->
       <div *ngIf="!favorites">No tienes favoritos</div>
 
+      <div *ngIf="favorites" customMargin>
+        <ion-card class="app-card" *ngFor="let article of favorites">
+          <img src="http://178.128.183.171/{{article.image_path}}" (click)="goToSingleArticle(article.slug)" />
+          <div class="det">
+            <h4 no-margin>{{article.name | slice:0:5}}</h4>
+            <p no-margin>{{article.price | currency:'RD$'}}</p>
+            <ion-grid no-padding>
 
-      <ion-card class="app-card" *ngFor="let article of favorites">
-        <img src="{{article.image_path}}" (click)="goToSingleArticle(article.slug)" />
-        <div class="det">
-          <h4 no-margin>{{article.name | slice:0:5}}</h4>
-          <p no-margin>{{article.price | currency:'RD$'}}</p>
-          <ion-grid no-padding>
-
-          </ion-grid>
-        </div>
-      </ion-card>
+            </ion-grid>
+          </div>
+        </ion-card>
+      </div>
 
 
 

@@ -14,8 +14,12 @@ export class CarritoPage {
   cart_articles: any[] = [];
 
   totalPrice: number;
+  total: number;
 
   homepage = HomePage;
+
+  show: boolean = false;
+  iva: number;
 
 
 
@@ -34,9 +38,24 @@ export class CarritoPage {
       console.log(this.cart_articles.length);
       carritoService.carritoBadgeCounter = this.cart_articles.length;
 
+      if (this.cart_articles) {
+        for (let article of this.cart_articles) {
+          this.totalPrice += parseFloat(article.price);
+        }
+
+        this.total = this.totalPrice + (this.totalPrice * 0.18);
+        this.iva = this.totalPrice * 0.18;
+
+      }
+
+
+
+
     });
 
-    this.actualizar_total();
+
+
+    
   }
 
   ionViewDidLoad() {
@@ -52,6 +71,8 @@ export class CarritoPage {
     this.carritoService.carritoBadgeCounter--;
   }
 
+
+
   removeFromArticlesArray(idx: number) {
     this.cart_articles.splice(idx, 1);
 
@@ -64,10 +85,16 @@ export class CarritoPage {
 
   }
 
-  makeOrder(){
-    this.carritoService.makeOrder().subscribe((data) =>{
+  makeOrder() {
+    this.carritoService.makeOrder().subscribe((data) => {
       console.log(data);
     });
+    let alert = this.alertCtrl.create({
+      title: 'Orden realizada',
+      subTitle: 'Has realizado tu orden',
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
   presentAlert() {
@@ -79,10 +106,5 @@ export class CarritoPage {
     alert.present();
   }
 
-  actualizar_total() {
-    this.totalPrice = 0;
-    for (let item of this.cart_articles) {
-      console.log(item.price);
-    }
-  }
+ 
 }

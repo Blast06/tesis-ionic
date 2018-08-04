@@ -146,7 +146,7 @@ export class CarritoProvider {
   addToCart(id, cantidad) {
     console.log("TOKEN EN ADDTOCART - CARRITOSERVICE.TS");
     console.log(this.token);
-    return this.http2.get(URL_ADD_ARTICLE_SHOPPING_CART + "/" + id + "/add/" + cantidad + "/car", this.options).map((response: Response) => response.json());
+    return this.http2.get(URL_ADD_ARTICLE_SHOPPING_CART + "/" + id + "/add/" + cantidad + "/cart", this.options).map((response: Response) => response.json());
 
 
   }
@@ -154,7 +154,7 @@ export class CarritoProvider {
   removeFromCart(id) {
     console.log("TOKEN EN REMOVEFROMCART - CARRITOSERVICE.TS");
     console.log(this.token);
-    return this.http2.get(URL_REMOVE_ARTICLE_SHOPPING_CART + "/" + id + "/remove/car", this.options).map((response: Response) => response.json());
+    return this.http2.get(URL_REMOVE_ARTICLE_SHOPPING_CART + "/" + id + "/remove/cart", this.options).map((response: Response) => response.json());
 
   }
 

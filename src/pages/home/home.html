@@ -32,7 +32,7 @@
   <img src="assets/imgs/new.png" class="new-collection" />
 
   <div class="products" *ngIf="!articlesFromSubscribed">
-    <p>No sigues a ningun sitio?, ve a la tercera imagen y suscribete a algunos!</p>
+    <p>No sigues a ningun sitio?, ve a la segunda imagen y suscribete a algunos!</p>
   </div>
 
   <div class="products" *ngIf="!_us.token_activo()">
@@ -48,8 +48,10 @@
       <strong>Articulos</strong>
     </p>
 
+
+
     <ion-card class="app-card" *ngFor="let article of articlesFromSubscribed">
-      <img src="{{article.image_path}}" (click)="goToSingleArticle(article.slug)" />
+      <img src="http://178.128.183.171{{article.image_path}}" (click)="goToSingleArticle(article.slug)" />
       <div class="det">
         <h4 no-margin>{{article.name | slice:0:5}}</h4>
         <p no-margin>{{article.price | currency:'RD$'}}</p>

@@ -46,6 +46,8 @@ export class PerfilPage {
 
   slug:any
 
+  hideFavoriteBtn:boolean = false;
+
 
 
   constructor(public navCtrl: NavController,
@@ -118,7 +120,7 @@ export class PerfilPage {
     console.log(slug);
     console.log(this.slug);
 
-    this.navCtrl.push(this.articuloPage, { slug: this.slug });
+    this.navCtrl.push(this.articuloPage, { slug: this.slug, hideFavoriteBtn: this.hideFavoriteBtn });
   }
 
 

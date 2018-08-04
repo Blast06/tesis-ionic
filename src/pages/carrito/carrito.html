@@ -33,7 +33,7 @@
 
         <ion-col>
           <p>{{article.name}}</p>
-          <p>{{article.price | currency}}</p>
+          <p>{{article.price | currency:'RD$'}}</p>
           <p>Cantidad: {{article.pivot.quantity}}</p>
 
           <button ion-button color="danger" outline small (click)="remove(article.id)">Eliminar</button>
@@ -45,13 +45,31 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <h3>
-            <strong>Total:</strong>
-            {{totalPrice}}
-          </h3>
-
+          <h5>
+            <strong>Subtotal:</strong>
+          </h5>
+          <p><b> {{totalPrice | currency:'RD$'}}</b></p>
         </ion-col>
       </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <h5>
+            <strong>iva:</strong>
+          </h5>
+          <p><b> {{iva | currency:'RD$'}} (0.18)</b></p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <h5>
+            <strong>Total:</strong>
+          </h5>
+          <p><b> {{total | currency:'RD$'}}</b></p>
+        </ion-col>
+      </ion-row>
+
     </ion-grid>
 
     <button ion-button block (click)="makeOrder()">Realizar pedido</button>

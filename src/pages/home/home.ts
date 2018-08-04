@@ -51,22 +51,18 @@ export class HomePage implements OnInit {
       websiteService.getArticlesFromSubscribed().subscribe((data) => {
         console.log(data.data);
         this.articlesFromSubscribed = data.data;
+        
+        if (this.articlesFromSubscribed.length < 1) {
+          this.articlesFromSubscribed = null;
+          
+        }
 
       });
 
-      this.getTotalItemsCart();
+      // this.getTotalItemsCart();
 
     }
-
-
-
-
-
-
     this.changeDetector();
-
-
-
   }
 
   ngAfterViewInit() {
