@@ -21,7 +21,7 @@ page-home {
 }
 .app-card{
   width: calc(50% - 6px);
-  margin: 12px 0 0 0;
+  margin: 9px 4 0 0;
   float: left;
   position: relative;
   img{
@@ -40,7 +40,7 @@ page-home {
   }
 }
 .card-md + ion-card{
-  margin-top: 12px;
+  margin-top: 9px;
 }
 
 .det{
@@ -112,6 +112,7 @@ page-home {
       color: #488aff;
   }
 }
+
 
 
  

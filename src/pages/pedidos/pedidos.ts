@@ -21,15 +21,20 @@ export class PedidosPage {
     public carritoService: CarritoProvider,
   ) {
 
-    carritoService.getOrders().subscribe((data) => {
-      console.log(data);
 
-    });
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PedidosPage');
+  }
+
+  ngOnInit() {
+    this.carritoService.getOrders().subscribe((data) => {
+      console.log(data);
+
+    });
+
   }
 
 }

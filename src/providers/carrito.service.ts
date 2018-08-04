@@ -158,16 +158,16 @@ export class CarritoProvider {
 
   }
 
-  makeOrder() {
+  makeOrder(orders) {
     console.log("TOKEN EN MAKEORDER - CARRITOSERVICE.TS");
     console.log(this.token);
-    return this.http2.post(URL_MAKE_ORDER, this.options).map((response: Response) => response.json());
+    return this.http2.post(URL_MAKE_ORDER,orders, this.options).map((response: Response) => response.json());
   }
 
   getOrders() {
     console.log("TOKEN EN GETORDER - CARRITOSERVICE.TS");
     console.log(this.token);
-    return this.http2.post(URL_MAKE_ORDER, this.options).map((response: Response) => response.json());
+    return this.http2.get(URL_MAKE_ORDER, this.options).map((response: Response) => response.json());
   }
 
 

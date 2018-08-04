@@ -47,21 +47,21 @@ export class HomePage implements OnInit {
 
 
 
-    if (this.token) {
-      websiteService.getArticlesFromSubscribed().subscribe((data) => {
-        console.log(data.data);
-        this.articlesFromSubscribed = data.data;
-        
-        if (this.articlesFromSubscribed.length < 1) {
-          this.articlesFromSubscribed = null;
-          
-        }
+    // if (this.token) {
+    //   websiteService.getArticlesFromSubscribed().subscribe((data) => {
+    //     console.log(data.data);
+    //     this.articlesFromSubscribed = data.data;
 
-      });
+    //     if (this.articlesFromSubscribed.length < 1) {
+    //       this.articlesFromSubscribed = null;
 
-      // this.getTotalItemsCart();
+    //     }
 
-    }
+    //   });
+
+    //   this.getTotalItemsCart();
+
+    // }
     this.changeDetector();
   }
 
@@ -70,8 +70,44 @@ export class HomePage implements OnInit {
     this.headerbg = document.getElementsByClassName("header_home")[length];
   }
 
+  // ionViewWillEnter() {
+
+  //   if (this.token) {
+  //     this.websiteService.getArticlesFromSubscribed().subscribe((data) => {
+  //       console.log(data.data);
+  //       this.articlesFromSubscribed = data.data;
+
+  //       if (this.articlesFromSubscribed.length < 1) {
+  //         this.articlesFromSubscribed = null;
+
+  //       }
+
+  //     });
+
+  //     this.getTotalItemsCart();
+
+  //   }
+
+  // }
+
 
   ngOnInit() {
+
+    if (this.token) {
+      this.websiteService.getArticlesFromSubscribed().subscribe((data) => {
+        console.log(data.data);
+        this.articlesFromSubscribed = data.data;
+
+        if (this.articlesFromSubscribed.length < 1) {
+          this.articlesFromSubscribed = null;
+
+        }
+
+      });
+
+      // this.getTotalItemsCart();
+
+    }
 
     //para cambiar las opciones del menu lateral
     this.actualizar_menu();
@@ -174,11 +210,6 @@ export class HomePage implements OnInit {
       this.renderer.setElementClass(this.headerbg, 'sub-header', true);
     } else this.renderer.setElementClass(this.headerbg, 'sub-header', false);
   }
-
-
-
-
-
 
 
 }

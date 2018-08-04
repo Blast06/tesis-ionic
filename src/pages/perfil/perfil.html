@@ -34,7 +34,7 @@
           </div>         -->
       <div *ngIf="!favorites">No tienes favoritos</div>
 
-      <div *ngIf="favorites" customMargin>
+      <div *ngIf="favorites" class="customMargin">
         <ion-card class="app-card" *ngFor="let article of favorites">
           <img src="http://178.128.183.171/{{article.image_path}}" (click)="goToSingleArticle(article.slug)" />
           <div class="det">

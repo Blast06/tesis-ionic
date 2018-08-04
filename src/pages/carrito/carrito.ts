@@ -13,13 +13,14 @@ export class CarritoPage {
 
   cart_articles: any[] = [];
 
-  totalPrice: number;
-  total: number;
+  totalPrice: number = 0;
+  total: number = 0;
 
   homepage = HomePage;
 
   show: boolean = false;
-  iva: number;
+  iva: number = 0;
+  pasnomber: number;
 
 
 
@@ -39,23 +40,17 @@ export class CarritoPage {
       carritoService.carritoBadgeCounter = this.cart_articles.length;
 
       if (this.cart_articles) {
-        for (let article of this.cart_articles) {
-          this.totalPrice += parseFloat(article.price);
-        }
-
+        this.totalPrice = this.cart_articles.reduce((totalPrice, article) => totalPrice += parseFloat(article.price), 0);
         this.total = this.totalPrice + (this.totalPrice * 0.18);
         this.iva = this.totalPrice * 0.18;
-
       }
-
-
 
 
     });
 
 
 
-    
+
   }
 
   ionViewDidLoad() {
@@ -86,7 +81,7 @@ export class CarritoPage {
   }
 
   makeOrder() {
-    this.carritoService.makeOrder().subscribe((data) => {
+    this.carritoService.makeOrder(this.cart_articles).subscribe((data) => {
       console.log(data);
     });
     let alert = this.alertCtrl.create({
@@ -106,5 +101,5 @@ export class CarritoPage {
     alert.present();
   }
 
- 
+
 }
