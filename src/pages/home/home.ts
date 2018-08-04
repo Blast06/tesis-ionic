@@ -91,7 +91,24 @@ export class HomePage implements OnInit {
   // }
 
 
+  ionViewWillEnter() {
+
+    this.carritoService.getCart().subscribe((data) => {
+      this.carritoService.carritoBadgeCounter = data.data.cart_article.length;
+
+    });
+
+  }
   ngOnInit() {
+
+    // this.carritoService.getCartItemsCount().subscribe((data) =>{
+    //   console.log(data);
+    //   console.log(data.length);
+    //   this.carritoService.carritoBadgeCounter = data.length;
+    // });
+
+
+
 
     if (this.token) {
       this.websiteService.getArticlesFromSubscribed().subscribe((data) => {
@@ -102,6 +119,11 @@ export class HomePage implements OnInit {
           this.articlesFromSubscribed = null;
 
         }
+
+      });
+
+      this.carritoService.getCart().subscribe((data) => {
+        this.carritoService.carritoBadgeCounter = data.data.cart_article.length;
 
       });
 

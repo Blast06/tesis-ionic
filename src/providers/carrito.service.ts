@@ -40,28 +40,20 @@ export class CarritoProvider {
     this.actualizar_total();
 
     // sacar token del storage
-    this.getToken();
+    this.token = usuarioService.token;
 
-    this.getCarritoCounter();
+    // this.getCarritoCounter();
 
 
     //config de headers para la peticion
     this.headers.append("Accept", "Application/json");
     // this.headers.append("Content-Type", "undefined");
     // this.headers.append('Access-Control-Allow-Origin', '*');
-    this.headers.append("Authorization", "Bearer " + this.token);
+    this.headers.append("Authorization", "Bearer " + usuarioService.token);
     this.options = new RequestOptions({ headers: this.headers });
 
   }
 
-
-  getCarritoCounter() {
-    this.getCart().subscribe((data: any) => {
-      console.log(data);
-    });
-
-
-  }
 
   ver_carrito() {
 
@@ -101,25 +93,6 @@ export class CarritoProvider {
   }
 
 
-  // agregar_carrito(item_parametro: any) {
-
-  //   for (let item of this.items) {
-  //     if (item.id == item_parametro.id) {
-
-  //       this.alertCtrl.create({
-  //         title: "Item existe",
-  //         subTitle: item_parametro.name + ", ya se encuentra en su carrito de compras",
-  //         buttons: ["OK"]
-  //       }).present();
-
-  //       return;
-  //     }
-  //   }
-
-  //   this.items.push(item_parametro);
-  //   this.actualizar_total();
-  //   this.guardar_storage();
-  // }
 
   actualizar_total() {
     this.total_carrito = 0;
@@ -127,7 +100,6 @@ export class CarritoProvider {
     for (let item of this.items) {
       this.total_carrito += Number(item.price);
     }
-
 
   }
 
@@ -229,20 +201,7 @@ export class CarritoProvider {
 
   }
 
-  getToken() {
-    // if (this.platform.is("cordova")) {
-    //   this.storage.get('token').then((t) => {
-    //     this.token = t;
-    //   })
-
-    // }
-    // else {
-    //   this.token = localStorage.getItem("token");
-    // }
-
-    this.token = this.usuarioService.token;
-
-  }
+  
 
 
 

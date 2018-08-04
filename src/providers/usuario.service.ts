@@ -75,6 +75,7 @@ export class UsuarioProvider {
         //para el login
         this.headers.append("Accept", "Application/json");
         this.headers.append("Content-Type", "Application/json");
+        this.headers.append("Access-Control-Allow-Origin", "*");
 
         this.options = new RequestOptions({ headers: this.headers });
 

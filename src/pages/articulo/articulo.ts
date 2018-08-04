@@ -19,7 +19,7 @@ export class ArticuloPage {
   article: any[] = [];
   activated: boolean = false;
   slug: any;
-  relatedArticles: any[] = [];
+  public relatedArticles: any[] = [];
   relatedArticles2 = []
   cantidad: number = 1;
   evilResponseProps;
@@ -48,11 +48,12 @@ export class ArticuloPage {
       console.log(data);
       console.log(this.article);
       console.log(data.data);
+      console.log(data.data.relateds);
       this.relatedArticles = data.data.relateds;
       console.log(this.relatedArticles);
     });
-    this.getRelatedArtsArray();
-    console.log(this.relatedArticles2);
+    
+    // console.log(this.relatedArticles2);
 
     articleService.getSingleArticleRelateds(this.slug).subscribe((data) => {
       console.log(data);
@@ -69,17 +70,17 @@ export class ArticuloPage {
     this.navCtrl.push(this.articuloPage, { slug: this.slug });
   }
 
-  getRelatedArtsArray() {
-    let evilResponse;
-    this.evilResponseProps = this.relatedArticles.keys();
+  // getRelatedArtsArray() {
+  //   let evilResponse;
+  //   this.evilResponseProps = this.relatedArticles.keys();
 
-    for (const prop of this.evilResponseProps) {
-      this.relatedArticles2.push(this.evilResponseProps[prop]);
+  //   for (const prop of this.evilResponseProps) {
+  //     this.relatedArticles2.push(this.evilResponseProps[prop]);
 
-    }
+  //   }
 
 
-  }
+  // }
 
   increment() {
     // if (this.cantidad == this.article.stock) {

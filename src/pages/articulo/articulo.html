@@ -4,11 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title text-capitalize>Articulo</ion-title>
-    <ion-buttons class="head-btns" end>
-      <button (click)="presentCartModal()" ion-button icon-only>
-        <ion-icon name="md-cart"></ion-icon>
-      </button>
-    </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
@@ -53,15 +49,14 @@
   </button>
 
   <!-- articulos relacionados en scroll horizontal -->
-  <h5>ARTICULSO RELACIONADOS </h5>
-  
-  <!-- <ion-card-content *ngIf="relatedArticles">
-    <ion-row>
-      <ion-item no-lines>
-        <ion-scroll scrollX="true">
-          
+  <h5>ARTICULOS RELACIONADOS </h5>
+
+    <!-- <ion-scroll scrollX="true"> -->
+    <ion-scroll scrollX="true" direction="x" *ngIf="relatedArticles">
+      <ion-card-content>
+        <ion-row>
           <ion-card class="app-card" *ngFor="let relatedArticle of relatedArticles">
-            <img src="{{relatedArticle.image_path}}" (click)="goToSingleArticle(relatedArticle.slug)" />
+            <img src="http://178.128.183.171/{{relatedArticle.image_path}}" (click)="goToSingleArticle(relatedArticle.slug)" />
             <div class="det">
               <h4 no-margin>{{relatedArticle.name | slice:0:5}}</h4>
               <p no-margin>{{relatedArticle.price | currency:'RD$'}}</p>
@@ -74,10 +69,12 @@
               </ion-grid>
             </div>
           </ion-card>
-        </ion-scroll>
-      </ion-item>
-    </ion-row>
-  </ion-card-content> -->
+        </ion-row>
+      </ion-card-content>
+    </ion-scroll>
+
+
+
 
   <h5>Opiniones de los usuarios</h5>
 </ion-content>
