@@ -19,99 +19,101 @@ page-home {
       }
   }
 }
+
+
 .app-card{
-  width: calc(50% - 6px);
-  margin: 9px 4 0 0;
-  float: left;
-  position: relative;
-  img{
-      height: 180px;
-      object-fit: cover;
-      -o-object-fit: cover;
+    width: calc(50% - 6px);
+    margin: 9px 4 0 0;
+    float: left;
+    position: relative;
+    img{
+        height: 180px;
+        object-fit: cover;
+        -o-object-fit: cover;
+    }
+    &:nth-child(2n+1){
+        margin-right: 6px;
+    }
+    &:nth-child(2n){
+        margin-left: 6px;
+    }
+    h4 , p{
+        color: color($colors,light);
+    }
   }
-  &:nth-child(2n+1){
-      margin-right: 6px;
+  .card-md + ion-card{
+    margin-top: 9px;
   }
-  &:nth-child(2n){
-      margin-left: 6px;
+  
+  .det{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(66, 66, 66, .5);
+    padding: 12px 10px 3px 10px;
+    .col{
+        display: flex;
+        align-items: center;
+        ion-icon{
+            font-size: 1.7rem;
+        }
+    }
+    [col-3]{
+        justify-content: center;
+    }
+    h4{
+        @extend %overflow;
+        font-size: 1.35rem;
+    }
+    p{
+        @extend %overflow;
+        font-size: 1.2rem;
+        span{
+            position: relative;
+            margin-right: 7px;
+            font-size: 12px;
+        }
+    }
+    .button{
+        height: 24px;
+        width: 55px;
+        padding: 0 5px;
+        font-size: 1rem !important;
+        background-color: color($colors,secondary);
+        color: color($colors,dark); 
+    }
   }
-  h4 , p{
-      color: color($colors,light);
+  
+  .activeColor{
+    color: color($colors,danger) !important;
   }
-}
-.card-md + ion-card{
-  margin-top: 9px;
-}
-
-.det{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(66, 66, 66, .5);
-  padding: 12px 10px 3px 10px;
-  .col{
-      display: flex;
-      align-items: center;
-      ion-icon{
-          font-size: 1.7rem;
-      }
+  
+  
+  .home-content{
+    .new-collection{
+        height: 165px;
+        width: 100%;
+        margin-bottom: 25px;
+        object-fit: cover;
+        @extend %box-shadow;
+    }
   }
-  [col-3]{
-      justify-content: center;
+  
+  .products{
+    padding: 7px 13px 13px 13px;
+    p{
+        margin-top: 0;
+        margin-bottom: 6px;
+    }
   }
-  h4{
-      @extend %overflow;
-      font-size: 1.35rem;
+  
+  .sub-header{
+    .searchbar-md{
+        transition: all .8s ease-in-out;
+        top: 33px !important;
+        color: #488aff;
+    }
   }
-  p{
-      @extend %overflow;
-      font-size: 1.2rem;
-      span{
-          position: relative;
-          margin-right: 7px;
-          font-size: 12px;
-      }
-  }
-  .button{
-      height: 24px;
-      width: 55px;
-      padding: 0 5px;
-      font-size: 1rem !important;
-      background-color: color($colors,secondary);
-      color: color($colors,dark); 
-  }
-}
-
-.activeColor{
-  color: color($colors,danger) !important;
-}
-
-
-.home-content{
-  .new-collection{
-      height: 165px;
-      width: 100%;
-      margin-bottom: 25px;
-      object-fit: cover;
-      @extend %box-shadow;
-  }
-}
-
-.products{
-  padding: 7px 13px 13px 13px;
-  p{
-      margin-top: 0;
-      margin-bottom: 6px;
-  }
-}
-
-.sub-header{
-  .searchbar-md{
-      transition: all .8s ease-in-out;
-      top: 33px !important;
-      color: #488aff;
-  }
-}
 
 
 
@@ -135,15 +137,7 @@ page-home {
 
 
 
-  .pins{
-    column-count: 3;
 
-    .pin{
-      display: inline-block;
-      margin: 0 2px 10px;
-      padding: 5px;
-    }
-  }
 
 
   ion-card {
@@ -167,7 +161,3 @@ page-home {
     width: 100%;
     color: #fff;
     }
-
-
-
- 

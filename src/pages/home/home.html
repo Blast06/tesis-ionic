@@ -37,7 +37,7 @@
 
   <div class="products" *ngIf="!_us.token_activo()">
     <p>Inicia sesion para una mejor experiencia de usuario</p>
-    <button ion-button (click)="goToSignIn()"> ENTRAR</button>
+    <button ion-button style="justify-content: center" (click)="goToSignIn()"> ENTRAR</button>
 
   </div>
 
@@ -50,7 +50,7 @@
 
 
 
-    <ion-card class="app-card" *ngFor="let article of articlesFromSubscribed">
+    <ion-card class="app-card2" *ngFor="let article of articlesFromSubscribed">
       <img src="http://178.128.183.171{{article.image_path}}" (click)="goToSingleArticle(article.slug)" />
       <div class="det">
         <h4 no-margin>{{article.name | slice:0:5}}</h4>

@@ -75,8 +75,9 @@ page-articulo {
 .app-card{
     width: calc(50% - 6px);
     margin: 12px 0 0 0;
-    float: left;
+    // float: left;
     position: relative;
+    // display: inline-block;
     img{
         height: 180px;
         object-fit: cover;
@@ -139,7 +140,34 @@ page-articulo {
     color: color($colors,danger) !important;
 }
 
-.scroll-zoom-wrapper {
+// .scroll-zoom-wrapper {
+//     white-space: nowrap;
+// }
+.ion-scroll{
     white-space: nowrap;
+    height: 250px;
 }
 
+.ion-row{
+    white-space: nowrap;
+    width: 50px;
+    overflow-x: auto !important;
+
+}
+ion-scroll[scrollX] {
+    white-space: nowrap;
+    height: 120px;
+    overflow: hidden;
+    margin:2px;
+
+    .scroll-item {
+      display: inline-block;
+    }
+    
+  }
+ion-scroll[scroll-avatar]{
+    height: 60px;
+  }
+  ::-webkit-scrollbar{
+    display:none;
+  }

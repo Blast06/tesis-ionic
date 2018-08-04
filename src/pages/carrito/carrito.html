@@ -25,55 +25,61 @@
 
   <div *ngIf="cart_articles.length != 0">
 
+
     <ion-grid>
       <ion-row *ngFor="let article of cart_articles; let i = index">
         <ion-col>
-          <img src="http://178.128.183.171{{article.image_path}}" alt="" srcset="">
+          <img src="http://178.128.183.171{{article.image_path}}">
         </ion-col>
-
-        <ion-col>
+        <ion-col no-padding>
           <p>{{article.name}}</p>
           <p>{{article.price | currency:'RD$'}}</p>
           <p>Cantidad: {{article.pivot.quantity}}</p>
-
           <button ion-button color="danger" outline small (click)="remove(article.id)">Eliminar</button>
         </ion-col>
       </ion-row>
     </ion-grid>
 
     <hr>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <h5>
-            <strong>Subtotal:</strong>
-          </h5>
-          <p><b> {{totalPrice | currency:'RD$'}}</b></p>
-        </ion-col>
-      </ion-row>
+    <div class="borders">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h5>
+              <strong>Subtotal:</strong>
+            </h5>
+            <p>
+              <b> {{totalPrice | currency:'RD$'}}</b>
+            </p>
+          </ion-col>
+        </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <h5>
-            <strong>iva:</strong>
-          </h5>
-          <p><b> {{iva | currency:'RD$'}} (0.18)</b></p>
-        </ion-col>
-      </ion-row>
+        <ion-row>
+          <ion-col>
+            <h5>
+              <strong>iva:</strong>
+            </h5>
+            <p>
+              <b> {{iva | currency:'RD$'}} (0.18)</b>
+            </p>
+          </ion-col>
+        </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <h5>
-            <strong>Total:</strong>
-          </h5>
-          <p><b> {{total | currency:'RD$' }}</b></p>
-        </ion-col>
-      </ion-row>
+        <ion-row>
+          <ion-col>
+            <h5>
+              <strong>Total:</strong>
+            </h5>
+            <p>
+              <b> {{total | currency:'RD$' }}</b>
+            </p>
+          </ion-col>
+        </ion-row>
 
-    </ion-grid>
+      </ion-grid>
+    </div>
 
     <button ion-button block (click)="makeOrder()">Realizar pedido</button>
-
 
   </div>
 

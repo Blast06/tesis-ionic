@@ -51,27 +51,40 @@
   <!-- articulos relacionados en scroll horizontal -->
   <h5>ARTICULOS RELACIONADOS </h5>
 
-    <!-- <ion-scroll scrollX="true"> -->
-    <ion-scroll scrollX="true" direction="x" *ngIf="relatedArticles">
-      <ion-card-content>
-        <ion-row>
+  <!-- <ion-scroll scrollX="true"> -->
+  <!-- <ion-scroll scrollX="true" direction="x" *ngIf="relatedArticles"> -->
+  <ion-card-content>
+    <ion-row>
+      <ion-item no-lines>
+        <ion-scroll scrollX="true">
           <ion-card class="app-card" *ngFor="let relatedArticle of relatedArticles">
             <img src="http://178.128.183.171/{{relatedArticle.image_path}}" (click)="goToSingleArticle(relatedArticle.slug)" />
             <div class="det">
               <h4 no-margin>{{relatedArticle.name | slice:0:5}}</h4>
               <p no-margin>{{relatedArticle.price | currency:'RD$'}}</p>
-              <ion-grid no-padding>
+              <!-- <ion-grid no-padding>
                 <ion-row>
                   <ion-col col-6>
                     <button ion-button block>Ordenar</button>
                   </ion-col>
                 </ion-row>
-              </ion-grid>
+              </ion-grid> -->
             </div>
           </ion-card>
-        </ion-row>
-      </ion-card-content>
-    </ion-scroll>
+        </ion-scroll>
+      </ion-item>
+    </ion-row>
+  </ion-card-content>
+  <!-- </ion-scroll> -->
+
+  <!-- <ion-row>
+    <ion-avatar *ngFor="let relatedArticle of relatedArticles">
+      <img src="http://178.128.183.171/{{relatedArticle.image_path}}" style="max-width:2.5rem;max-height:2.5rem;">
+      <h5> {{relatedArticle.name | slice:0:5}} </h5>
+    </ion-avatar>
+  </ion-row> -->
+
+
 
 
 
