@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, Slides, Platform } from 'ionic-angular';
 import { NgAisModule } from 'angular-instantsearch';
+import { SuperTabs } from '../../../node_modules/ionic2-super-tabs';
 
 
 
@@ -13,9 +14,8 @@ import { NgAisModule } from 'angular-instantsearch';
 export class BuscarPage {
 
   @ViewChild('slider') slider: Slides;
-  page = "0"
 
-
+  public page = "1";
 
 
   pet: string = "puppies";
@@ -32,26 +32,35 @@ export class BuscarPage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
+
+
     this.isAndroid = platform.is('android');
+
+
+  }
+
+  ngAfterViewInit() {
+    // setTimeout(() => {
+    //   if (this.slider) {
+    //     this.slider.update();
+    //   }
+    // }, 300);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BuscarPage');
   }
 
-  ngAfterViewInit() {
-
-  }
-
-
-  selectedTab(ind) {
-    this.slider.slideTo(ind);
-  }
+  // selectTab(ind) {
+  //   this.slider.slideTo(ind);
+  // }
 
 
-  moveButton($event) {
-    this.page = $event._snapIndex.toString();
-  }
+
+
+
+
+
 
 
 

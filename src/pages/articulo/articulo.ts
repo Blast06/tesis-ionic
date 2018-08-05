@@ -5,6 +5,10 @@ import { ArticlesProvider } from '../../providers/index.services';
 
 
 
+export  interface article {
+  stock:number;
+}
+
 
 
 @IonicPage()
@@ -16,7 +20,7 @@ export class ArticuloPage {
 
   articuloPage = ArticuloPage;
 
-  article: any[] = [];
+  article: article[] = [];
   activated: boolean = false;
   slug: any;
   public relatedArticles: any[] = [];

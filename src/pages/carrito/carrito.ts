@@ -20,7 +20,8 @@ export class CarritoPage {
 
   show: boolean = false;
   iva: number = 0;
-  toOrder:any;
+  toOrder: any;
+  orders:any[] = [];
 
 
 
@@ -41,21 +42,36 @@ export class CarritoPage {
       console.log(this.cart_articles.length);
       carritoService.carritoBadgeCounter = this.cart_articles.length;
 
-      if (this.cart_articles) {
-        this.totalPrice = this.cart_articles.reduce((totalPrice, article) => totalPrice += parseFloat(article.price), 0);
-        this.total = this.totalPrice + (this.totalPrice * 0.18);
-        this.iva = this.totalPrice * 0.18;
+      if (this.cart_articles.length) {
+        this.orders = [];
+        this.cart_articles.forEach((article) => {
+          this.orders.push({
+             
+              "article_id": article.id,
+              "quantity": article.pivot.quantity,
+          });
+        });
+
+        
+
+        console.log(this.orders);
+        // console.log(this.orders.orders);
+
+
       }
 
-      this.toOrder = JSON.stringify(this.cart_articles);
 
-
-
+      this.calculateSubTotal();
 
     });
 
 
 
+
+  }
+
+  ngOnInit() {
+    this.calculateSubTotal();
 
   }
 
@@ -70,12 +86,28 @@ export class CarritoPage {
     this.removeFromArticlesArray(idx);
     this.presentAlert();
     this.carritoService.carritoBadgeCounter--;
+    this.calculateSubTotal();
+
+
   }
 
 
 
   removeFromArticlesArray(idx: number) {
     this.cart_articles.splice(idx, 1);
+
+
+  }
+
+
+  calculateSubTotal() {
+    if (this.cart_articles) {
+      this.totalPrice = this.cart_articles.reduce((totalPrice, article) => totalPrice += parseFloat(article.price), 0);
+      this.total = this.totalPrice + (this.totalPrice * 0.18);
+      this.iva = this.totalPrice * 0.18;
+    }
+
+    this.toOrder = JSON.stringify(this.cart_articles);
 
   }
 
@@ -87,7 +119,8 @@ export class CarritoPage {
   }
 
   makeOrder() {
-    this.carritoService.makeOrder(this.toOrder).subscribe((data) => {
+
+    this.carritoService.makeOrder(this.orders).subscribe((data) => {
       console.log(data);
     });
     let alert = this.alertCtrl.create({

@@ -1,0 +1,55 @@
+<!--
+  Generated template for the BuscarSitiosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Buscar Sitios</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+  <ais-instantsearch [config]="algoliaConfig">
+
+    <ais-search-box placeholder='Busca un sitio'></ais-search-box>
+    <br>
+
+    <ais-current-refinements [clearRefinements]="false"></ais-current-refinements>
+    <ais-refinement-list attribute="location"></ais-refinement-list>
+    <ais-refinement-list attribute="created_at"></ais-refinement-list>
+    
+
+
+
+    <ais-hits>
+      <ng-template let-hits="hits">
+        <div *ngFor="let hit of hits">
+          <img src="http://178.128.183.171/{{hit.image_path}}" class="image">
+          <ais-highlight attribute="name" [hit]="hit">
+          </ais-highlight>
+          ({{ hit.category }}) | {{ hit.price | currency:'RD$'}} {{hits.nbHits}} results found in {{hits.processingTimeMS}}ms.
+        </div>
+      </ng-template>
+    </ais-hits>
+
+
+
+    <!-- <ais-pagination [totalPages]="20"></ais-pagination> -->
+
+  </ais-instantsearch>
+
+
+
+
+
+
+
+
+</ion-content>

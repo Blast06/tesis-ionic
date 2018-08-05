@@ -1,3 +1,4 @@
+import { BuscarSitiosPage } from './../pages/buscar-sitios/buscar-sitios';
 
 import { MainListPage } from './../pages/main-list/main-list';
 import { Network } from '@ionic-native/network';
@@ -21,6 +22,7 @@ import { HomePage } from '../pages/home/home';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { SuperTabsModule } from 'ionic2-super-tabs';
 
 // storage
 import { IonicStorageModule } from '@ionic/storage';
@@ -76,6 +78,7 @@ import { PipesNullfieldsPipe } from '../pipes/pipes-nullfields/pipes-nullfields'
     BuscarPage,
     PipesNullfieldsPipe,
     CreararticuloPage,
+    BuscarSitiosPage
     
     
   ],
@@ -86,6 +89,7 @@ import { PipesNullfieldsPipe } from '../pipes/pipes-nullfields/pipes-nullfields'
     HttpClientModule,
     HttpModule,
     IonicStorageModule.forRoot(),
+    SuperTabsModule.forRoot(),
     NgAisModule.forRoot(),
     IonicModule.forRoot(MyApp,{
       scrollPadding:false,
@@ -115,6 +119,7 @@ import { PipesNullfieldsPipe } from '../pipes/pipes-nullfields/pipes-nullfields'
     MainListPage,
     BuscarPage,
     CreararticuloPage,
+    BuscarSitiosPage
   ],
   providers: [
     StatusBar,

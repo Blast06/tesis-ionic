@@ -227,6 +227,7 @@ export class HomePage implements OnInit {
   cerrarSesion() {
     this._us.cerrar_sesion();
     this.articlesFromSubscribed = null;
+    this.carritoService.carritoBadgeCounter = 0;
   }
 
   updateHeader(ev) {

@@ -6,7 +6,7 @@
                 <h4 class="title-form" color="light" text-uppercase>Enjoy Shopping</h4>
                 <ion-list>
                     <ion-item>
-                        <ion-label floating >Correo</ion-label>
+                        <ion-label floating>Correo</ion-label>
                         <ion-input [(ngModel)]="email" type="text" formControlName="email"></ion-input>
                     </ion-item>
                     <ion-item *ngIf="!loginForm.controls.email.valid">
@@ -16,11 +16,15 @@
 
 
                     <ion-item>
-                        <ion-label floating >Contrasena</ion-label>
-                        <ion-input [(ngModel)]="password"  formControlName="password" type="password"></ion-input>
+                        <ion-label floating>Contrasena</ion-label>
+                        <ion-input [(ngModel)]="password" formControlName="password" type="password"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="!loginForm.controls.password.valid">
+                        <p>minimo 6 caracteres</p>
+
                     </ion-item>
                 </ion-list>
-                <button ion-button block text-uppercase color="third" [disabled]="!loginForm.controls.email.valid && !loginForm.controls.password.valid" (click)="ingresar()">ENTRAR</button>
+                <button ion-button block text-uppercase color="third" [disabled]="!loginForm.valid" (click)="ingresar()">ENTRAR</button>
 
             </form>
         </div>

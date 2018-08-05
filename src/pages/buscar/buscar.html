@@ -9,25 +9,25 @@
     </ion-buttons> -->
   </ion-navbar>
 
-
 </ion-header>
 
 
 <ion-content padding>
 
+
   <ais-instantsearch [config]="algoliaConfig">
 
-    <ais-search-box class="iSearchbar" placeholder='Busca un articulo'></ais-search-box>
+    <ais-search-box placeholder='Busca un articulo'></ais-search-box>
     <br>
 
     <ais-current-refinements [clearRefinements]="false"></ais-current-refinements>
     <ais-refinement-list attribute="sub_category"></ais-refinement-list>
-    <ais-clear-refinements buttonLabel="Remove Refinements"></ais-clear-refinements>
+    <!-- <ais-clear-refinements buttonLabel="Remove Refinements"></ais-clear-refinements> -->
     <ais-sort-by [items]="[
-                            { name: 'articles', label: 'Relevancia' },
-                            { name: 'articles_price_asc', label: 'Precio mas bajo' },
-                            { name: 'articles_price_desc', label: 'Precio mas alto' }
-                          ]">
+                                    { name: 'articles', label: 'Relevancia' },
+                                    { name: 'articles_price_asc', label: 'Precio mas bajo' },
+                                    { name: 'articles_price_desc', label: 'Precio mas alto' }
+                                  ]">
     </ais-sort-by>
 
     <div>
@@ -35,7 +35,6 @@
         <ais-rating-menu attribute="rating" [max]="5">
         </ais-rating-menu>
         <br>
-
         <ais-range-slider attribute="price" [min]="" [max]="">
         </ais-range-slider>
       </ais-panel>
@@ -61,7 +60,6 @@
     <!-- <ais-pagination [totalPages]="20"></ais-pagination> -->
 
   </ais-instantsearch>
-
 
 
 

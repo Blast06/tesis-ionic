@@ -1,3 +1,5 @@
+import { BuscarSitiosPage } from './../pages/buscar-sitios/buscar-sitios';
+
 import { ToastController } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
 
@@ -110,6 +112,8 @@ export class MyApp {
         { title: 'Mi perfil', component: PerfilPage },
         { title: 'Crear Sitio', component: CrearSitiosPage },
         { title: 'Crear Articulo', component: CreararticuloPage },
+        { title: 'Buscar Sitios', component: BuscarSitiosPage },
+
       ];
 
     } else {
