@@ -108,7 +108,6 @@ export class MyApp {
     if (this.us.token) {
       this.pages = [
         { title: 'Mi perfil', component: PerfilPage },
-        { title: 'Configuracion', component: ConfiguracionPage },
         { title: 'Crear Sitio', component: CrearSitiosPage },
         { title: 'Crear Articulo', component: CreararticuloPage },
       ];

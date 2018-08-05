@@ -1,17 +1,71 @@
-
 <ion-header>
 
   <ion-navbar>
     <ion-title>Buscar</ion-title>
+    <!-- <ion-buttons end>
+      <button ion-button icon-only (click)="Choose()">
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons> -->
   </ion-navbar>
+
 
 </ion-header>
 
 
 <ion-content padding>
 
-  
-  <page-main-list></page-main-list>
+  <ais-instantsearch [config]="algoliaConfig">
+
+    <ais-search-box class="iSearchbar" placeholder='Busca un articulo'></ais-search-box>
+    <br>
+
+    <ais-current-refinements [clearRefinements]="false"></ais-current-refinements>
+    <ais-refinement-list attribute="sub_category"></ais-refinement-list>
+    <ais-clear-refinements buttonLabel="Remove Refinements"></ais-clear-refinements>
+    <ais-sort-by [items]="[
+                            { name: 'articles', label: 'Relevancia' },
+                            { name: 'articles_price_asc', label: 'Precio mas bajo' },
+                            { name: 'articles_price_desc', label: 'Precio mas alto' }
+                          ]">
+    </ais-sort-by>
+
+    <div>
+      <ais-panel header="Header foo" footer="Footer bar">
+        <ais-rating-menu attribute="rating" [max]="5">
+        </ais-rating-menu>
+        <br>
+
+        <ais-range-slider attribute="price" [min]="" [max]="">
+        </ais-range-slider>
+      </ais-panel>
+
+
+    </div>
+
+
+
+    <ais-hits>
+      <ng-template let-hits="hits">
+        <div *ngFor="let hit of hits">
+          <img src="http://178.128.183.171/{{hit.image_path}}" class="image">
+          <ais-highlight attribute="name" [hit]="hit">
+          </ais-highlight>
+          ({{ hit.category }}) | {{ hit.price | currency:'RD$'}} {{hits.nbHits}} results found in {{hits.processingTimeMS}}ms.
+        </div>
+      </ng-template>
+    </ais-hits>
+
+
+
+    <!-- <ais-pagination [totalPages]="20"></ais-pagination> -->
+
+  </ais-instantsearch>
+
+
+
+
+
 
 
 </ion-content>

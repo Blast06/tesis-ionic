@@ -3,7 +3,7 @@ import { MainListPage } from './../pages/main-list/main-list';
 import { Network } from '@ionic-native/network';
 
 import { HTTP } from '@ionic-native/http';
-import { NgAisModule } from 'angular-instantsearch';
+import { NgAisModule, NgAisInstantSearch } from 'angular-instantsearch';
 
 
 import { HttpModule } from '@angular/http';
@@ -129,6 +129,7 @@ import { PipesNullfieldsPipe } from '../pipes/pipes-nullfields/pipes-nullfields'
     Network,
     WebsiteProvider,
     IonicStorageModule,
+    NgAisInstantSearch
 
   ]
 })

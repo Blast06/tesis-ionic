@@ -20,7 +20,9 @@ export class CarritoPage {
 
   show: boolean = false;
   iva: number = 0;
-  pasnomber: number;
+  toOrder:any;
+
+
 
 
 
@@ -44,6 +46,10 @@ export class CarritoPage {
         this.total = this.totalPrice + (this.totalPrice * 0.18);
         this.iva = this.totalPrice * 0.18;
       }
+
+      this.toOrder = JSON.stringify(this.cart_articles);
+
+
 
 
     });
@@ -81,7 +87,7 @@ export class CarritoPage {
   }
 
   makeOrder() {
-    this.carritoService.makeOrder(this.cart_articles).subscribe((data) => {
+    this.carritoService.makeOrder(this.toOrder).subscribe((data) => {
       console.log(data);
     });
     let alert = this.alertCtrl.create({

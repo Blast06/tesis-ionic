@@ -8,6 +8,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
+ export interface MyOrders{
+   price:string,
+   quantity:string,
+   created_at:string,
+   website:string,
+
+ }
+
 @IonicPage()
 @Component({
   selector: 'page-pedidos-detalle',
@@ -15,7 +23,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PedidosDetallePage {
 
-  order:any[]=[];
+  order:MyOrders;
   price:number = 0;
   iva:number = 0;
 

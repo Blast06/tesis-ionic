@@ -1,3 +1,39 @@
 page-buscar {
 
 }
+
+.sub-header{
+    .searchbar-md{
+        transition: all .8s ease-in-out;
+        top: 33px !important;
+        color: #488aff;
+    }
+  }
+
+.iSearchbar::-moz-placeholder {
+    color: white;
+  }
+  
+  .iSearchbar::-ms-input-placeholder {
+    color: white;
+  }
+  
+  .iSearchbar::-webkit-input-placeholder {
+    color: white;
+  }
+
+  .myHeader{
+    transition: all .05s ease-in-out;
+}
+.userInfo{
+    .profile-head{
+        h4 , p , img{
+           opacity: 0;
+           transition: opacity .4s ease-in-out;
+        }
+    }
+  }
+  .customMargin{
+    margin: 5px 5px 5px 5px;
+
+}

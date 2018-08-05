@@ -1,3 +1,4 @@
+import { NgAisModule } from 'angular-instantsearch';
 
 import { ArticuloPage, LoginPage, BuscarPage } from './../index.paginas';
 
@@ -107,6 +108,8 @@ export class HomePage implements OnInit {
     //   this.carritoService.carritoBadgeCounter = data.length;
     // });
 
+
+    
 
 
 
