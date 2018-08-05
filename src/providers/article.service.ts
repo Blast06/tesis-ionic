@@ -1,6 +1,6 @@
 import { map } from 'rxjs/operators';
 import { LoadingController } from 'ionic-angular';
-import { URL_ARTICULOS, URL_SHOW_SINGLE_ARTICLE, URL_ARTICLE_FAVORITE, URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED, URL_CREATE_ARTICLE } from './../URLs/url.servicios';
+import { URL_ARTICULOS, URL_SHOW_SINGLE_ARTICLE, URL_ARTICLE_FAVORITE, URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED, URL_CREATE_ARTICLE, URL_ARTICLE_UNFAVORITE, URL_ARTICLE_ISFAVORITED } from './../URLs/url.servicios';
 
 import { Http } from '@angular/http';
 import { Storage } from "@ionic/storage";
@@ -76,7 +76,11 @@ export class ArticlesProvider {
   }
 
   removeToFavorite(slug) {
-    return this.http.get(URL_ARTICLE_FAVORITE + slug + "/unfavorite", this.options).map((response:Response) =>response.json());
+    return this.http.get(URL_ARTICLE_UNFAVORITE + slug + "/unfavorite", this.options).map((response:Response) =>response.json());
+  }
+
+  isFavorite(slug){
+    return this.http.get(URL_ARTICLE_ISFAVORITED + slug + "/isFavoritedTo",this.options).map((response:Response) =>response.json());
   }
 
   createArticle(parameters,websiteslug){

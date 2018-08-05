@@ -7,12 +7,38 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>pedidosDetalle</ion-title>
+    <ion-title>Detalles</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
+
+  <h3>Ver detalles del pedido</h3>
+
+  <div class="borders">
+
+    <p>
+      <b>Fecha de pedido: </b>
+      {{order.created_at | date:"shortDate"}}
+    </p>
+    <p><b>Vendedor: </b>
+      {{order.website.name}}
+    </p>
+    <p><b>Cantidad: </b>
+      {{order.quantity}}
+    </p>
+    <p><b>iva: </b>
+      {{iva | currency:'RD$'}}
+    </p>
+    <p><b>Total del pedido: </b>
+      {{price | currency:'RD$'}}
+    </p>
+
+  </div>
+
+  
+
+
 
 </ion-content>

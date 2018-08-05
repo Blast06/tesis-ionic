@@ -15,11 +15,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PedidosDetallePage {
 
+  order:any[]=[];
+  price:number = 0;
+  iva:number = 0;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+    this.order = JSON.parse(navParams.get('order'));
+    console.log(this.order);
+
+    this.iva = (parseFloat(this.order.price) * 0.18);
+    this.price = parseFloat(this.order.price)  + this.iva;
+
+    
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PedidosDetallePage');
   }
+
+
 
 }
