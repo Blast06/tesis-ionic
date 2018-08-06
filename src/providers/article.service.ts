@@ -1,3 +1,4 @@
+import { UsuarioProvider } from './usuario.service';
 import { map } from 'rxjs/operators';
 import { LoadingController } from 'ionic-angular';
 import { URL_ARTICULOS, URL_SHOW_SINGLE_ARTICLE, URL_ARTICLE_FAVORITE, URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED, URL_CREATE_ARTICLE, URL_ARTICLE_UNFAVORITE, URL_ARTICLE_ISFAVORITED } from './../URLs/url.servicios';
@@ -36,10 +37,13 @@ export class ArticlesProvider {
     private http3: HTTP,
     public loadingCtrl: LoadingController,
     public platform:Platform,
-    public storage: Storage, ) {
+    public storage: Storage,
+    public usuarioService:UsuarioProvider ) {
+
+      this.token = usuarioService.token;
 
     // sacar token del storage
-    this.getToken();
+   // this.getToken();
 
 
     //config de headers para la peticion
@@ -85,6 +89,7 @@ export class ArticlesProvider {
 
   createArticle(parameters,websiteslug){
     let body2 = parameters;
+    this.getToken();
     console.log(this.token);
     return this.http.post(URL_CREATE_ARTICLE + websiteslug + "/articles",body2,this.options).map((response:Response) => response.json());
 

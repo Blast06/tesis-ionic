@@ -1,3 +1,4 @@
+import { MisSitiosPage } from './../mis-sitios/mis-sitios';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { NgAisModule } from 'angular-instantsearch';
@@ -13,9 +14,15 @@ import { NgAisModule } from 'angular-instantsearch';
 @Component({
   selector: 'page-buscar-sitios',
   templateUrl: 'buscar-sitios.html',
-  
+
 })
 export class BuscarSitiosPage {
+
+  page = MisSitiosPage;
+
+  username: any;
+
+
 
   algoliaConfig = {
     apiKey: '0751b52d360e98c2d482aefc3afcf3fb',
@@ -29,6 +36,11 @@ export class BuscarSitiosPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BuscarSitiosPage');
+  }
+
+  goTowebsite(username) {
+    this.username = username
+    this.navCtrl.push(this.page, { username: this.username });
   }
 
 }

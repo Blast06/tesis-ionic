@@ -22,20 +22,28 @@
     <br>
 
     <ais-current-refinements [clearRefinements]="false"></ais-current-refinements>
+    <h6>Ubicacion</h6>
     <ais-refinement-list attribute="location"></ais-refinement-list>
+    <h6>Fecha de creacion</h6>
     <ais-refinement-list attribute="created_at"></ais-refinement-list>
-    
+
 
 
 
     <ais-hits>
       <ng-template let-hits="hits">
-        <div *ngFor="let hit of hits">
+        <!-- <div *ngFor="let hit of hits">
           <img src="http://178.128.183.171/{{hit.image_path}}" class="image">
           <ais-highlight attribute="name" [hit]="hit">
           </ais-highlight>
           ({{ hit.category }}) | {{ hit.price | currency:'RD$'}} {{hits.nbHits}} results found in {{hits.processingTimeMS}}ms.
-        </div>
+        </div> -->
+
+        <ion-card *ngFor="let hit of hits">
+          <img src="http://178.128.183.171/{{hit.image_path}}" class="image" (click)="goTowebsite(hit.username)"/>
+          <div class="card-title">{{hit.name}}</div>
+          <!-- <div class="card-subtitle">{{hit.subscribers}}</div> -->
+        </ion-card>
       </ng-template>
     </ais-hits>
 

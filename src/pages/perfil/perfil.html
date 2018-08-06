@@ -27,7 +27,7 @@
 </ion-header>
 
 
-<ion-content fullscreen (ionScroll)="scrollingFun($event)" [ngSwitch]="tabs">
+<ion-content (ionScroll)="scrollingFun($event)" [ngSwitch]="tabs">
   <ion-slides class="app-slider" #pageSlider>
     <ion-slide (ionSlideWillChange)="changeWillSlide($event)">
       <!-- <div class="sub-list">

@@ -21,7 +21,7 @@
     </ion-buttons>
   </ion-navbar>
 
-  <ion-searchbar class="iSearchbar" color="third" placeholder="Buscar.."></ion-searchbar>
+  <!-- <ion-searchbar class="iSearchbar" color="third" placeholder="Buscar.."></ion-searchbar> -->
 </ion-header>
 
 
@@ -50,7 +50,7 @@
 
 
 
-    <ion-card class="app-card2" *ngFor="let article of articlesFromSubscribed">
+    <ion-card class="app-card" *ngFor="let article of articlesFromSubscribed">
       <img src="http://178.128.183.171{{article.image_path}}" (click)="goToSingleArticle(article.slug)" />
       <div class="det">
         <h4 no-margin>{{article.name | slice:0:5}}</h4>
@@ -60,9 +60,7 @@
             <ion-col col-6>
               <!-- <button ion-button block>Ordenar</button> -->
             </ion-col>
-            <ion-col col-3 (click)="like(article)">
-              <ion-icon name="md-heart" color="light" [ngClass]="{'activeColor': article.activeLike }"></ion-icon>
-            </ion-col>
+            
 
           </ion-row>
         </ion-grid>
