@@ -123,6 +123,16 @@ export class ArticuloPage {
     this.carritoService.ver_carrito();
   }
 
+  presentAlert3() {
+    let alert = this.alertCtrl.create({
+      title: 'Articulo agregado',
+      subTitle: 'Has agregado este articulo a favoritos',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+  
+
   presentAlert() {
     let alert = this.alertCtrl.create({
       title: 'Articulo agregado',
@@ -136,6 +146,8 @@ export class ArticuloPage {
 
     this.articleService.addToFavorite(id).subscribe((data) => {
       console.log(data);
+      this.presentAlert3();
+      
 
     });
   }

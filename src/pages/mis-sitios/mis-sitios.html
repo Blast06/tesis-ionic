@@ -15,7 +15,7 @@
     <h4>{{website.name}}</h4>
     <p>{{website.description | pipesNullfields}}</p>
     <p>{{website.phone | pipesNullfields}}</p>
-    <button ion-button color="third">SUBSCRIBIRSE</button>
+    <button ion-button color="third" (click)="subscriteTowebsite(website.name)">SUBSCRIBIRSE</button>
   </ion-toolbar>
 
 

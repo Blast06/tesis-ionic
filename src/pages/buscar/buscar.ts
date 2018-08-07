@@ -77,8 +77,8 @@ export class BuscarPage {
     }
   }
 
-  goToSingleArticle(slug) {
-    this.slug = slug;
+  goToSingleArticle(slug:string) {
+    this.slug = slug.replace(/\s+/g, '-'); //para sustituir por - en los espacios del slug
     console.log(slug);
     console.log(this.slug);
 

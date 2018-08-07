@@ -21,7 +21,11 @@ export class CarritoPage {
   show: boolean = false;
   iva: number = 0;
   toOrder: any;
-  orders:any[];
+  // orders:any[];
+
+  orders: any = [];
+
+
 
 
 
@@ -42,22 +46,17 @@ export class CarritoPage {
       console.log(this.cart_articles.length);
       carritoService.carritoBadgeCounter = this.cart_articles.length;
 
+
+
       if (this.cart_articles.length) {
         this.orders = [];
         this.cart_articles.forEach((article) => {
           this.orders.push({
-             
-              "article_id": article.id,
-              "quantity": article.pivot.quantity,
+
+            "article_id": article.id,
+            "quantity": article.pivot.quantity,
           });
         });
-
-        
-
-        console.log(this.orders);
-        // console.log(this.orders.orders);
-
-
       }
 
 
@@ -129,6 +128,9 @@ export class CarritoPage {
       buttons: ['OK']
     });
     alert.present();
+    this.carritoService.carritoBadgeCounter = 0;
+    
+    
   }
 
   presentAlert() {

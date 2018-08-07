@@ -130,10 +130,10 @@ export class CarritoProvider {
 
   }
 
-  makeOrder(orders=[]) {
+  makeOrder(orders1=[]) {
     console.log("TOKEN EN MAKEORDER - CARRITOSERVICE.TS");
     console.log(this.token);
-    return this.http2.post(URL_MAKE_ORDER,orders, this.options).map((response: Response) => response.json());
+    return this.http2.post(URL_MAKE_ORDER,{orders:orders1}, this.options).map((response: Response) => response.json());
   }
 
   getOrders() {

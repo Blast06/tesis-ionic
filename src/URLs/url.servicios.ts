@@ -21,7 +21,7 @@ export const URL_ARTICLE_UNFAVORITE = URL_BASE ; // ESTA VA ASI tesis.test/1/unf
 export const URL_ARTICLE_ISFAVORITED = URL_BASE ; // ESTA VA ASI tesis.test/1/unfavorite
 
 
-export const URL_CREATE_ARTICLE = "http://178.128.183.171/client/"  ; //ESTA FUNCIONA ASI -> client/my-sitio/articles 
+export const URL_CREATE_ARTICLE = URL_BASE + "/client/"  ; //ESTA FUNCIONA ASI -> client/my-sitio/articles 
 export const URL_SEND_ARTICLE_IMAGE = URL_BASE ; //DESPUES DE LA URL BASE, SE LE AGREGA EL ID DEL ARTICULO, ASI -> api/{mi-website}/articles/images
 export const URL_SHOPPING_CART = URL_BASE + "/shopping/cart" ; //PARA OBTENER  los items del shopping cart + los favoritos
 export const URL_SHOPPING_CART_COUNT = URL_BASE + "/shopping/cart/count" ; //PARA OBTENER la cantidad de items

@@ -1,3 +1,4 @@
+import { AlertController } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { WebsiteProvider } from './../../providers/website.service';
 import { Component } from '@angular/core';
@@ -40,6 +41,7 @@ export class MisSitiosPage {
               public platform:Platform,
               public usuarioService:UsuarioProvider,
               public websiteService:WebsiteProvider,
+              public alertCtrl:AlertController,
               ) {
 
                 
@@ -67,6 +69,24 @@ export class MisSitiosPage {
 
   irCrear(){
     this.navCtrl.push(this.Page);
+  }
+
+  subscriteTowebsite(website){
+    this.websiteService.subscribeToWebsite(website).subscribe((data) =>{
+      console.log(data);
+    })
+
+    
+
+  }
+
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'HECHO',
+      subTitle: 'Te acabas de suscribir',
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
   goToSingleArticle(slug){

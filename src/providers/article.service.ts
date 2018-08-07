@@ -26,7 +26,9 @@ export class ArticlesProvider {
 
   private options;
 
-  public token: string;
+  // public token: string;
+  public token;
+
 
   articulos: any[] = [];
 
@@ -36,18 +38,21 @@ export class ArticlesProvider {
     private http2: HttpClient,
     private http3: HTTP,
     public loadingCtrl: LoadingController,
-    public platform:Platform,
+    public platform: Platform,
     public storage: Storage,
-    public usuarioService:UsuarioProvider ) {
+    public usuarioService: UsuarioProvider) {
 
-      this.token = usuarioService.token;
+    // this.token;
 
     // sacar token del storage
-   // this.getToken();
+    this.getToken();
+
+    console.log(this.token);
 
 
     //config de headers para la peticion
     this.headers.append("Accept", "Application/json");
+    this.headers.append("Content-Type", "application/x-www-form-urlencoded");
     this.headers.append("Authorization", "Bearer " + this.token);
     this.options = new RequestOptions({ headers: this.headers });
   }
@@ -65,39 +70,38 @@ export class ArticlesProvider {
   }
 
   getSingleArticleRelateds(slug) {
-    return this.http.get(URL_SHOW_SINGLE_ARTICLE + slug).map((response:Response) =>response.toString());
+    return this.http.get(URL_SHOW_SINGLE_ARTICLE + slug).map((response: Response) => response.toString());
 
   }
 
-  getArticlesFromSubscribed(){
-    return this.http.get(URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED,this.options).map((response:Response) =>response.json());
+  getArticlesFromSubscribed() {
+    return this.http.get(URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED, this.options).map((response: Response) => response.json());
     //
   }
 
   addToFavorite(slug) {
     console.log(this.token);
-    return this.http.get(URL_ARTICLE_FAVORITE + slug + "/favorite", this.options).map((response:Response) =>response.json());
+    return this.http.get(URL_ARTICLE_FAVORITE + slug + "/favorite", this.options).map((response: Response) => response.json());
   }
 
   removeToFavorite(slug) {
-    return this.http.get(URL_ARTICLE_UNFAVORITE + slug + "/unfavorite", this.options).map((response:Response) =>response.json());
+    return this.http.get(URL_ARTICLE_UNFAVORITE + slug + "/unfavorite", this.options).map((response: Response) => response.json());
   }
 
-  isFavorite(slug){
-    return this.http.get(URL_ARTICLE_ISFAVORITED + slug + "/isFavoritedTo",this.options).map((response:Response) =>response.json());
+  isFavorite(slug) {
+    return this.http.get(URL_ARTICLE_ISFAVORITED + slug + "/isFavoritedTo", this.options).map((response: Response) => response.json());
   }
 
-  createArticle(parameters,websiteslug){
+  createArticle(parameters, websiteslug) {
     let body2 = parameters;
     this.getToken();
     console.log(this.token);
-    return this.http.post(URL_CREATE_ARTICLE + websiteslug + "/articles",body2,this.options).map((response:Response) => response.json());
-
+    return this.http2.post(URL_CREATE_ARTICLE + websiteslug + "/articles", body2, this.options);
   }
 
- 
 
-  
+
+
 
 
   getToken() {
