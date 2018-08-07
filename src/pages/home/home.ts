@@ -48,22 +48,25 @@ export class HomePage implements OnInit {
 
 
 
-    // if (this.token) {
-    //   websiteService.getArticlesFromSubscribed().subscribe((data) => {
-    //     console.log(data.data);
-    //     this.articlesFromSubscribed = data.data;
+    if (this.token) {
+      websiteService.getArticlesFromSubscribed().subscribe((data) => {
+        console.log(data.data);
+        this.articlesFromSubscribed = data.data;
 
-    //     if (this.articlesFromSubscribed.length < 1) {
-    //       this.articlesFromSubscribed = null;
+        if (this.articlesFromSubscribed.length < 1) {
+          this.articlesFromSubscribed = null;
 
-    //     }
+        }
 
-    //   });
+      });
 
-    //   this.getTotalItemsCart();
+      this.getTotalItemsCart();
 
-    // }
+    }
     this.changeDetector();
+    console.log(this.articlesFromSubscribed);
+    console.log(this.articlesFromSubscribed.length);
+    
   }
 
   ngAfterViewInit() {
@@ -93,23 +96,30 @@ export class HomePage implements OnInit {
 
 
   ionViewWillEnter() {
+    console.log("ionViewWillEnter");
+    if (this.token) {
+      this.websiteService.getArticlesFromSubscribed().subscribe((data) => {
+        console.log(data.data);
+        this.articlesFromSubscribed = data.data;
+      });
 
-    this.carritoService.getCart().subscribe((data) => {
-      this.carritoService.carritoBadgeCounter = data.data.cart_article.length;
 
-    });
+      this.carritoService.getCart().subscribe((data) => {
+        this.carritoService.carritoBadgeCounter = data.data.cart_article.length;
+
+      });
+
+
+
+    }
+
 
   }
   ngOnInit() {
 
-    // this.carritoService.getCartItemsCount().subscribe((data) =>{
-    //   console.log(data);
-    //   console.log(data.length);
-    //   this.carritoService.carritoBadgeCounter = data.length;
-    // });
 
 
-    
+
 
 
 

@@ -1,10 +1,11 @@
+import { AlertController } from 'ionic-angular';
 import { UsuarioProvider } from './../../providers/index.services';
 
 import { RegistroPage } from './../registro/registro';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, Events } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-
+import 'rxjs/add/operator/catch';
 
 
 
@@ -26,14 +27,16 @@ export class LoginPage {
     isLogin: boolean = false;
     attemptedSubmit: boolean = false;
 
-    error = null;
+    error: any;
+    data: any;
 
 
     constructor(public fb: FormBuilder,
         private navCtrl: NavController,
         private usuarioService: UsuarioProvider,
         private viewCtrl: ViewController,
-        public events: Events, ) {
+        public events: Events,
+        public alertCtrl: AlertController, ) {
 
 
         this.loginForm = fb.group({
@@ -45,22 +48,37 @@ export class LoginPage {
     }
 
     ingresar() {
-        this.usuarioService.ingresar(this.email, this.password)
-            .subscribe(() => {
+        this.usuarioService.ingresar(this.email, this.password).subscribe(
+            // data => console.log('sucess', this.data = data),
+            // error => console.log('OOPS', this.error = error.error)
+            (data: any) => {
+                //success catch
+                console.log(data)
+                this.data = data;
+                console.log(this.data);
+                this.usuarioService.token = data.access_token;
+                this.usuarioService.guardar_storage();
+                this.usuarioService.presentLoadingDefault('Iniciando sesion..');
+                this.events.publish('user:menu');
+                this.viewCtrl.dismiss(true);
 
-                console.log("DATOS A ENVIAR: " + this.email, this.password);
+            }, // catch errors
+            (error: any) => {
+                console.log(error)
+                this.error = error;
+                console.log(this.error);
+                this.presentAlert('Error', 'Sus credenciales son incorrectas');
+            }
+        );
+    }
 
-                if (this.usuarioService.token_activo()) {
-                    this.viewCtrl.dismiss(true);
-
-                }
-
-
-            });
-
-
-
-
+    presentAlert(msg1, msg2) {
+        let alert = this.alertCtrl.create({
+            title: msg1,
+            subTitle: msg2,
+            buttons: ['OK']
+        });
+        alert.present();
     }
 
 

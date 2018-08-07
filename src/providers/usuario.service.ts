@@ -1,20 +1,22 @@
-import { Observable } from 'rxjs/Observable';
+
+import { HTTP } from '@ionic-native/http';
+import { Http, Response, Headers, RequestOptions } from "@angular/http";
+import 'rxjs/add/operator/catch';
+import {  HttpClient,  HttpErrorResponse } from '@angular/common/http';
+
+
 import { URL_SIGNUP, URL_LOGIN, URL_SHOW_USER, URL_SHOPPING_CART } from './../URLs/url.servicios';
-import { HttpClientModule, HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 
 
 import { Injectable } from "@angular/core";
-import { Http, Response, Headers, RequestOptions } from "@angular/http";
-//import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import { map } from 'rxjs/operators';
+
+
 
 import { Storage } from "@ionic/storage";
-
-
 import { AlertController, Platform, ToastController, Events, LoadingController } from "ionic-angular";
 import { FormGroup } from '@angular/forms';
+
 
 
 interface APIErrorResponse extends HttpErrorResponse {
@@ -54,8 +56,12 @@ export class UsuarioProvider {
 
     private options;
     private options2;
+    response: any;
 
-    body3:APIErrorResponse;
+    data: any;
+    error: any;
+
+    body3: APIErrorResponse;
 
 
 
@@ -68,7 +74,8 @@ export class UsuarioProvider {
         private http2: HttpClient,
         private toastCtrl: ToastController,
         public events: Events,
-        public loadingCtrl: LoadingController, ) {
+        public loadingCtrl: LoadingController,
+        public http3: HTTP,) {
         this.cargar_storage();
 
 
@@ -98,8 +105,8 @@ export class UsuarioProvider {
     }
 
 
-    getFavorites(){
-        return this.http.get(URL_SHOPPING_CART,this.options2).map((response:Response) => response.json());
+    getFavorites() {
+        return this.http.get(URL_SHOPPING_CART, this.options2).map((response: Response) => response.json());
     }
 
 
@@ -113,57 +120,20 @@ export class UsuarioProvider {
             grant_type: "password"
         };
 
-        let body2;
 
-        return this.http.post(URL_LOGIN, body, this.options).map((data_resp:Response) => {
-
-            console.log("DATOS A ENVIAR(DENTRO DEL USUARIO en usuarioSERVICE): ");
-
-            // console.log(this.body3.statusText);
-
-
-            //convertir el body en json() 
-            body2 = data_resp.json() || {};
-            console.log("body2 hola");
-
-            console.log(body2);
-
-
-            if (body2.status) {
-
-
-                let alert = this.alertCtrl.create({
-                    title: 'Error',
-                    subTitle: 'Correo o contrasena incorrecta!',
-                    buttons: ['OK']
-                });
-                alert.present();
-
-
-                console.log("body2");
-            } else {
-
-
-                this.presentLoadingDefault('Iniciando sesion..');
-
-                this.presentToast();
-
-                this.token = body2.access_token;
-                //this.id_usuario = body2.user;
-
-                //guardar storage
-                this.guardar_storage();
-                //para actualizar el side menu
-                this.events.publish('user:menu');
-
-            }
-
-        });
-
-
-
-
+        return this.http2.post(URL_LOGIN, body, this.options);
     }
+
+    presentAlert(msg1, msg2) {
+        let alert = this.alertCtrl.create({
+            title: msg1,
+            subTitle: msg2,
+            buttons: ['OK']
+        });
+        alert.present();
+    }
+
+
 
     mostrar_usuario() {
 
@@ -183,17 +153,17 @@ export class UsuarioProvider {
     }
 
     cerrar_sesion() {
+        this.presentLoadingDefault('Cerrando sesion..');
         this.token = null;
         this.id_usuario = null;
 
         //guardar storage
         this.guardar_storage();
         this.events.publish('user:menu');
-        this.presentLoadingDefault('Cerrando sesion..');
 
     }
 
-    private guardar_storage() {
+    public guardar_storage() {
 
 
         if (this.platform.is("cordova")) {
