@@ -32,13 +32,6 @@
 
     <ais-hits>
       <ng-template let-hits="hits">
-        <!-- <div *ngFor="let hit of hits">
-          <img src="http://178.128.183.171/{{hit.image_path}}" class="image">
-          <ais-highlight attribute="name" [hit]="hit">
-          </ais-highlight>
-          ({{ hit.category }}) | {{ hit.price | currency:'RD$'}} {{hits.nbHits}} results found in {{hits.processingTimeMS}}ms.
-        </div> -->
-
         <ion-card *ngFor="let hit of hits">
           <img src="http://178.128.183.171/{{hit.image_path}}" class="image" (click)="goTowebsite(hit.username)"/>
           <div class="card-title">{{hit.name}}</div>

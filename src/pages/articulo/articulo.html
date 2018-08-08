@@ -9,11 +9,17 @@
 </ion-header>
 
 
-<ion-content class="detail-content">
+<ion-content class="detail-content" padding>
   <!-- <ion-spinner name="circles" paused="activated"></ion-spinner> -->
   <img src="http://178.128.183.171/{{article.image_path}}" class="det-img" />
   <ion-card>
     <ion-item>
+      <p>
+        <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" nullable="false">
+        </rating>
+      </p>
+
+
       {{article.name}}
       <button color="grayColor" ion-button item-right>{{article.price | currency:'RD$'}}</button>
       <p>Stock: {{article.stock}}</p>
@@ -49,38 +55,37 @@
   </button>
 
   <!-- articulos relacionados en scroll horizontal -->
-  <h5>ARTICULOS RELACIONADOS </h5>
+  <h5>Mas articulos similares </h5>
 
   <!-- <ion-scroll scrollX="true"> -->
   <!-- <ion-scroll scrollX="true" direction="x" *ngIf="relatedArticles"> -->
-  <ion-card-content>
-    <ion-row>
-      <ion-item no-lines>
-        <ion-scroll scrollX="true">
-          <ion-card class="app-card" *ngFor="let relatedArticle of relatedArticles">
-            <img src="http://178.128.183.171/{{relatedArticle.image_path}}" (click)="goToSingleArticle(relatedArticle.slug)" />
-            <div class="det">
-              <h4 no-margin>{{relatedArticle.name | slice:0:5}}</h4>
-              <p no-margin>{{relatedArticle.price | currency:'RD$'}}</p>
-            </div>
-          </ion-card>
-        </ion-scroll>
-      </ion-item>
-    </ion-row>
-  </ion-card-content>
-  <!-- </ion-scroll> -->
+  <!-- <ion-scroll scrollX="true"> -->
 
   <!-- <ion-row>
-    <ion-avatar *ngFor="let relatedArticle of relatedArticles">
-      <img src="http://178.128.183.171/{{relatedArticle.image_path}}" style="max-width:2.5rem;max-height:2.5rem;">
-      <h5> {{relatedArticle.name | slice:0:5}} </h5>
-    </ion-avatar>
-  </ion-row> -->
+      <ion-card *ngFor="let relatedArticle of relatedArticles">
+        <img src="http://178.128.183.171/{{relatedArticle.image_path}}" class="image" (click)="goToSingleArticle(relatedArticle.slug)"
+        />
+        <div class="card-title">{{relatedArticle.name}}</div>
+        <div class="card-subtitle">{{relatedArticle.price | currency:'RD$'}}</div>
+      </ion-card>
+    </ion-row> -->
+
+
+  <!-- </ion-scroll>   -->
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-33 *ngFor="let post of list">
+        <div class="card card-1" (click)="ondemand_details(post.product_final_categories_id)">
+          <img src="{{post.product_final_categories_icon}}">
+          <p style="font-size: 9px;">{{post.product_final_categories_name}}</p>
+        </div>
+      </ion-col>
+    </ion-row>
+    </ion-grid>
 
 
 
 
-
-
-  <!-- <h5>Opiniones de los usuarios</h5> -->
+    <!-- <h5>Opiniones de los usuarios</h5> -->
 </ion-content>

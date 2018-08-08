@@ -5,8 +5,8 @@ import { ArticlesProvider } from '../../providers/index.services';
 
 
 
-export  interface article {
-  stock:number;
+export interface article {
+  stock: number;
 }
 
 
@@ -27,6 +27,9 @@ export class ArticuloPage {
   relatedArticles2 = []
   cantidad: number = 1;
   evilResponseProps;
+  reviews = [];
+
+  rate: number = 0;
 
 
 
@@ -45,7 +48,7 @@ export class ArticuloPage {
     console.log("en articulo.ts");
     console.log(this.slug);
 
-  
+
 
     articleService.getSingleArticle(this.slug).subscribe((data) => {
       this.article = data.data.article;
@@ -53,14 +56,30 @@ export class ArticuloPage {
       console.log(this.article);
       console.log(data.data);
       console.log(data.data.relateds);
+      console.log(data.data.reviews);
+      this.reviews = data.data.reviews;
       this.relatedArticles = data.data.relateds;
       console.log(this.relatedArticles);
+      console.log(this.reviews);
+
+      this.reviews.forEach((review) => {
+        this.rate += review.rating;
+      });
+      console.log(this.rate);
+      this.rate = this.rate / this.reviews.length;
+      console.log(this.rate);
     });
-    
+
     // console.log(this.relatedArticles2);
 
     articleService.getSingleArticleRelateds(this.slug).subscribe((data) => {
       console.log(data);
+    });
+  }
+
+  ngOnInit() {
+    this.reviews.forEach((review) => {
+      this.rate += review.rating;
     });
   }
 
@@ -131,7 +150,7 @@ export class ArticuloPage {
     });
     alert.present();
   }
-  
+
 
   presentAlert() {
     let alert = this.alertCtrl.create({
@@ -147,7 +166,7 @@ export class ArticuloPage {
     this.articleService.addToFavorite(id).subscribe((data) => {
       console.log(data);
       this.presentAlert3();
-      
+
 
     });
   }

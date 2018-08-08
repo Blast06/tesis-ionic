@@ -5,6 +5,9 @@ import { Network } from '@ionic-native/network';
 
 import { HTTP } from '@ionic-native/http';
 import { NgAisModule, NgAisInstantSearch } from 'angular-instantsearch';
+import { Ionic2RatingModule } from 'ionic2-rating';
+import { StarRatingModule, StarRatingConfigService } from 'angular-star-rating';
+
 
 
 import { HttpModule } from '@angular/http';
@@ -88,7 +91,9 @@ import { PipesNullfieldsPipe } from '../pipes/pipes-nullfields/pipes-nullfields'
     BrowserModule,
     HttpClientModule,
     HttpModule,
+    StarRatingModule.forRoot(),
     IonicStorageModule.forRoot(),
+    Ionic2RatingModule,
     SuperTabsModule.forRoot(),
     NgAisModule.forRoot(),
     IonicModule.forRoot(MyApp,{
@@ -134,7 +139,8 @@ import { PipesNullfieldsPipe } from '../pipes/pipes-nullfields/pipes-nullfields'
     Network,
     WebsiteProvider,
     IonicStorageModule,
-    NgAisInstantSearch
+    NgAisInstantSearch,
+    StarRatingConfigService,
 
   ]
 })
