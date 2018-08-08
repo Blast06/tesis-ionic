@@ -1,14 +1,9 @@
+
 import { CarritoProvider } from './../../providers/carrito.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, LoadingController, AlertController } from 'ionic-angular';
 import { ArticlesProvider } from '../../providers/index.services';
-
-
-
-export interface article {
-  stock: number;
-}
-
+import { Article } from '../../app/models/article';
 
 
 @IonicPage()
@@ -20,7 +15,8 @@ export class ArticuloPage {
 
   articuloPage = ArticuloPage;
 
-  article: article[] = [];
+  article: Article[] = [];
+
   activated: boolean = false;
   slug: any;
   public relatedArticles: any[] = [];
@@ -30,6 +26,8 @@ export class ArticuloPage {
   reviews = [];
 
   rate: number = 0;
+
+
 
 
 
@@ -68,6 +66,7 @@ export class ArticuloPage {
       console.log(this.rate);
       this.rate = this.rate / this.reviews.length;
       console.log(this.rate);
+      
     });
 
     // console.log(this.relatedArticles2);
@@ -76,6 +75,8 @@ export class ArticuloPage {
       console.log(data);
     });
   }
+
+  
 
   ngOnInit() {
     this.reviews.forEach((review) => {
@@ -106,12 +107,13 @@ export class ArticuloPage {
   // }
 
   increment() {
-    // if (this.cantidad == this.article.stock) {
+    if (this.cantidad == this.article.stock ) {
 
-    // } else {
-    //   this.cantidad++;
+    } else {
+      this.cantidad++;
+    
 
-    // }
+    }
   }
 
   decrement() {

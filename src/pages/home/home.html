@@ -31,9 +31,11 @@
 
   <img src="assets/imgs/new.png" class="new-collection" />
 
-  <div class="products" *ngIf="!articlesFromSubscribed && _us.token_activo()">
-    <p>No sigues a ningun sitio?, ve a la segunda imagen y suscribete a algunos!</p>
+  <div class="products" *ngIf="!show && _us.token_activo()">
+    <p>No sigues a ningun sitio?, Busca algunos y suscribete!</p>
   </div>
+
+
 
   <div class="products" *ngIf="!_us.token_activo()">
     <p>Inicia sesion para una mejor experiencia de usuario</p>
@@ -42,7 +44,7 @@
   </div>
 
 
-  <div *ngIf="articlesFromSubscribed" class="products">
+  <div *ngIf="show" class="products">
 
     <p text-uppercase>
       <strong>Articulos</strong>

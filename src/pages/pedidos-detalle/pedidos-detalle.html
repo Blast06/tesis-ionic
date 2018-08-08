@@ -28,6 +28,9 @@
     <p><b>Cantidad: </b>
       {{order.quantity}}
     </p>
+    <p><b>Precio(sin iva): </b>
+      {{order.price | currency:'RD$'}}
+    </p>
     <p><b>iva: </b>
       {{iva | currency:'RD$'}}
     </p>

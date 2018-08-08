@@ -31,6 +31,7 @@ export class HomePage implements OnInit {
   cartItemsCounter: number = 0;
 
   token: boolean = this._us.token_activo();
+  show:boolean = false;
 
 
 
@@ -103,6 +104,12 @@ export class HomePage implements OnInit {
         this.articlesFromSubscribed = data.data;
       });
 
+      if (this.articlesFromSubscribed.length > 0) {
+        this.show = true;
+
+        
+      }
+
 
       this.carritoService.getCart().subscribe((data) => {
         this.carritoService.carritoBadgeCounter = data.data.cart_article.length;
@@ -153,12 +160,12 @@ export class HomePage implements OnInit {
 
   }
 
-  calculateReviews() {
-    if (this.articlesFromSubscribed) {
-      this.rate = this.articlesFromSubscribed.reviews.reduce((rate, article) => rate += parseFloat(article.review), 0);
-    }
+  // calculateReviews() {
+  //   if (this.articlesFromSubscribed) {
+  //     this.rate = this.articlesFromSubscribed.reviews.reduce((rate, article) => rate += parseFloat(article.review), 0);
+  //   }
 
-  }
+  // }
 
     getTotalItemsCart() {
       this.carritoService.getCart().subscribe((data: any) => {

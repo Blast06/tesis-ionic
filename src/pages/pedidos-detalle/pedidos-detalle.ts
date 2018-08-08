@@ -25,6 +25,7 @@ export class PedidosDetallePage {
 
   order:MyOrders;
   price:number = 0;
+  pricenoIva:number = 0;
   iva:number = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -33,7 +34,9 @@ export class PedidosDetallePage {
     console.log(this.order);
 
     this.iva = (parseFloat(this.order.price) * 0.18);
+
     this.price = parseFloat(this.order.price)  + this.iva;
+    this.pricenoIva = parseFloat(this.order.price);
 
     
 

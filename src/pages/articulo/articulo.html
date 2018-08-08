@@ -57,35 +57,22 @@
   <!-- articulos relacionados en scroll horizontal -->
   <h5>Mas articulos similares </h5>
 
-  <!-- <ion-scroll scrollX="true"> -->
   <!-- <ion-scroll scrollX="true" direction="x" *ngIf="relatedArticles"> -->
-  <!-- <ion-scroll scrollX="true"> -->
 
-  <!-- <ion-row>
-      <ion-card *ngFor="let relatedArticle of relatedArticles">
-        <img src="http://178.128.183.171/{{relatedArticle.image_path}}" class="image" (click)="goToSingleArticle(relatedArticle.slug)"
-        />
-        <div class="card-title">{{relatedArticle.name}}</div>
-        <div class="card-subtitle">{{relatedArticle.price | currency:'RD$'}}</div>
-      </ion-card>
-    </ion-row> -->
-
-
-  <!-- </ion-scroll>   -->
-
-  <ion-grid>
-    <ion-row>
-      <ion-col col-33 *ngFor="let post of list">
-        <div class="card card-1" (click)="ondemand_details(post.product_final_categories_id)">
-          <img src="{{post.product_final_categories_icon}}">
-          <p style="font-size: 9px;">{{post.product_final_categories_name}}</p>
-        </div>
-      </ion-col>
-    </ion-row>
-    </ion-grid>
+  <ion-scroll scrollX="true">
+    <ion-item>
+      <ion-row>
+        <ion-card *ngFor="let relatedArticle of relatedArticles">
+          <img src="http://178.128.183.171/{{relatedArticle.image_path}}" class="image" (click)="goToSingleArticle(relatedArticle.slug)"
+          />
+          <div class="card-title">{{relatedArticle.name}}</div>
+          <div class="card-subtitle">{{relatedArticle.price | currency:'RD$'}}</div>
+        </ion-card>
+      </ion-row>
+    </ion-item>
+  </ion-scroll>
 
 
 
-
-    <!-- <h5>Opiniones de los usuarios</h5> -->
+  <!-- <h5>Opiniones de los usuarios</h5> -->
 </ion-content>
