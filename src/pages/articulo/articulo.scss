@@ -1,4 +1,26 @@
 page-articulo {
+
+    .header-banner{
+        width: 200px;
+        min-width: 200px;
+		height:200px;
+		min-height:200px;
+        background-color:primary;
+        justify-content: center;
+    }
+    @import "./pages/buscar/buscar.scss";
+
+	.slide-zoom {
+		// height:200px;
+		height: 80%;
+		// overflow:hidden;
+	}
+
+       ion-slide {
+          height: 500px;
+          justify-content: center;
+       }
+
     ion-spinner * {
         width: 28px;
         height: 28px;

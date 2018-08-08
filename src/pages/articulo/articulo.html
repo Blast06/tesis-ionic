@@ -10,7 +10,7 @@
 
 
 <ion-content class="detail-content" padding>
-  <!-- <ion-spinner name="circles" paused="activated"></ion-spinner> -->
+  <ion-spinner name="circles"*ngIf="!article"></ion-spinner>
   <img src="http://178.128.183.171/{{article.image_path}}" class="det-img" />
   <ion-card>
     <ion-item>
@@ -57,22 +57,16 @@
   <!-- articulos relacionados en scroll horizontal -->
   <h5>Mas articulos similares </h5>
 
-  <!-- <ion-scroll scrollX="true" direction="x" *ngIf="relatedArticles"> -->
-
-  <ion-scroll scrollX="true">
-    <ion-item>
-      <ion-row>
-        <ion-card *ngFor="let relatedArticle of relatedArticles">
-          <img src="http://178.128.183.171/{{relatedArticle.image_path}}" class="image" (click)="goToSingleArticle(relatedArticle.slug)"
-          />
-          <div class="card-title">{{relatedArticle.name}}</div>
-          <div class="card-subtitle">{{relatedArticle.price | currency:'RD$'}}</div>
-        </ion-card>
-      </ion-row>
-    </ion-item>
-  </ion-scroll>
-
-
+  <ion-slides (ionSlideDidChange)="slideChanged()" class="header-banner" >
+      <ion-slide *ngFor="let relatedArticle of relatedArticles" >
+        <img src="http://178.128.183.171/{{relatedArticle.image_path}}" class="image" (click)="goToSingleArticle(relatedArticle.slug)"
+        />
+        <div class="det">
+          <h4 no-margin>{{relatedArticle.name | slice:0:12}}</h4>
+          <p no-margin>{{relatedArticle.price | currency:'RD$'}}</p>
+          </div>
+      </ion-slide>
+  </ion-slides>
 
   <!-- <h5>Opiniones de los usuarios</h5> -->
 </ion-content>

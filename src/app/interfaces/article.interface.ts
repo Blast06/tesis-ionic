@@ -1,4 +1,5 @@
-export class Article {
+interface SingleArticle {
+
     id: number;
     name: string;
     slug: string;
@@ -10,4 +11,5 @@ export class Article {
     sub_category_id: number;
     image_path: string;
     website: any;
+
 }

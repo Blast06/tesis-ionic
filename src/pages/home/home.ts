@@ -6,7 +6,7 @@ import { ArticuloPage, LoginPage, BuscarPage } from './../index.paginas';
 import { UsuarioProvider, ArticlesProvider, CarritoProvider, WebsiteProvider } from './../../providers/index.services';
 
 
-import { Component, Input, OnInit, Renderer, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, Renderer, ViewChild, NgZone } from '@angular/core';
 import { NavController, Events, Content } from 'ionic-angular';
 import { CreararticuloPage } from '../creararticulo/creararticulo';
 
@@ -31,7 +31,7 @@ export class HomePage implements OnInit {
   cartItemsCounter: number = 0;
 
   token: boolean = this._us.token_activo();
-  show:boolean = false;
+  show: boolean = false;
 
 
 
@@ -104,11 +104,11 @@ export class HomePage implements OnInit {
         this.articlesFromSubscribed = data.data;
       });
 
-      if (this.articlesFromSubscribed.length > 0) {
-        this.show = true;
+      // if (this.articlesFromSubscribed.length > 0) {
+      //   this.show = true;
 
-        
-      }
+
+      // }
 
 
       this.carritoService.getCart().subscribe((data) => {
@@ -124,12 +124,6 @@ export class HomePage implements OnInit {
   }
   ngOnInit() {
 
-
-
-
-
-
-
     if (this.token) {
       this.websiteService.getArticlesFromSubscribed().subscribe((data) => {
         console.log(data.data);
@@ -138,6 +132,9 @@ export class HomePage implements OnInit {
         if (this.articlesFromSubscribed.length < 1) {
           this.articlesFromSubscribed = null;
 
+        } else {
+
+          this.show = true;
         }
 
       });
@@ -167,100 +164,100 @@ export class HomePage implements OnInit {
 
   // }
 
-    getTotalItemsCart() {
-      this.carritoService.getCart().subscribe((data: any) => {
-        console.log("DATOS EN EL CONSTRUCTOR");
-        console.log(data);
+  getTotalItemsCart() {
+    this.carritoService.getCart().subscribe((data: any) => {
+      console.log("DATOS EN EL CONSTRUCTOR");
+      console.log(data);
 
-        this.cartItemsCounter = data.data.cart_article.length;
-        console.log(this.cartItemsCounter);
+      this.cartItemsCounter = data.data.cart_article.length;
+      console.log(this.cartItemsCounter);
 
-      });
-
-
-    }
-
-    changeDetector() {
-      if (this.articlesFromSubscribed.length == 0 || this.articlesFromSubscribed == null) {
-        this.detector = true;
-
-      }
-      else {
-        this.detector = false;
-      }
-    }
-
-    actualizar_menu() {
-      this.events.publish('user:menu');
-    }
-
-    isConnected() {
-      this.events.publish('network:conexion');
-    }
-
-    scrollingFun(ev) {
-      ev.domWrite(() => {
-        this.updateHeader(ev);
-      });
-    }
-
-    goTo() {
-      if (this.token) {
-        this.navCtrl.push(CreararticuloPage);
-
-      }
-      else {
-        this.navCtrl.push(LoginPage);
-      }
-    }
-    goTo2() {
-      this.navCtrl.push(BuscarPage);
-    }
-
-    goToSignIn() {
-      this.navCtrl.push(LoginPage);
-
-    }
-
-    goToSingleArticle(slug) {
-      this.slug = slug;
-      console.log(slug);
-      console.log(this.slug);
-
-      this.navCtrl.push(this.articuloPage, { slug: this.slug });
-
-
-    }
-
-    like(article) {
-      article.activeLike = !article.activeLike;
-      console.log(article.id);
-      if (article.activeLike) {
-        this.articleService.addToFavorite(article.id).subscribe((data) => {
-          console.log(data);
-
-        });
-      } else {
-        this.articleService.removeToFavorite(article.id).subscribe((data) => {
-          console.log(data);
-
-        });
-
-      }
-    }
-
-    cerrarSesion() {
-      this._us.cerrar_sesion();
-      this.articlesFromSubscribed = null;
-      this.carritoService.carritoBadgeCounter = 0;
-    }
-
-    updateHeader(ev) {
-      if (ev.scrollTop > 0) {
-        this.darkHeader = ev.scrollTop / 200;
-        this.renderer.setElementClass(this.headerbg, 'sub-header', true);
-      } else this.renderer.setElementClass(this.headerbg, 'sub-header', false);
-    }
+    });
 
 
   }
+
+  changeDetector() {
+    if (this.articlesFromSubscribed.length == 0 || this.articlesFromSubscribed == null) {
+      this.detector = true;
+
+    }
+    else {
+      this.detector = false;
+    }
+  }
+
+  actualizar_menu() {
+    this.events.publish('user:menu');
+  }
+
+  isConnected() {
+    this.events.publish('network:conexion');
+  }
+
+  scrollingFun(ev) {
+    ev.domWrite(() => {
+      this.updateHeader(ev);
+    });
+  }
+
+  goTo() {
+    if (this.token) {
+      this.navCtrl.push(CreararticuloPage);
+
+    }
+    else {
+      this.navCtrl.push(LoginPage);
+    }
+  }
+  goTo2() {
+    this.navCtrl.push(BuscarPage);
+  }
+
+  goToSignIn() {
+    this.navCtrl.push(LoginPage);
+
+  }
+
+  goToSingleArticle(slug) {
+    this.slug = slug;
+    console.log(slug);
+    console.log(this.slug);
+
+    this.navCtrl.push(this.articuloPage, { slug: this.slug });
+
+
+  }
+
+  like(article) {
+    article.activeLike = !article.activeLike;
+    console.log(article.id);
+    if (article.activeLike) {
+      this.articleService.addToFavorite(article.id).subscribe((data) => {
+        console.log(data);
+
+      });
+    } else {
+      this.articleService.removeToFavorite(article.id).subscribe((data) => {
+        console.log(data);
+
+      });
+
+    }
+  }
+
+  cerrarSesion() {
+    this._us.cerrar_sesion();
+    this.articlesFromSubscribed = null;
+    this.carritoService.carritoBadgeCounter = 0;
+  }
+
+  updateHeader(ev) {
+    if (ev.scrollTop > 0) {
+      this.darkHeader = ev.scrollTop / 200;
+      this.renderer.setElementClass(this.headerbg, 'sub-header', true);
+    } else this.renderer.setElementClass(this.headerbg, 'sub-header', false);
+  }
+
+
+}

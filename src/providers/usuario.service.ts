@@ -122,7 +122,7 @@ export class UsuarioProvider {
 
 
         return this.http2.post(URL_LOGIN, body, this.options);
-        this.presentLoadingDefault('Ingresando..');
+       
 
     }
 

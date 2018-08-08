@@ -1,9 +1,10 @@
 
 import { CarritoProvider } from './../../providers/carrito.service';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, LoadingController, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController, AlertController, Slides } from 'ionic-angular';
 import { ArticlesProvider } from '../../providers/index.services';
-import { Article } from '../../app/models/article';
+
+
 
 
 @IonicPage()
@@ -13,9 +14,12 @@ import { Article } from '../../app/models/article';
 })
 export class ArticuloPage {
 
+  @ViewChild(Slides) slides: Slides;
+
   articuloPage = ArticuloPage;
 
-  article: Article[] = [];
+  article: any[] = [];
+
 
   activated: boolean = false;
   slug: any;
@@ -41,6 +45,9 @@ export class ArticuloPage {
     public alertCtrl: AlertController
   ) {
 
+
+
+
     this.slug = navParams.get('slug');
 
     console.log("en articulo.ts");
@@ -48,7 +55,8 @@ export class ArticuloPage {
 
 
 
-    articleService.getSingleArticle(this.slug).subscribe((data) => {
+
+    articleService.getSingleArticle(this.slug).subscribe((data: any) => {
       this.article = data.data.article;
       console.log(data);
       console.log(this.article);
@@ -66,7 +74,7 @@ export class ArticuloPage {
       console.log(this.rate);
       this.rate = this.rate / this.reviews.length;
       console.log(this.rate);
-      
+
     });
 
     // console.log(this.relatedArticles2);
@@ -76,12 +84,20 @@ export class ArticuloPage {
     });
   }
 
-  
 
-  ngOnInit() {
+  slideChanged() {
+    let currentIndex = this.slides.getActiveIndex();
+    console.log('Current index is', currentIndex);
+  }
+
+  ionViewWillEnter() {
     this.reviews.forEach((review) => {
       this.rate += review.rating;
     });
+
+  }
+  ngOnInit() {
+
   }
 
 
@@ -107,11 +123,11 @@ export class ArticuloPage {
   // }
 
   increment() {
-    if (this.cantidad == this.article.stock ) {
+    if (this.cantidad == this.article.stock) {
 
     } else {
       this.cantidad++;
-    
+
 
     }
   }
