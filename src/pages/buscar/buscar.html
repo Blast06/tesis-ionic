@@ -2,11 +2,6 @@
 
   <ion-navbar>
     <ion-title>Buscar</ion-title>
-    <!-- <ion-buttons end>
-      <button ion-button icon-only (click)="Choose()">
-        <ion-icon name="create"></ion-icon>
-      </button>
-    </ion-buttons> -->
   </ion-navbar>
 
 </ion-header>
@@ -51,25 +46,13 @@
 
     <ais-hits>
       <ng-template let-hits="hits">
-        <!-- <div *ngFor="let hit of hits">
-          <img src="http://178.128.183.171/{{hit.image_path}}" class="image">
-          <ais-highlight attribute="name" [hit]="hit">
-          </ais-highlight>
-          ({{ hit.category }}) | {{ hit.price | currency:'RD$'}} {{hits.nbHits}} results found in {{hits.processingTimeMS}}ms.
-        </div> -->
-
         <ion-card class="app-card" *ngFor="let hit of hits">
           <img src="http://178.128.183.171/{{hit.image_path}}" (click)="goToSingleArticle(hit.name)" />
           <div class="det">
             <h4 no-margin>{{hit.name | slice:0:5}}</h4>
             <p no-margin>{{hit.price | currency:'RD$'}}</p>
-          
           </div>
         </ion-card>
-
-
-
-
       </ng-template>
     </ais-hits>
 

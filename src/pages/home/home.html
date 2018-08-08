@@ -45,15 +45,12 @@
   </div>
 
 
+  <p *ngIf="show" style="text-align: center;"><b>ARTICULOS</b></p>
+
   <div *ngIf="show" class="products">
 
-    <p text-uppercase>
-      <strong>Articulos</strong>
-    </p>
-
-
-
     <ion-card class="app-card" *ngFor="let article of articlesFromSubscribed">
+      
       <img src="http://178.128.183.171{{article.image_path}}" (click)="goToSingleArticle(article.slug)" />
 
       <div class="det">
@@ -67,7 +64,6 @@
 
       </div>
     </ion-card>
-
   </div>
 
 

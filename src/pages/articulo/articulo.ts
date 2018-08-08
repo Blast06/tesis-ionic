@@ -123,13 +123,13 @@ export class ArticuloPage {
   // }
 
   increment() {
-    if (this.cantidad == this.article.stock) {
+    // if (this.cantidad == this.article.stock) {
 
-    } else {
-      this.cantidad++;
+    // } else {
+    //   this.cantidad++;
 
 
-    }
+    // }
   }
 
   decrement() {
