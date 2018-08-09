@@ -2,9 +2,11 @@
 
   <ion-navbar>
     <ion-buttons>
-      <button ion-button (click)="viewCtrl.dismiss()"> Cerrar</button>
+      <button ion-button (click)="viewCtrl.dismiss()">
+        <ion-icon [name]="'close'"></ion-icon>
+      </button>
     </ion-buttons>
-    <ion-title>Carrito de compras</ion-title>
+    <ion-title mode="ios">Carrito de compras</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -35,6 +37,7 @@
           <p>{{article.name}}</p>
           <p>{{article.price | currency:'RD$'}}</p>
           <p>Cantidad: {{article.pivot.quantity}}</p>
+          <button ion-button color="success" outline small (click)="goToSingleArticle(article.slug)">Actualizar</button>
           <button ion-button color="danger" outline small (click)="remove(article.id)">Eliminar</button>
         </ion-col>
       </ion-row>
@@ -42,7 +45,7 @@
 
     <hr>
 
-    
+
     <div class="borders">
       <ion-grid>
         <ion-row>

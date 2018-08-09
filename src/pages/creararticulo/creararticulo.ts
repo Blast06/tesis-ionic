@@ -75,26 +75,6 @@ export class CreararticuloPage {
 
       }
 
-
-      if (this.platform.is("cordova")) {
-        //dispositivo
-
-        this.storage.set('websites', JSON.stringify(this.websites));
-      } else {
-        //computadora
-        if (this.websites) {
-
-          localStorage.setItem('websites', JSON.stringify(this.websites));
-
-
-
-        } else {
-          localStorage.removeItem("websites");
-
-        }
-
-      }
-
     });
 
 

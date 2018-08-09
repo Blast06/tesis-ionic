@@ -1,3 +1,4 @@
+import { ArticuloPage } from './../articulo/articulo';
 import { HomePage } from './../home/home';
 import { CarritoProvider } from "../../providers/index.services";
 import { Component } from '@angular/core';
@@ -24,6 +25,8 @@ export class CarritoPage {
   // orders:any[];
 
   orders: any = [];
+  slug:any;
+  articuloPage = ArticuloPage;
 
 
 
@@ -128,9 +131,9 @@ export class CarritoPage {
       buttons: ['OK']
     });
     alert.present();
+    alert.onDidDismiss(() => console.log('Alerta cerrada'));
     this.carritoService.carritoBadgeCounter = 0;
-    
-    
+    this.navCtrl.pop();
   }
 
   presentAlert() {
@@ -140,6 +143,14 @@ export class CarritoPage {
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  goToSingleArticle(slug) {
+    this.slug = slug;
+    console.log(slug);
+    console.log(this.slug);
+
+    this.navCtrl.push(this.articuloPage, { slug: this.slug });
   }
 
 

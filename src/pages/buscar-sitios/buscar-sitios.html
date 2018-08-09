@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Buscar Sitios</ion-title>
+    <ion-title mode="ios">Buscar Sitios</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -32,8 +32,11 @@
 
     <ais-hits>
       <ng-template let-hits="hits">
+        <p class="info" *ngIf="hits.length === 0">
+          No se encontraron resultados
+        </p>
         <ion-card *ngFor="let hit of hits">
-          <img src="http://178.128.183.171/{{hit.image_path}}" class="image" (click)="goTowebsite(hit.username)"/>
+          <img src="http://178.128.183.171/{{hit.image_path}}" class="image" (click)="goTowebsite(hit.username)" />
           <div class="card-title">{{hit.name}}</div>
           <!-- <div class="card-subtitle">{{hit.subscribers}}</div> -->
         </ion-card>

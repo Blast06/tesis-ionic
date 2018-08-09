@@ -65,6 +65,7 @@ $colors: (
   light:      #f4f4f4,
   dark:       rgb(161, 159, 159),
   apagao:     rgb(112, 111, 111),
+  success:    rgb(7, 206, 66)
 );
 
 
@@ -72,7 +73,7 @@ $colors: (
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
-
+$toolbar-ios-title-text-align: center;
 
 
 
