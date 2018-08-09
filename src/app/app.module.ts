@@ -1,5 +1,3 @@
-import { BuscarSitiosPage } from './../pages/buscar-sitios/buscar-sitios';
-
 import { MainListPage } from './../pages/main-list/main-list';
 import { Network } from '@ionic-native/network';
 
@@ -20,8 +18,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from "@angular/common/http";
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -34,6 +31,9 @@ import { IonicStorageModule } from '@ionic/storage';
 import { CarritoProvider,ArticlesProvider,UsuarioProvider,WebsiteProvider} from "../providers/index.services";
 
 //paginas
+import { MyApp } from './app.component';
+import { HomePage } from '../pages/home/home';
+import { BuscarSitiosPage } from './../pages/buscar-sitios/buscar-sitios';
 import { 
  
     ArticuloPage,

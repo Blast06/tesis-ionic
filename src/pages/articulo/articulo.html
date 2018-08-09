@@ -9,8 +9,10 @@
 </ion-header>
 
 
-<ion-content class="detail-content" padding>
-  <ion-spinner name="circles"*ngIf="!article"></ion-spinner>
+<div *ngIf="!article" class="spinner-container">
+  <ion-spinner name="circles"></ion-spinner>
+</div>
+<ion-content class="detail-content" padding *ngIf="article">
   <img src="http://178.128.183.171/{{article.image_path}}" class="det-img" />
   <ion-card>
     <ion-item>
@@ -40,8 +42,8 @@
 
     <ion-card-header>Cantidad: </ion-card-header>
     <p>{{cantidad}}</p>
-    <ion-icon name="ios-remove-circle" (click)="decrement()"> </ion-icon>
-    <ion-icon name="ios-add-circle" (click)="increment()"> </ion-icon>
+    <ion-icon name="remove" (click)="decrement()"> </ion-icon>
+    <ion-icon name="add" (click)="increment()"> </ion-icon>
 
   </ion-card>
 
@@ -49,27 +51,27 @@
     <ion-icon name="md-cart" color="light"></ion-icon>
     Agregar al carrito
   </button>
-  <button *ngIf="mostrarfavorite" ion-button block text-uppercase color="primary" class="app-btn" (click)="addToFavorite(article.id)">
-    <ion-icon name="md-heart" color="light" *ngIf="mostrarfavorite"></ion-icon>
+  <button *ngIf="!mostrarfavorite" ion-button block text-uppercase color="primary" class="app-btn" (click)="addToFavorite(article.id)">
+    <ion-icon name="heart-empy" color="light" ></ion-icon>
     Agregar favoritos
   </button>
-  <button *ngIf="!mostrarfavorite" ion-button block text-uppercase color="primary" class="app-btn" (click)="removeFromFavorite(article.id)">
-    <ion-icon name="md-heart" color="light" *ngIf="mostrarfavorite"></ion-icon>
+  <button *ngIf="mostrarfavorite" ion-button block text-uppercase color="primary" class="app-btn" (click)="removeFromFavorite(article.id)">
+    <ion-icon name="md-heart" color="light"></ion-icon>
     Eliminar de favoritos
   </button>
 
   <!-- articulos relacionados en scroll horizontal -->
   <h5>Mas articulos similares </h5>
 
-  <ion-slides (ionSlideDidChange)="slideChanged()" class="header-banner" >
-      <ion-slide *ngFor="let relatedArticle of relatedArticles" style="text-align: center;">
-        <img src="http://178.128.183.171/{{relatedArticle.image_path}}" class="image" (click)="goToSingleArticle(relatedArticle.slug)"
-        />
-        <div class="det">
-          <h4 no-margin>{{relatedArticle.name | slice:0:12}}</h4>
-          <p no-margin>{{relatedArticle.price | currency:'RD$'}}</p>
-          </div>
-      </ion-slide>
+  <ion-slides (ionSlideDidChange)="slideChanged()" class="header-banner">
+    <ion-slide *ngFor="let relatedArticle of relatedArticles" style="text-align: center;">
+      <img src="http://178.128.183.171/{{relatedArticle.image_path}}" class="image" (click)="goToSingleArticle(relatedArticle.slug)"
+      />
+      <div class="det">
+        <h4 no-margin>{{relatedArticle.name | slice:0:12}}</h4>
+        <p no-margin>{{relatedArticle.price | currency:'RD$'}}</p>
+      </div>
+    </ion-slide>
   </ion-slides>
 
   <!-- <h5>Opiniones de los usuarios</h5> -->

@@ -78,15 +78,18 @@ export class ArticuloPage {
       console.log(this.rate);
       this.rate = this.rate / this.reviews.length;
       console.log(this.rate);
-      this.mostrarfavorite = true;
-      this.mostrarcart = true;
       this.isFavorite();
+      // this.mostrarfavorite = true;
+      this.mostrarcart = true;
 
 
     });
     articleService.getSingleArticleRelateds(this.slug).subscribe((data) => {
       console.log(data);
     });
+
+
+    
   }
 
 
@@ -181,6 +184,11 @@ export class ArticuloPage {
     this.articleService.isFavorite(this.article.id).subscribe((data: any) => {
       console.log(this.article.name);
       console.log(data);
+      if (data == false) {
+        this.mostrarfavorite = false;
+      }else{
+        this.mostrarfavorite = true;
+      }
     })
   }
 
@@ -197,7 +205,7 @@ export class ArticuloPage {
 
     this.articleService.addToFavorite(id).subscribe((data) => {
       console.log(data);
-      this.mostrarfavorite = false;
+      this.mostrarfavorite = true;
       this.presentAlert3('Articulo agregado', 'Has agregado este articulo a favoritos');
 
 
@@ -207,8 +215,8 @@ export class ArticuloPage {
 
     this.articleService.removeToFavorite(id).subscribe((data) => {
       console.log(data);
-      this.mostrarfavorite = true;
       this.presentAlert3('Articulo eliminado', 'Has eliminado este articulo de favoritos');
+      this.mostrarfavorite = false;
 
 
     });

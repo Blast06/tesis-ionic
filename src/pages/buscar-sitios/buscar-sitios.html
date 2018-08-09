@@ -21,7 +21,7 @@
     <ais-search-box placeholder='Busca un sitio'></ais-search-box>
     <br>
 
-    <ais-current-refinements [clearRefinements]="false"></ais-current-refinements>
+    <ais-current-refinements [clearRefinements]="true"></ais-current-refinements>
     <h6>Ubicacion</h6>
     <ais-refinement-list attribute="location"></ais-refinement-list>
     <h6>Fecha de creacion</h6>
@@ -35,7 +35,10 @@
         <p class="info" *ngIf="hits.length === 0">
           No se encontraron resultados
         </p>
+
         <ion-card *ngFor="let hit of hits">
+          <!-- <ais-highlight attribute="name" [hit]="hit">
+          </ais-highlight> -->
           <img src="http://178.128.183.171/{{hit.image_path}}" class="image" (click)="goTowebsite(hit.username)" />
           <div class="card-title">{{hit.name}}</div>
           <!-- <div class="card-subtitle">{{hit.subscribers}}</div> -->

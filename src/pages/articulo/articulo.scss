@@ -262,3 +262,9 @@ ion-scroll[scroll-avatar]{
   ::-webkit-scrollbar{
     display:none;
   }
+  .spinner-container {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 40px !important;
+    }

@@ -2,7 +2,7 @@
   <ion-navbar color="primary">
     <ion-buttons start>
       <button *ngIf="_us.token_activo()" ion-button (click)="cerrarSesion()">
-        Salir
+          <ion-icon name="log-out" ></ion-icon>
       </button>
     </ion-buttons>
     <button ion-button menuToggle>
@@ -34,6 +34,7 @@
 
   <div class="products" *ngIf="!show && _us.token_activo()">
     <p>No sigues a ningun sitio?, Busca algunos y suscribete!</p>
+    <button ion-button style="justify-content: center" [navPush]="buscarSitios">Buscar sitios</button>
   </div>
 
 
@@ -68,8 +69,7 @@
 
 
 
-
-  <div class="products" *ngIf="!articlesFromSubscribed || !_us.token_activo() ">
+  <div *ngIf="!articlesFromSubscribed || !_us.token_activo() ">
     <ion-card (click)="goTo()">
       <img src="assets/imgs/ecommerce.jpg" />
       <div class="card-title">Quieres vender?</div>
@@ -88,7 +88,6 @@
       <div class="card-subtitle">Con una interfaz amigable al usuario</div>
     </ion-card>
   </div>
-
 
 
 </ion-content>

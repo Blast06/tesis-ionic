@@ -60,14 +60,11 @@ export class MisSitiosPage {
       console.log(this.website.username);
       this.articles = data.data.articles;
       console.log(this.articles);
-      this.isSubscribed();
+      // this.isSubscribed();
     });
 
 
-    this.mostrarBtn = true;
-
-
-
+    
 
 
   }
@@ -75,6 +72,11 @@ export class MisSitiosPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MisSitiosPage');
+  }
+
+  ionViewWillEnter(){
+    console.log("ionViewWillEnter");
+    this.isSubscribed();
   }
 
   irCrear() {
@@ -88,7 +90,7 @@ export class MisSitiosPage {
         console.log(data);
         // console.log(data.data.message);
         console.log(data.message);
-        this.mostrarBtn = false;
+        this.mostrarBtn = true;
       })
 
     }
@@ -99,20 +101,23 @@ export class MisSitiosPage {
         console.log(data);
         // console.log(data.data.message);
         console.log(data.message);
-        this.mostrarBtn = true;
-      })
+        this.mostrarBtn = false;
+      });
 
     }
-
-
   }
   isSubscribed() {
     if (this.username) {
       this.websiteService.isSubscribedTo(this.username).subscribe((data: any) => {
+        if (data == true) {
+          this.mostrarBtn = true;
+
+        }else{
+          this.mostrarBtn = false;
+        }
         console.log(data);
         console.log(this.username);
         console.log(this.username.toString());
-        this.mostrarBtn = false;
       });
 
 
@@ -162,5 +167,6 @@ export class MisSitiosPage {
     }
 
   }
+
 
 }

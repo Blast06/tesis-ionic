@@ -44,38 +44,21 @@ export class BuscarPage {
 
   }
 
+  ionViewWillEnter(){
+    console.log("ionviewwillenter");
+    
+  }
+
   ngAfterViewInit() {
-    // setTimeout(() => {
-    //   if (this.slider) {
-    //     this.slider.update();
-    //   }
-    // }, 300);
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BuscarPage');
   }
 
-  // selectTab(ind) {
-  //   this.slider.slideTo(ind);
-  // }
 
-  like(article) {
-    article.activeLike = !article.activeLike;
-    console.log(article.id);
-    if (article.activeLike) {
-      this.articleService.addToFavorite(article.id).subscribe((data) => {
-        console.log(data);
 
-      });
-    } else {
-      this.articleService.removeToFavorite(article.id).subscribe((data) => {
-        console.log(data);
-
-      });
-
-    }
-  }
 
   goToSingleArticle(slug:string) {
     this.slug = slug.replace(/\s+/g, '-'); //para sustituir por - en los espacios del slug

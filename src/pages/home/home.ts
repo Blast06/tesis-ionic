@@ -1,3 +1,4 @@
+import { BuscarSitiosPage } from './../buscar-sitios/buscar-sitios';
 
 import { StarRatingModule } from 'angular-star-rating';
 import { ArticuloPage, LoginPage, BuscarPage } from './../index.paginas';
@@ -32,6 +33,8 @@ export class HomePage implements OnInit {
 
   token: boolean = this._us.token_activo();
   show: boolean = false;
+
+  buscarSitios = BuscarSitiosPage;
 
 
 
@@ -103,12 +106,6 @@ export class HomePage implements OnInit {
         console.log(data.data);
         this.articlesFromSubscribed = data.data;
       });
-
-      // if (this.articlesFromSubscribed.length > 0) {
-      //   this.show = true;
-
-
-      // }
 
 
       this.carritoService.getCart().subscribe((data) => {

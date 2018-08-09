@@ -11,7 +11,7 @@
   </div>
 
   <ion-toolbar color="primary" class="profile-head" text-center *ngIf="user">
-    <img src="{{user.avatar}}" />
+    <img src="http://178.128.183.171/{{user.avatar}}" />
     <h4>{{user.name}}</h4>
     <p>{{user.email}}</p>
   </ion-toolbar>
@@ -32,7 +32,7 @@
     <ion-slide (ionSlideWillChange)="changeWillSlide($event)">
       <!-- <div class="sub-list">
           </div>         -->
-      <div *ngIf="!favorites">No tienes favoritos</div>
+      <div *ngIf="favorites.length < 1">No tienes favoritos</div>
 
       <div *ngIf="favorites" class="customMargin">
         <ion-card class="app-card" *ngFor="let article of favorites">
