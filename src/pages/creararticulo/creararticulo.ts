@@ -129,13 +129,7 @@ export class CreararticuloPage {
   
 
 
-  private increment() {
-    this.currentNumber++;
-  }
-
-  private decrement() {
-    this.currentNumber--;
-  }
+ 
 
   crearSitio(){
     this.navCtrl.push(CrearSitiosPage);

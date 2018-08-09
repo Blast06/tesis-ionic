@@ -18,7 +18,7 @@ export const URL_WEBSITE_IS_SUSCRIBED = URL_BASE + "/"; //ESTA SERIA URL_BASE{we
 export const URL_CREATE_WEBSITE = URL_BASE + "/websites"; // ESTA VA ASI tesis.test/1/unfavorite
 export const URL_ARTICLE_FAVORITE = URL_BASE + "/" ; // ESTA VA ASI tesis.test/1/favorite
 export const URL_ARTICLE_UNFAVORITE = URL_BASE ; // ESTA VA ASI tesis.test/1/unfavorite
-export const URL_ARTICLE_ISFAVORITED = URL_BASE ; // ESTA VA ASI tesis.test/1/unfavorite
+export const URL_ARTICLE_ISFAVORITED = URL_BASE + "/" ; // ESTA VA ASI tesis.test/1/unfavorite
 
 
 export const URL_CREATE_ARTICLE = URL_BASE + "/client/"  ; //ESTA FUNCIONA ASI -> client/my-sitio/articles 

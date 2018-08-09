@@ -20,46 +20,56 @@ export class MisSitiosPage {
 
   Page = CrearSitiosPage;
 
-  articulos: any[] =[];
+  articulos: any[] = [];
   webSitesCollection: any[] = [];
 
-  website:any[]=[];
+  website: any = [];
 
-  username:string
+  username: string
 
-  slug:any;
+  slug: any;
   articuloPage = ArticuloPage
 
-  articles:any[] =[];
- 
+  articles: any[] = [];
+
+  mostrarBtn: boolean;
 
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              public modalCtrl:ModalController,
-              public storage:Storage,
-              public platform:Platform,
-              public usuarioService:UsuarioProvider,
-              public websiteService:WebsiteProvider,
-              public alertCtrl:AlertController,
-              ) {
 
-                
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+    public storage: Storage,
+    public platform: Platform,
+    public usuarioService: UsuarioProvider,
+    public websiteService: WebsiteProvider,
+    public alertCtrl: AlertController,
+  ) {
 
-                this.username = navParams.get('username');
 
-                websiteService.mostrar_info_sitio(this.username).subscribe((data) => {
-                  console.log(data);
-                  this.website = data.data;
-                  console.log(this.website);
-                  this.articles = data.data.articles;
-                  console.log(this.articles);
-                });
 
-                
-                
 
-                
+
+    this.username = navParams.get('username');
+
+    websiteService.mostrar_info_sitio(this.username).subscribe((data) => {
+      console.log(data);
+      console.log(this.username);
+      this.website = data.data;
+      console.log(this.website);
+      console.log(this.website.username);
+      this.articles = data.data.articles;
+      console.log(this.articles);
+      this.isSubscribed();
+    });
+
+
+    this.mostrarBtn = true;
+
+
+
+
+
   }
 
 
@@ -67,16 +77,46 @@ export class MisSitiosPage {
     console.log('ionViewDidLoad MisSitiosPage');
   }
 
-  irCrear(){
+  irCrear() {
     this.navCtrl.push(this.Page);
   }
 
-  subscriteTowebsite(website){
-    this.websiteService.subscribeToWebsite(website).subscribe((data) =>{
-      console.log(data);
-    })
 
-    
+  subscribeTowebsite(website) {
+    if (website) {
+      this.websiteService.subscribeToWebsite(website).subscribe((data) => {
+        console.log(data);
+        // console.log(data.data.message);
+        console.log(data.message);
+        this.mostrarBtn = false;
+      })
+
+    }
+  }
+  unSubscribeTowebsite(website) {
+    if (website) {
+      this.websiteService.unSubscribeToWebsite(website).subscribe((data) => {
+        console.log(data);
+        // console.log(data.data.message);
+        console.log(data.message);
+        this.mostrarBtn = true;
+      })
+
+    }
+
+
+  }
+  isSubscribed() {
+    if (this.username) {
+      this.websiteService.isSubscribedTo(this.username).subscribe((data: any) => {
+        console.log(data);
+        console.log(this.username);
+        console.log(this.username.toString());
+        this.mostrarBtn = false;
+      });
+
+
+    }
 
   }
 
@@ -89,35 +129,35 @@ export class MisSitiosPage {
     alert.present();
   }
 
-  goToSingleArticle(slug){
+  goToSingleArticle(slug) {
     this.slug = slug;
     console.log(slug);
     console.log(this.slug);
-    
-    this.navCtrl.push(this.articuloPage, {slug:this.slug});
+
+    this.navCtrl.push(this.articuloPage, { slug: this.slug });
 
 
   }
 
   // active like fun
-  like(item){
+  like(item) {
     item.activeLike = !item.activeLike;
   }
-// shareModal
+  // shareModal
   presentshareModal() {
     let shareModal = this.modalCtrl.create('ShareModal', { userId: 8675309 });
     shareModal.present();
   }
 
-  getData(){
+  getData() {
     if (this.platform.is("cordova")) {
-    this.storage.get('websites').then((data) => {
-      console.log("myd data", JSON.parse(data));
-      this.webSitesCollection = data;
-  });
-  
-  }else{
-    this.webSitesCollection = JSON.parse(localStorage.getItem('websites'));
+      this.storage.get('websites').then((data) => {
+        console.log("myd data", JSON.parse(data));
+        this.webSitesCollection = data;
+      });
+
+    } else {
+      this.webSitesCollection = JSON.parse(localStorage.getItem('websites'));
 
     }
 

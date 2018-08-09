@@ -18,7 +18,9 @@ export class ArticuloPage {
 
   articuloPage = ArticuloPage;
 
-  article: any[] = [];
+  article: any = [];
+
+
 
 
   activated: boolean = false;
@@ -30,6 +32,9 @@ export class ArticuloPage {
   reviews = [];
 
   rate: number = 0;
+  mostrarfavorite: boolean;
+  mostrarcart: boolean;
+
 
 
 
@@ -45,9 +50,6 @@ export class ArticuloPage {
     public alertCtrl: AlertController
   ) {
 
-
-
-
     this.slug = navParams.get('slug');
 
     console.log("en articulo.ts");
@@ -60,6 +62,7 @@ export class ArticuloPage {
       this.article = data.data.article;
       console.log(data);
       console.log(this.article);
+      console.log(this.article.id);
       console.log(data.data);
       console.log(data.data.relateds);
       console.log(data.data.reviews);
@@ -68,17 +71,19 @@ export class ArticuloPage {
       console.log(this.relatedArticles);
       console.log(this.reviews);
 
+
       this.reviews.forEach((review) => {
         this.rate += review.rating;
       });
       console.log(this.rate);
       this.rate = this.rate / this.reviews.length;
       console.log(this.rate);
+      this.mostrarfavorite = true;
+      this.mostrarcart = true;
+      this.isFavorite();
+
 
     });
-
-    // console.log(this.relatedArticles2);
-
     articleService.getSingleArticleRelateds(this.slug).subscribe((data) => {
       console.log(data);
     });
@@ -110,26 +115,16 @@ export class ArticuloPage {
     this.navCtrl.push(this.articuloPage, { slug: this.slug });
   }
 
-  // getRelatedArtsArray() {
-  //   let evilResponse;
-  //   this.evilResponseProps = this.relatedArticles.keys();
 
-  //   for (const prop of this.evilResponseProps) {
-  //     this.relatedArticles2.push(this.evilResponseProps[prop]);
-
-  //   }
-
-
-  // }
 
   increment() {
-    // if (this.cantidad == this.article.stock) {
+    if (this.cantidad == this.article.stock) {
 
-    // } else {
-    //   this.cantidad++;
+    } else {
+      this.cantidad++;
 
 
-    // }
+    }
   }
 
   decrement() {
@@ -143,10 +138,23 @@ export class ArticuloPage {
   addToCart(id, cantidad) {
     if (cantidad < 1) {
       this.presentAlert2();
+      this.mostrarcart = false;
 
 
     }
     this.carritoService.addToCart(id, cantidad).subscribe((data: any) => {
+      console.log(data);
+      this.presentAlert();
+    });
+  }
+  removeToCart(id, cantidad) {
+    if (cantidad < 1) {
+      this.presentAlert2();
+      this.mostrarcart = false;
+
+
+    }
+    this.carritoService.removeFromCart(id).subscribe((data: any) => {
       console.log(data);
       this.presentAlert();
     });
@@ -160,15 +168,21 @@ export class ArticuloPage {
     this.carritoService.ver_carrito();
   }
 
-  presentAlert3() {
+  presentAlert3(msg1, msg2) {
     let alert = this.alertCtrl.create({
-      title: 'Articulo agregado',
-      subTitle: 'Has agregado este articulo a favoritos',
+      title: msg1,
+      subTitle: msg2,
       buttons: ['OK']
     });
     alert.present();
   }
 
+  isFavorite() {
+    this.articleService.isFavorite(this.article.id).subscribe((data: any) => {
+      console.log(this.article.name);
+      console.log(data);
+    })
+  }
 
   presentAlert() {
     let alert = this.alertCtrl.create({
@@ -183,7 +197,18 @@ export class ArticuloPage {
 
     this.articleService.addToFavorite(id).subscribe((data) => {
       console.log(data);
-      this.presentAlert3();
+      this.mostrarfavorite = false;
+      this.presentAlert3('Articulo agregado', 'Has agregado este articulo a favoritos');
+
+
+    });
+  }
+  removeFromFavorite(id) {
+
+    this.articleService.removeToFavorite(id).subscribe((data) => {
+      console.log(data);
+      this.mostrarfavorite = true;
+      this.presentAlert3('Articulo eliminado', 'Has eliminado este articulo de favoritos');
 
 
     });

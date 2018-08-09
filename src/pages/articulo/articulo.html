@@ -49,16 +49,20 @@
     <ion-icon name="md-cart" color="light"></ion-icon>
     Agregar al carrito
   </button>
-  <button ion-button block text-uppercase color="primary" class="app-btn" (click)="addToFavorite(article.id)">
-    <ion-icon name="md-cart" color="light"></ion-icon>
-    Agregar favorito
+  <button *ngIf="mostrarfavorite" ion-button block text-uppercase color="primary" class="app-btn" (click)="addToFavorite(article.id)">
+    <ion-icon name="md-heart" color="light" *ngIf="mostrarfavorite"></ion-icon>
+    Agregar favoritos
+  </button>
+  <button *ngIf="!mostrarfavorite" ion-button block text-uppercase color="primary" class="app-btn" (click)="removeFromFavorite(article.id)">
+    <ion-icon name="md-heart" color="light" *ngIf="mostrarfavorite"></ion-icon>
+    Eliminar de favoritos
   </button>
 
   <!-- articulos relacionados en scroll horizontal -->
   <h5>Mas articulos similares </h5>
 
   <ion-slides (ionSlideDidChange)="slideChanged()" class="header-banner" >
-      <ion-slide *ngFor="let relatedArticle of relatedArticles" >
+      <ion-slide *ngFor="let relatedArticle of relatedArticles" style="text-align: center;">
         <img src="http://178.128.183.171/{{relatedArticle.image_path}}" class="image" (click)="goToSingleArticle(relatedArticle.slug)"
         />
         <div class="det">

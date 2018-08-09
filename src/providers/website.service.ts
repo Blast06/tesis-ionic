@@ -1,4 +1,4 @@
-import { URL_CREATE_WEBSITE, URL_WEBSITE_SUSCRIBE } from './../URLs/url.servicios';
+import { URL_CREATE_WEBSITE, URL_WEBSITE_SUSCRIBE, URL_WEBSITE_UNSUSCRIBE, URL_WEBSITE_IS_SUSCRIBED } from './../URLs/url.servicios';
 import { Headers, RequestOptions, Response } from '@angular/http';
 
 import { HttpClient } from '@angular/common/http';
@@ -77,14 +77,14 @@ export class WebsiteProvider {
   }
 
   subscribeToWebsite(slug){
-    return this.http2.get(URL_WEBSITE_SUSCRIBE + "/" + slug + "/subscribe",this.options).map((response:Response) => response.json());
+    return this.http2.get(URL_WEBSITE_SUSCRIBE  + slug + "/subscribe",this.options).map((response:Response) => response.json());
   }
 
   unSubscribeToWebsite(slug){
-    return this.http2.get(URL_WEBSITE_SUSCRIBE + "/" + slug + "/unsubscribe",this.options).map((response:Response) => response.json());
+    return this.http2.get(URL_WEBSITE_UNSUSCRIBE + slug + "/unsubscribe",this.options).map((response:Response) => response.json());
   }
   isSubscribedTo(slug){
-    return this.http2.get(URL_WEBSITE_SUSCRIBE + "/" + slug + "/isSubscribedTo",this.options).map((response:Response) => response.json());
+    return this.http2.get(URL_WEBSITE_IS_SUSCRIBED + slug + "/isSubscribedTo",this.options).map((response:Response) => response.json());
   }
 
 

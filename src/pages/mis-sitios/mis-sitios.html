@@ -15,7 +15,8 @@
     <h4>{{website.name}}</h4>
     <p>{{website.description | pipesNullfields}}</p>
     <p>{{website.phone | pipesNullfields}}</p>
-    <button ion-button color="third" (click)="subscriteTowebsite(website.name)">SUBSCRIBIRSE</button>
+    <button *ngIf="mostrarBtn" ion-button color="third" (click)="subscribeTowebsite(website.username)">SUBSCRIBIRSE</button>
+    <button *ngIf="!mostrarBtn" ion-button color="apagao" (click)="unSubscribeTowebsite(website.username)">SUSCRITO</button>
   </ion-toolbar>
 
 
