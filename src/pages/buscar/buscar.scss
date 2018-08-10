@@ -5,6 +5,21 @@ page-buscar {
     @import "../assets/css/nouislider.min.css";
 
 
+    
+    ul {
+        padding: 0px;
+      
+        &.rating li {
+          padding: 2px 2px !important;
+          background: none;
+          color: #ffb400;
+      
+          ion-icon {
+            font-size: 18px;
+          }
+        }
+      }
+
     app-card{
       width: calc(50% - 6px);
       margin: 12px 0 0 0;

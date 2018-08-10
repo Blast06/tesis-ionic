@@ -21,15 +21,28 @@ page-home {
 
     @import "./pages/buscar/buscar.scss";
 
+    .par{
+        height: 35px;
+        width: 90px;
+        margin-left: 22px;
+        
+    }
+
     ul {
-        padding: 2px;
+        padding: 1px;
+        
       
         &.rating li {
           padding: 1px 1px !important;
           background: none;
           color: #ffb400;
+          margin-bottom: 2px;
+          
           ion-icon {
             font-size: 18px;
+            
+
+            
           }
         }
       }
@@ -90,7 +103,8 @@ page-home {
     .det{
       position: absolute;
       bottom: 0;
-      width: 100%;
+      height: 80px;
+      width: 160px;
       background: rgba(66, 66, 66, .5);
       padding: 12px 5px 3px 3px;
       .col{

@@ -57,11 +57,11 @@
       <div class="det">
         <h4 no-margin>{{article.name | slice:0:5}}</h4>
         <p no-margin>{{article.price | currency:'RD$'}}</p>
-        <!-- <p no-margin *ngFor="let review of article.reviews; let i = index">
-          <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"
+        <p no-margin class="par">
+          <rating [(ngModel)]="article.rating" readOnly="true" max="5" emptyStarIconName="star-outline"  starIconName="star"
             nullable="false">
           </rating>
-        </p> -->
+        </p>
 
       </div>
     </ion-card>

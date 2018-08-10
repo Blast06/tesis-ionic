@@ -28,7 +28,7 @@
     <br>
 
     <div>
-      <ais-panel >
+      <ais-panel>
         <h6>Rating</h6>
         <ais-rating-menu attribute="rating" [max]="5">
         </ais-rating-menu>
@@ -51,20 +51,18 @@
           <div class="det">
             <h4 no-margin>{{hit.name | slice:0:5}}</h4>
             <p no-margin>{{hit.price | currency:'RD$'}}</p>
+            <p no-margin>
+              <rating [(ngModel)]="hit.rating" readOnly="true" max="5" emptyStarIconName="star-outline"  starIconName="star"
+                nullable="false">
+              </rating>
+            </p>
           </div>
         </ion-card>
       </ng-template>
     </ais-hits>
-
-
-
     <!-- <ais-pagination [totalPages]="20"></ais-pagination> -->
 
   </ais-instantsearch>
-
-
-
-
 
 
 </ion-content>
