@@ -78,28 +78,12 @@ export class HomePage implements OnInit {
     this.headerbg = document.getElementsByClassName("header_home")[length];
   }
 
-  // ionViewWillEnter() {
 
-  //   if (this.token) {
-  //     this.websiteService.getArticlesFromSubscribed().subscribe((data) => {
-  //       console.log(data.data);
-  //       this.articlesFromSubscribed = data.data;
-
-  //       if (this.articlesFromSubscribed.length < 1) {
-  //         this.articlesFromSubscribed = null;
-
-  //       }
-
-  //     });
-
-  //     this.getTotalItemsCart();
-
-  //   }
-
-  // }
 
 
   ionViewWillEnter() {
+    this._us.cargar_storage();
+        
     console.log("ionViewWillEnter");
     this.token = this._us.token;
     if (this.token) {
@@ -113,10 +97,9 @@ export class HomePage implements OnInit {
         this.carritoService.carritoBadgeCounter = data.data.cart_article.length;
 
       });
-
-
-
     }
+
+
 
 
   }
@@ -246,7 +229,6 @@ export class HomePage implements OnInit {
 
   cerrarSesion() {
     this._us.cerrar_sesion();
-    
     this.articlesFromSubscribed = null;
     this.carritoService.carritoBadgeCounter = 0;
   }

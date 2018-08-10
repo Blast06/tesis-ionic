@@ -53,7 +53,7 @@ export class CreararticuloPage {
 
     this.todo = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
-      price: ['', [Validators.required], [Validators.pattern('[a-zA-Z0-9]*')]],
+      price: ['', [Validators.required,Validators.pattern('[0-9]*')]],
       stock: ['', [Validators.required]],
       sub_category_id: ['', [Validators.required]],
       status: ['', [Validators.required]],

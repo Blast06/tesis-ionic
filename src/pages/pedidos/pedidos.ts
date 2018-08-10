@@ -20,7 +20,8 @@ export class PedidosPage {
 
   orders: any[] = [];
   order: any[] = [];
-  show:boolean = true;
+  show: boolean = true;
+  show2: boolean = false;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -28,9 +29,19 @@ export class PedidosPage {
     public usuarioService: UsuarioProvider,
   ) {
 
-    
 
 
+
+
+  }
+
+  ionViewDidLeave() {
+    console.log('ionViewDidLeave PedidosPage');
+    if (!this.usuarioService.token) {
+
+      this.show2 = true;
+    }
+    this.show2 = true;
 
   }
 
@@ -39,23 +50,8 @@ export class PedidosPage {
 
   }
 
-  
-
-  ngOnInit() {
-    if (this.usuarioService.token) {
-      this.carritoService.getOrders().subscribe((data) => {
-        console.log(data);
-        this.orders = data;
-        console.log(this.orders);
-        console.log(this.orders.length);
-        this.show = false;
-
-      });
-
-    }
 
 
-  }
 
   ionViewWillEnter() {
     console.log('ionViewWillEnter PedidosPage');
@@ -65,14 +61,16 @@ export class PedidosPage {
         this.orders = data;
         console.log(this.orders);
         console.log(this.orders);
+        this.show = false;
+        this.show2 = false;
 
       });
 
+
+    } else {
+      this.show = false;
+      this.show2 = true;
     }
-
-
-
-
   }
 
   verDetalles(order) {

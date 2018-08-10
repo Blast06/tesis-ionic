@@ -1,3 +1,4 @@
+import { PedidosPage } from './../pages/pedidos/pedidos';
 import { BuscarSitiosPage } from './../pages/buscar-sitios/buscar-sitios';
 
 import { ToastController } from 'ionic-angular';
@@ -7,7 +8,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { RegistroPage, HomePage, TabsPage, LoginPage, PerfilPage, ConfiguracionPage, MensajesPage, MisSitiosPage, CreararticuloPage, CrearSitiosPage } from "../pages/index.paginas";
+import {  TabsPage, LoginPage, PerfilPage, CreararticuloPage, CrearSitiosPage } from "../pages/index.paginas";
 import { NetworkProvider, UsuarioProvider } from "../providers/index.services";
 
 
@@ -30,7 +31,8 @@ export class MyApp {
     public events: Events,
     public networkProvider: NetworkProvider,
     public checkNetwork: Network,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    public usuarioService:UsuarioProvider) {
 
 
 
@@ -94,6 +96,8 @@ export class MyApp {
 
       this.networkProvider.initializeNetworkEvents();
       this.isConnected();
+      this.usuarioService.cargar_storage();
+      
 
 
     });
@@ -113,6 +117,7 @@ export class MyApp {
         { title: 'Crear Sitio', component: CrearSitiosPage },
         { title: 'Crear Articulo', component: CreararticuloPage },
         { title: 'Buscar Sitios', component: BuscarSitiosPage },
+        { title: 'Ordenes', component: PedidosPage },
 
       ];
 

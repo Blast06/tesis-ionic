@@ -156,7 +156,7 @@ export class UsuarioProvider {
 
     cerrar_sesion() {
         this.presentLoadingDefault('Cerrando sesion..');
-        // this.token = null;
+        this.token = null;
         // this.id_usuario = null;
 
         //borrar storage
@@ -169,9 +169,11 @@ export class UsuarioProvider {
 
         if (this.platform.is("cordova")) {
             //dispositivo
+            this.storage.remove('token');
             this.storage.clear();
         } else {
             //computadora
+            localStorage.removeItem('token');
             localStorage.clear();
 
         }
