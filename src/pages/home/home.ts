@@ -31,7 +31,7 @@ export class HomePage implements OnInit {
   articuloPage = ArticuloPage;
   cartItemsCounter: number = 0;
 
-  token: boolean = this._us.token_activo();
+  token = this._us.token;
   show: boolean = false;
 
   buscarSitios = BuscarSitiosPage;
@@ -101,6 +101,7 @@ export class HomePage implements OnInit {
 
   ionViewWillEnter() {
     console.log("ionViewWillEnter");
+    this.token = this._us.token;
     if (this.token) {
       this.websiteService.getArticlesFromSubscribed().subscribe((data) => {
         console.log(data.data);
@@ -245,6 +246,7 @@ export class HomePage implements OnInit {
 
   cerrarSesion() {
     this._us.cerrar_sesion();
+    
     this.articlesFromSubscribed = null;
     this.carritoService.carritoBadgeCounter = 0;
   }

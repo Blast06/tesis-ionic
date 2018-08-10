@@ -2,7 +2,7 @@
 import { HTTP } from '@ionic-native/http';
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import 'rxjs/add/operator/catch';
-import {  HttpClient,  HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 
 import { URL_SIGNUP, URL_LOGIN, URL_SHOW_USER, URL_SHOPPING_CART } from './../URLs/url.servicios';
@@ -75,7 +75,7 @@ export class UsuarioProvider {
         private toastCtrl: ToastController,
         public events: Events,
         public loadingCtrl: LoadingController,
-        public http3: HTTP,) {
+        public http3: HTTP, ) {
         this.cargar_storage();
 
 
@@ -122,7 +122,7 @@ export class UsuarioProvider {
 
 
         return this.http2.post(URL_LOGIN, body, this.options);
-       
+
 
     }
 
@@ -156,12 +156,25 @@ export class UsuarioProvider {
 
     cerrar_sesion() {
         this.presentLoadingDefault('Cerrando sesion..');
-        this.token = null;
-        this.id_usuario = null;
+        // this.token = null;
+        // this.id_usuario = null;
 
-        //guardar storage
-        this.guardar_storage();
+        //borrar storage
+        this.borrar_storage();
         this.events.publish('user:menu');
+
+    }
+
+    public borrar_storage() {
+
+        if (this.platform.is("cordova")) {
+            //dispositivo
+            this.storage.clear();
+        } else {
+            //computadora
+            localStorage.clear();
+
+        }
 
     }
 

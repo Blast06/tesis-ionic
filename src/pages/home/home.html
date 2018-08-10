@@ -34,14 +34,14 @@
 
   <div class="products" *ngIf="!show && _us.token_activo()">
     <p>No sigues a ningun sitio?, Busca algunos y suscribete!</p>
-    <button ion-button style="justify-content: center" [navPush]="buscarSitios">Buscar sitios</button>
+    <button ion-button style="text-align: center;" [navPush]="buscarSitios">Buscar sitios</button>
   </div>
 
 
 
   <div class="products" *ngIf="!_us.token_activo()">
     <p>Inicia sesion para una mejor experiencia de usuario</p>
-    <button ion-button style="justify-content: center" (click)="goToSignIn()"> ENTRAR</button>
+    <button ion-button style="text-align: center;" (click)="goToSignIn()"> ENTRAR</button>
 
   </div>
 

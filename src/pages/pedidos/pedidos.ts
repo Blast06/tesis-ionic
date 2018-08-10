@@ -28,6 +28,8 @@ export class PedidosPage {
     public usuarioService: UsuarioProvider,
   ) {
 
+    
+
 
 
   }
@@ -37,13 +39,15 @@ export class PedidosPage {
 
   }
 
+  
+
   ngOnInit() {
     if (this.usuarioService.token) {
       this.carritoService.getOrders().subscribe((data) => {
         console.log(data);
         this.orders = data;
         console.log(this.orders);
-        console.log(this.orders);
+        console.log(this.orders.length);
         this.show = false;
 
       });

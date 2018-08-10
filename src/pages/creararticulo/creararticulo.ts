@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, AlertController } from 'ionic-angular';
 import { User } from '../../app/models/user';
 import { Storage } from "@ionic/storage";
 import { UsuarioProvider, ArticlesProvider } from '../../providers/index.services';
@@ -22,7 +22,7 @@ import { CrearSitiosPage } from '../crear-sitios/crear-sitios';
 })
 export class CreararticuloPage {
 
-  
+
 
   public currentNumber = 0;
 
@@ -35,11 +35,11 @@ export class CreararticuloPage {
 
   title: string;
   price: number;
-  estatus:any;
-  
+  estatus: any;
+
   public todo: FormGroup;
 
- 
+
 
 
   constructor(public navCtrl: NavController,
@@ -48,15 +48,16 @@ export class CreararticuloPage {
     public platform: Platform,
     public _us: UsuarioProvider,
     public fb: FormBuilder,
-    public articleService:ArticlesProvider,) {
+    public articleService: ArticlesProvider,
+    public alertCtrl:AlertController, ) {
 
     this.todo = this.fb.group({
-      name: ['', [Validators.required,Validators.minLength(4),Validators.maxLength(30)]],
-      price: ['', [Validators.required],[Validators.pattern('[a-zA-Z0-9]*')]],
-      stock: ['',[Validators.required]],
-      sub_category_id:['', [Validators.required]],
-      status: ['',[Validators.required]],
-      description: ['', [Validators.required,Validators.minLength(20)]],
+      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
+      price: ['', [Validators.required], [Validators.pattern('[a-zA-Z0-9]*')]],
+      stock: ['', [Validators.required]],
+      sub_category_id: ['', [Validators.required]],
+      status: ['', [Validators.required]],
+      description: ['', [Validators.required, Validators.minLength(20)]],
     });
 
 
@@ -85,10 +86,10 @@ export class CreararticuloPage {
     console.log(this.todo.value);
     console.log(this.todo.value.name);
 
-    
+
   }
 
-  
+
 
 
 
@@ -99,23 +100,39 @@ export class CreararticuloPage {
   }
 
 
-  createArticle(){
+  createArticle() {
     console.log(this.website_slug);
-    this.articleService.createArticle(this.todo.value,this.website_slug).subscribe((data) =>{
+    this.articleService.createArticle(this.todo.value, this.website_slug).subscribe((data) => {
       console.log(data);
-    });
+      this.presentAlert('Hecho', 'Tu articulo ha sido creado');
+    },
+      (error: any) => {
+        console.log(error);
+        this.presentAlert('Error', 'Revisa tu plan para ver que ha pasado');
+      }
+
+    );
   }
 
-  
+  presentAlert(ms1, ms2) {
+    let alert = this.alertCtrl.create({
+      title: ms1,
+      subTitle: ms2,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 
 
- 
 
-  crearSitio(){
+
+
+
+  crearSitio() {
     this.navCtrl.push(CrearSitiosPage);
   }
 
-  
+
 
 
   ionViewDidLoad() {

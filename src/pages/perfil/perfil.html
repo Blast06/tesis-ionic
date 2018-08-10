@@ -16,6 +16,7 @@
     <p>{{user.email}}</p>
   </ion-toolbar>
 
+
   <ion-segment [(ngModel)]="tabs" *ngIf="user">
     <ion-segment-button value="Likes" (click)="selectTab(0)" value="0" text-uppercase>
       Favoritos
@@ -25,6 +26,8 @@
     </ion-segment-button>
   </ion-segment>
 </ion-header>
+
+
 
 
 <ion-content (ionScroll)="scrollingFun($event)" [ngSwitch]="tabs">
@@ -52,7 +55,7 @@
 
     </ion-slide>
     <ion-slide (ionSlideWillChange)="changeWillSlide($event)">
-        <div *ngIf="websites.length < 1">No tienes sitios</div>
+      <div *ngIf="websites.length < 1">No tienes sitios</div>
       <ion-item class="cart-list" no-lines *ngFor="let website of websites">
         <ion-thumbnail item-left>
           <img src="assets/imgs/cart-img.png" (click)="goTowebsite(website.username)">

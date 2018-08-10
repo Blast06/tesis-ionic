@@ -29,7 +29,6 @@ export class CarritoProvider {
   public token: any;
 
   constructor(public http: HttpClient,
-    private alertCtrl: AlertController,
     private platform: Platform,
     private storage: Storage,
     private usuarioService: UsuarioProvider,
@@ -130,10 +129,10 @@ export class CarritoProvider {
 
   }
 
-  makeOrder(orders1=[]) {
+  makeOrder(orders1 = []) {
     console.log("TOKEN EN MAKEORDER - CARRITOSERVICE.TS");
     console.log(this.token);
-    return this.http2.post(URL_MAKE_ORDER,{orders:orders1}, this.options).map((response: Response) => response.json());
+    return this.http2.post(URL_MAKE_ORDER, { orders: orders1 }, this.options).map((response: Response) => response.json());
   }
 
   getOrders() {
@@ -143,65 +142,49 @@ export class CarritoProvider {
   }
 
 
-  private guardar_storage() {
-
-    if (this.platform.is("cordova")) {
-      //dispositivo
-      this.storage.set('items', this.items);
-
-    } else {
-      //computadora
-
-      localStorage.setItem("items", JSON.stringify(this.items));
-
-    }
-
-
-  }
 
 
   cargar_storage() {
 
+
+
     let promesa = new Promise((resolve, reject) => {
 
-
       if (this.platform.is("cordova")) {
-        //dispositivo
+        // dispositivo
         this.storage.ready()
           .then(() => {
 
-            this.storage.get("items")
-              .then(items => {
-                if (items) {
-                  this.items = items;
-
+            this.storage.get("token")
+              .then(token => {
+                if (token) {
+                  this.token = token;
                 }
-                resolve();
-              });
+              })
 
-          });
+          })
 
 
       } else {
-        //computadora
+        // computadora
+        if (localStorage.getItem("token")) {
+          //Existe items en el localstorage
+          this.token = localStorage.getItem("token");
+          
 
-        //existe item en el localstorage
-        if (localStorage.getItem("items")) {
-
-          this.items = JSON.parse(localStorage.getItem("items"));
         }
 
         resolve();
+
       }
 
     });
 
     return promesa;
 
-
   }
 
-  
+
 
 
 

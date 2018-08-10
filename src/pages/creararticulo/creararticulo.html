@@ -22,8 +22,7 @@
     <ion-spinner name="circles"></ion-spinner>
   </div>
 
-  <h5 *ngIf="!websites">No tienes sitios?</h5>
-  <p (click)="crearSitio()">
+  <p (click)="crearSitio()" *ngIf="websites.length < 1">
     <b>
       No tienes sitios? Crea uno aqui
     </b>

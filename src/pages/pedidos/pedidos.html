@@ -7,17 +7,30 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title mode="ios">Pedidos</ion-title>
+    <ion-title mode="ios">Ordenes</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-<div *ngIf="show" class="spinner-container">
-  <ion-spinner name="circles"></ion-spinner>
-</div>
+
 
 
 <ion-content padding>
+
+  
+<div *ngIf="show" class="spinner-container">
+    <ion-spinner name="circles"></ion-spinner>
+  </div>
+
+
+  <div text-center class="carrito_vacio" *ngIf="orders.length == 0">
+
+    <ion-icon name="appstore" class="icon-5x"></ion-icon>
+    <br> No tienes ordenes
+  </div>
+
+
+
   <ion-list>
     <ion-item *ngFor="let order of orders">
       <ion-thumbnail item-start>

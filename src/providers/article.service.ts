@@ -105,15 +105,39 @@ export class ArticlesProvider {
 
 
   getToken() {
-    if (this.platform.is("cordova")) {
-      this.storage.get('token').then((t) => {
-        this.token = t;
-      })
+    let promesa = new Promise((resolve, reject) => {
 
-    }
-    else {
-      this.token = localStorage.getItem("token");
-    }
+      if (this.platform.is("cordova")) {
+        // dispositivo
+        this.storage.ready()
+          .then(() => {
+
+            this.storage.get("token")
+              .then(token => {
+                if (token) {
+                  this.token = token;
+                }
+              })
+
+          })
+
+
+      } else {
+        // computadora
+        if (localStorage.getItem("token")) {
+          //Existe items en el localstorage
+          this.token = localStorage.getItem("token");
+
+
+        }
+
+        resolve();
+
+      }
+
+    });
+
+    return promesa;
 
   }
 

@@ -72,7 +72,7 @@ export class WebsiteProvider {
 
     }
 
-    return this.http2.post(URL_CREATE_WEBSITE, body, this.options).map((response: Response) => response.json());
+    return this.http2.post(URL_CREATE_WEBSITE, body, this.options);
 
   }
 

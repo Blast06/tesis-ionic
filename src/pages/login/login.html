@@ -10,7 +10,7 @@
                         <ion-input [(ngModel)]="email" type="text" formControlName="email"></ion-input>
                     </ion-item>
                     <ion-item *ngIf="!loginForm.controls.email.valid">
-                        <p>correo no valido</p>
+                        <p class="tix">correo no valido</p>
 
                     </ion-item>
 
@@ -20,7 +20,7 @@
                         <ion-input [(ngModel)]="password" formControlName="password" type="password"></ion-input>
                     </ion-item>
                     <ion-item *ngIf="!loginForm.controls.password.valid">
-                        <p>minimo 6 caracteres</p>
+                        <p class="tix">minimo 6 caracteres</p>
 
                     </ion-item>
                 </ion-list>

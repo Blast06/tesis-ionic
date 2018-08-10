@@ -6,6 +6,7 @@ import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
 import { UsuarioProvider } from '../../providers/index.services';
 import { User } from '../../app/models/user';
+import { Observable } from '../../../node_modules/rxjs';
 
 
 
@@ -32,7 +33,7 @@ export class CrearSitiosPage {
     public storage: Storage,
     public _us: UsuarioProvider,
     public platform: Platform,
-    public alertCtrl:AlertController, ) {
+    public alertCtrl: AlertController, ) {
 
 
 
@@ -54,19 +55,28 @@ export class CrearSitiosPage {
 
 
     //hacer la peticion post para crear el sitio
-    this.websiteService.crear_sitio(this.name, this.username).subscribe((data) => {
+    this.websiteService.crear_sitio(this.name, this.username).subscribe((data: any) => {
+      console.log(data);
+      this.presentAlert('Hecho', 'Has creado un sitio');
+    },
+      //catch errors
+      (error: any) => {
+        console.log(error);
+        this.presentAlert('ERROR', 'No has podido crear el sitio, revisa tu tipo de plan');
+        return Observable.throw(error);
 
-    });
-    this.presentAlert();
+
+      });
+    
 
 
 
   }
 
-  presentAlert() {
+  presentAlert(ms1,ms2) {
     let alert = this.alertCtrl.create({
-      title: 'HECHO',
-      subTitle: 'Sitio creado!',
+      title: ms1,
+      subTitle: ms2,
       buttons: ['OK']
     });
     alert.present();

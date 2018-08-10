@@ -3,6 +3,11 @@ page-login{
         padding: 16px !important;
         margin-bottom: 0 !important;
     }
+
+    .tix{
+        color: beige;
+
+    }
 }
 
 .app-bg{
@@ -38,6 +43,7 @@ page-login{
     h4{
         font-size: 1.2rem;
         color: color($colors,light);
+        font-style: oblique;
     }
     .title-form{
         font-size: 2rem;
