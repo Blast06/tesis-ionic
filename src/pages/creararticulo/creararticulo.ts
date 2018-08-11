@@ -1,3 +1,4 @@
+import { PorCategoriaPage } from './../por-categoria/por-categoria';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, AlertController } from 'ionic-angular';
 import { User } from '../../app/models/user';
@@ -85,8 +86,7 @@ export class CreararticuloPage {
   logForm() {
     console.log(this.todo.value);
     console.log(this.todo.value.name);
-
-
+    console.log(this.todo.value.name);
   }
 
 
@@ -102,7 +102,8 @@ export class CreararticuloPage {
 
   createArticle() {
     console.log(this.website_slug);
-    this.articleService.createArticle(this.todo.value, this.website_slug).subscribe((data) => {
+    this.articleService.createArticle(this.todo.value.name,this.todo.value.description,
+      this.todo.value.price,this.todo.value.status,this.todo.value.stock,this.todo.value.sub_category_id, this.website_slug).subscribe((data) => {
       console.log(data);
       this.presentAlert('Hecho', 'Tu articulo ha sido creado');
     },

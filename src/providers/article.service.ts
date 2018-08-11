@@ -51,8 +51,9 @@ export class ArticlesProvider {
 
 
     //config de headers para la peticion
+    // this.headers.append("Accept", "Application/json");
+    // this.headers.append("Content-Type", "application/x-www-form-urlencoded");
     this.headers.append("Accept", "Application/json");
-    this.headers.append("Content-Type", "application/x-www-form-urlencoded");
     this.headers.append("Authorization", "Bearer " + this.token);
     this.options = new RequestOptions({ headers: this.headers });
   }
@@ -92,11 +93,23 @@ export class ArticlesProvider {
     return this.http.get(URL_ARTICLE_ISFAVORITED + slug + "/isFavoritedTo", this.options).map((response: Response) => response.json());
   }
 
-  createArticle(parameters, websiteslug) {
-    let body2 = parameters;
+  createArticle(name,description,price,status,stock,subcategory, websiteslug) {
+    let body2 = {
+      name: name,
+      description: description,
+      price:price,
+      status:status,
+      stock:stock,
+      sub_category_id:subcategory
+
+    }
     this.getToken();
     console.log(this.token);
-    return this.http2.post(URL_CREATE_ARTICLE + websiteslug + "/articles", body2, this.options);
+
+    // return this.http2.post(URL_CREATE_ARTICLE + websiteslug + "/articles", body2, this.options);
+
+    return this.http2.post(URL_CREATE_ARTICLE + websiteslug + "/articles" ,body2, {headers:
+       {'Accept':'Application/json', 'Authorization': 'Bearer ' + this.token} });
   }
 
 

@@ -44,9 +44,9 @@ export class PerfilPage {
 
   articuloPage = ArticuloPage;
 
-  slug:any
+  slug: any
 
-  hideFavoriteBtn:boolean = false;
+  hideFavoriteBtn: boolean = false;
 
 
 
@@ -100,6 +100,14 @@ export class PerfilPage {
 
 
   }
+
+  ionViewWillEnter(){
+    console.log("ionViewWillEnter");
+    this.getFavorites();
+
+  }
+
+
 
   goTowebsite(username) {
     this.username = username
@@ -156,6 +164,8 @@ export class PerfilPage {
     this.header = document.getElementsByClassName("myHeader")[length];
     // var lengthToolbar=document.getElementsByClassName("toolbar-background-md").length -1;
     // this.headerHeight = this.header.clientHeight;
+    
+
   }
 
   selectTab(index) {

@@ -15,54 +15,52 @@
     <h4>{{user.name}}</h4>
     <p>{{user.email}}</p>
   </ion-toolbar>
-
-
+  
+  
   <ion-segment [(ngModel)]="tabs" *ngIf="user">
     <ion-segment-button value="Likes" (click)="selectTab(0)" value="0" text-uppercase>
-      Favoritos
-    </ion-segment-button>
-    <ion-segment-button value="notification" (click)="selectTab(1)" value="1" text-uppercase>
-      Mis sitios
-    </ion-segment-button>
-  </ion-segment>
+    Favoritos
+  </ion-segment-button>
+  <ion-segment-button value="notification" (click)="selectTab(1)" value="1" text-uppercase>
+    Mis sitios
+  </ion-segment-button>
+</ion-segment>
 </ion-header>
 
 
 
 
-<ion-content (ionScroll)="scrollingFun($event)" [ngSwitch]="tabs">
+<ion-content (ionScroll)="scrollingFun($event)" [ngSwitch]="tabs" padding >
+
+
   <ion-slides class="app-slider" #pageSlider>
     <ion-slide (ionSlideWillChange)="changeWillSlide($event)">
-      <!-- <div class="sub-list">
-          </div>         -->
       <div *ngIf="favorites.length < 1">No tienes favoritos</div>
 
-      <div *ngIf="favorites" class="customMargin">
+      <!-- <div *ngIf="favorites"> -->
         <ion-card class="app-card" *ngFor="let article of favorites">
           <img src="http://178.128.183.171/{{article.image_path}}" (click)="goToSingleArticle(article.slug)" />
           <div class="det">
             <h4 no-margin>{{article.name | slice:0:5}}</h4>
             <p no-margin>{{article.price | currency:'RD$'}}</p>
-            <ion-grid no-padding>
-
-            </ion-grid>
           </div>
         </ion-card>
-      </div>
-
-
-
-
+      <!-- </div> -->
     </ion-slide>
+
+
     <ion-slide (ionSlideWillChange)="changeWillSlide($event)">
       <div *ngIf="websites.length < 1">No tienes sitios</div>
       <ion-item class="cart-list" no-lines *ngFor="let website of websites">
         <ion-thumbnail item-left>
-          <img src="assets/imgs/cart-img.png" (click)="goTowebsite(website.username)">
+          <img src="{{website.image_path}}" (click)="goTowebsite(website.username)">
         </ion-thumbnail>
         <h2>{{website.name}}</h2>
         <p>{{website.subscribed_users_count}} subscriptores</p>
       </ion-item>
     </ion-slide>
   </ion-slides>
+
+
+
 </ion-content>
