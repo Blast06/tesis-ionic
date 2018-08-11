@@ -96,7 +96,17 @@ export class MyApp {
 
       this.networkProvider.initializeNetworkEvents();
       this.isConnected();
-      this.usuarioService.cargar_storage();
+      this.usuarioService.cargar_storage().then((live) =>{
+        
+
+        if (live) {
+          this.actualizar_menu();
+          
+        }else{
+
+        }
+      });
+      this.splashScreen.hide();
       
 
 

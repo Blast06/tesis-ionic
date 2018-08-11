@@ -1,3 +1,4 @@
+import { Platform } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { UsuarioProvider } from './../../providers/index.services';
 
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, Events } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/catch';
+import { Storage } from "@ionic/storage";
 
 
 
@@ -29,6 +31,7 @@ export class LoginPage {
 
     error: any;
     data: any;
+    token: any;
 
 
     constructor(public fb: FormBuilder,
@@ -36,7 +39,9 @@ export class LoginPage {
         private usuarioService: UsuarioProvider,
         private viewCtrl: ViewController,
         public events: Events,
-        public alertCtrl: AlertController, ) {
+        public alertCtrl: AlertController,
+        public storage:Storage,
+        public platform:Platform, ) {
 
 
         this.loginForm = fb.group({
@@ -44,6 +49,29 @@ export class LoginPage {
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
 
+
+    }
+
+    guardar_storage() {
+
+        if (this.platform.is("cordova")) {
+            //dispositivo
+            this.storage.set('token', this.token);
+            
+        } else {
+            //computadora
+            if (this.token) {
+
+                localStorage.setItem('token', this.token);
+                
+
+            } else {
+                localStorage.removeItem("token");
+                
+
+            }
+
+        }
 
     }
 
@@ -57,7 +85,9 @@ export class LoginPage {
                 this.data = data;
                 console.log(this.data);
                 this.usuarioService.token = data.access_token;
-                this.usuarioService.guardar_storage();
+                this.token = data.access_token;
+                // this.usuarioService.guardar_storage();
+                this.guardar_storage()
                 this.usuarioService.presentLoadingDefault('Iniciando sesion..');
                 this.events.publish('user:menu');
                 this.viewCtrl.dismiss(true);

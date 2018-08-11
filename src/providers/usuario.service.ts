@@ -1,5 +1,5 @@
 
-import { HTTP } from '@ionic-native/http';
+//http
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import 'rxjs/add/operator/catch';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -12,7 +12,7 @@ import { URL_SIGNUP, URL_LOGIN, URL_SHOW_USER, URL_SHOPPING_CART } from './../UR
 import { Injectable } from "@angular/core";
 
 
-
+//plugins misc
 import { Storage } from "@ionic/storage";
 import { AlertController, Platform, ToastController, Events, LoadingController } from "ionic-angular";
 import { FormGroup } from '@angular/forms';
@@ -74,8 +74,7 @@ export class UsuarioProvider {
         private http2: HttpClient,
         private toastCtrl: ToastController,
         public events: Events,
-        public loadingCtrl: LoadingController,
-        public http3: HTTP, ) {
+        public loadingCtrl: LoadingController, ) {
         this.cargar_storage();
 
 
@@ -211,25 +210,37 @@ export class UsuarioProvider {
 
             if (this.platform.is("cordova")) {
                 // dispositivo
-                this.storage.ready()
-                    .then(() => {
+                // this.storage.ready()
+                //     .then(() => {
 
-                        this.storage.get("token")
-                            .then(token => {
-                                if (token) {
-                                    this.token = token;
-                                }
-                            })
+                //         this.storage.get("token")
+                //             .then(token => {
+                //                 if (token) {
+                //                     this.token = token;
+                //                 }
+                //             })
 
-                        this.storage.get("id_usuario")
-                            .then(id_usuario => {
-                                if (id_usuario) {
-                                    this.id_usuario = id_usuario;
-                                }
-                                resolve();
-                            })
+                //         this.storage.get("id_usuario")
+                //             .then(id_usuario => {
+                //                 if (id_usuario) {
+                //                     this.id_usuario = id_usuario;
+                //                 }
+                //                 resolve();
+                //             })
 
-                    })
+                //     })
+
+                this.storage.get('token').then(val =>{
+                    if (val) {
+                        this.token = val
+                        resolve(true);
+                        
+                    }else{
+                        resolve(false);
+                    }
+                });
+
+                
 
 
             } else {

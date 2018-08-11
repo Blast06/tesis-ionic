@@ -1,5 +1,5 @@
 import { UsuarioProvider } from './usuario.service';
-import { map } from 'rxjs/operators';
+
 import { LoadingController } from 'ionic-angular';
 import { URL_ARTICULOS, URL_SHOW_SINGLE_ARTICLE, URL_ARTICLE_FAVORITE, URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED, URL_CREATE_ARTICLE, URL_ARTICLE_UNFAVORITE, URL_ARTICLE_ISFAVORITED } from './../URLs/url.servicios';
 
@@ -11,9 +11,9 @@ import "rxjs/Rx";
 import { Observable } from 'rxjs/Observable';
 import { Headers, RequestOptions, Response } from '@angular/http';
 
-import { HTTP } from '@ionic-native/http';
+
 import { Platform } from 'ionic-angular'
-// import { map } from '../../node_modules/rxjs/operator/map';
+
 
 
 
@@ -36,7 +36,6 @@ export class ArticlesProvider {
 
   constructor(public http: Http,
     private http2: HttpClient,
-    private http3: HTTP,
     public loadingCtrl: LoadingController,
     public platform: Platform,
     public storage: Storage,
