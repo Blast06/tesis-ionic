@@ -26,7 +26,7 @@ import { SuperTabsModule } from 'ionic2-super-tabs';
 
 // storage
 import { IonicStorageModule } from '@ionic/storage';
-import { Storage } from "@ionic/storage";
+
 
 
 //servicios
@@ -135,15 +135,13 @@ import { PipesNullfieldsPipe } from '../pipes/pipes-nullfields/pipes-nullfields'
     UsuarioProvider,
     ArticlesProvider,
     CarritoProvider,
-    HTTP,
     InstantsearchProvider,
     NetworkProvider,
     Network,
     WebsiteProvider,
-    IonicStorageModule,
     NgAisInstantSearch,
     StarRatingConfigService,
-    Storage,
+    HTTP,
 
   ]
 })

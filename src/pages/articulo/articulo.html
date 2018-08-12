@@ -20,8 +20,6 @@
         <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" starIconName="star" nullable="false">
         </rating>
       </p>
-
-
       {{article.name}}
       <button color="grayColor" ion-button item-right>{{article.price | currency:'RD$'}}</button>
       <p>Stock: {{article.stock}}</p>
@@ -37,9 +35,7 @@
         {{article.description}}
       </p>
     </ion-card-content>
-
-
-
+    
     <ion-card-header>Cantidad: </ion-card-header>
     <p>{{cantidad}}</p>
     <ion-icon name="remove" (click)="decrement()"> </ion-icon>
@@ -61,19 +57,19 @@
   </button>
 
   <!-- articulos relacionados en scroll horizontal -->
-  <h5>Mas articulos similares </h5>
+  <h5 style="text-align: center;">Mas articulos similares </h5>
 
   <ion-slides (ionSlideDidChange)="slideChanged()" class="header-banner">
-    <ion-slide *ngFor="let relatedArticle of relatedArticles" >
-      <img src="http://178.128.183.171/{{relatedArticle.image_path}}" class="image" (click)="goToSingleArticle(relatedArticle.slug)"
-      />
-      <div class="det">
-        <h4 no-margin>{{relatedArticle.name | slice:0:12}}</h4>
-        <p no-margin>{{relatedArticle.price | currency:'RD$'}}</p>
-      </div>
-
-    </ion-slide>
+      <ion-slide *ngFor="let relatedArticle of relatedArticles">
+        <img src="http://178.128.183.171/{{relatedArticle.image_path}}" class="image" (click)="goToSingleArticle(relatedArticle.slug)"
+        />
+        <div class="det">
+          <h4 no-margin>{{relatedArticle.name | slice:0:12}}</h4>
+          <p no-margin>{{relatedArticle.price | currency:'RD$'}}</p>
+        </div>
+      </ion-slide>
   </ion-slides>
 
-  
+
+
 </ion-content>

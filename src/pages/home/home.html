@@ -32,16 +32,16 @@
 
   <img src="assets/imgs/new.png" class="new-collection" />
 
-  <div class="products" *ngIf="!show && _us.token_activo()">
+  <div class="products" *ngIf="!show && _us.token_activo()" style="text-align: center;">
     <p>No sigues a ningun sitio?, Busca algunos y suscribete!</p>
-    <button ion-button style="text-align: center;" [navPush]="buscarSitios">Buscar sitios</button>
+    <button ion-button  [navPush]="buscarSitios">Buscar sitios</button>
   </div>
 
 
 
-  <div class="products" *ngIf="!_us.token_activo()">
+  <div class="products" *ngIf="!_us.token_activo()" style="text-align: center;">
     <p>Inicia sesion para una mejor experiencia de usuario</p>
-    <button ion-button style="text-align: center;" (click)="goToSignIn()"> ENTRAR</button>
+    <button ion-button  (click)="goToSignIn()"> ENTRAR</button>
 
   </div>
 

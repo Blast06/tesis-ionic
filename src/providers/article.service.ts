@@ -46,7 +46,7 @@ export class ArticlesProvider {
     // sacar token del storage
     this.getToken();
 
-    console.log(this.token);
+    //console.log(this.token);
 
 
     //config de headers para la peticion

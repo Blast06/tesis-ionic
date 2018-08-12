@@ -6,8 +6,9 @@ page-articulo {
 		height:200px;
 		min-height:200px;
         background-color:primary;
-        justify-content: center;
-        text-align: center;
+        position: absolute;
+        left: 24%;
+        top: 130%;
 
     }
     @import "./pages/buscar/buscar.scss";
@@ -26,7 +27,7 @@ page-articulo {
 
        ion-slide {
 		height:200px;
-        justify-content: center;
+        
        }
 
     ion-spinner * {
@@ -88,6 +89,10 @@ page-articulo {
           width: 80px;
           height: 80px;
           border-radius: 5px;
+      }
+      .image{
+          width: 200px;
+          height: 200px;
       }
     
       .card-title {
@@ -196,10 +201,16 @@ page-articulo {
     margin-top: 12px;
 }
 
+.divi{
+    display: flex!important;
+     align-content: center!important;
+     align-items: center!important;
+}
+
 .det{
     position: absolute;
-    bottom: 0;
     width: 100%;
+    height: 30%;
     background: rgba(66, 66, 66, .5);
     padding: 12px 10px 3px 10px;
     .col{
