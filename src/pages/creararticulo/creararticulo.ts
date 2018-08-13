@@ -118,8 +118,9 @@ export class CreararticuloPage {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      saveToPhotoAlbum: false
+      encodingType:this.camera.EncodingType.JPEG,
+      mediaType:this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
     }
 
     this.camera.getPicture(options).then((imageData) => {
@@ -143,6 +144,7 @@ export class CreararticuloPage {
         console.log(data.data.id);
         this.article_id = data.data.id;
         console.log("Este es el id del articulo:", this.article_id);
+        this.uploadImg(this.article_id,this.mypic);
         this.presentAlert('Hecho', 'Tu articulo ha sido creado');
       },
         (error: any) => {
@@ -154,12 +156,14 @@ export class CreararticuloPage {
   }
 
   uploadImg(article_id, img) {
-    this.articleService.sendArticleImg(article_id, img).subscribe((data: any) => {
-      console.log(data);
+    let postData = new FormData();
+    postData.append('file', img);
+    this.articleService.sendArticleImg(article_id, postData).subscribe((data: any) => {
+      console.log("CONSOLELOG DEL DATA DE SUBIR IMAGEN",JSON.stringify(data));
     },
       (error: any) => {
-        console.log(error);
-      })
+        console.log("CONSOLE LOG DE ERROR SUBIR IMAGEN",JSON.stringify(error));
+      });
 
 
   }

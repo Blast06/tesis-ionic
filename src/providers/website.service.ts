@@ -116,6 +116,8 @@ export class WebsiteProvider {
             this.storage.get('token').then(val =>{
                 if (val) {
                     this.token = val
+                    this.headers.delete("Accept");
+                    this.headers.delete("Authorization");
                     this.headers.append("Accept", "Application/json");
                     this.headers.append("Authorization", "Bearer " + this.token);
                     this.options = new RequestOptions({ headers: this.headers });

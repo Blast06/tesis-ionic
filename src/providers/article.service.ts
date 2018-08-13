@@ -113,7 +113,7 @@ export class ArticlesProvider {
 
   sendArticleImg(website, img) {
 
-    return this.http2.post(URL_SEND_ARTICLE_IMAGE + website + "/image", img, {
+    return this.http2.post(URL_SEND_ARTICLE_IMAGE + website + "articles/images", img, {
       headers:
         { 'Accept': 'Application/json', 'Authorization': 'Bearer ' + this.token }
     });

@@ -39,7 +39,7 @@
   </div>
 
 
-  
+
 
 
   <form [formGroup]="todo" (ngSubmit)="logForm()" *ngIf="show">
@@ -52,16 +52,21 @@
       <ion-textarea formControlName="description"></ion-textarea>
     </ion-item>
 
+    <div style="text-align: center;">
 
-    <button ion-button (click)="getImage()">Subir foto</button>
-    <p><img src="{{mypic}}" ></p>
+      <button ion-button (click)="getImage()">Subir foto</button>
+      <p>
+        <img src="{{mypic}}">
+      </p>
+    </div>
 
 
     <h6>Categorias</h6>
 
-    <p>
+    <ion-title>
       <b>Electrónicos, computadoras y oficina</b>
-    </p>
+    </ion-title>
+
 
     <ion-row radio-group formControlName="sub_category_id">
       <ion-col>
@@ -94,11 +99,15 @@
       </ion-col>
       <br>
 
-      <p>
+
+      <ion-title>
         <b>
           Deportes y Aire libre
         </b>
-      </p>
+      </ion-title>
+
+
+
       <br>
       <ion-col>
         <ion-item>
@@ -116,12 +125,17 @@
       </ion-col>
       <br>
 
-      <p>
+
+      <ion-title>
         <b>
           Hogar, Jardín y Herramientas
         </b>
-      </p>
+      </ion-title>
+
+
       <br>
+
+
       <ion-col>
         <ion-item>
           <ion-icon name="muebles" item-start></ion-icon>
@@ -131,11 +145,14 @@
       </ion-col>
       <br>
 
-      <p>
+
+      <ion-title>
         <b>
           Comida y Víveres
         </b>
-      </p>
+      </ion-title>
+
+
       <br>
       <ion-col>
         <ion-item>
@@ -153,12 +170,13 @@
       </ion-col>
       <br>
 
-      <p>
+      <ion-title>
         <b>
-          Belleza y salud
+          Belleza, salud y relacionados
         </b>
-      </p>
-      <br>
+      </ion-title>
+
+
       <ion-col>
         <ion-item>
           <ion-icon name="mujeres" item-start></ion-icon>
@@ -189,11 +207,9 @@
       </ion-col>
       <br>
 
-      <p>
-        <b>
-          Ropa, calzado y joyeria
-        </b>
-      </p>
+      <ion-title>
+        <p> Ropa calzado y joyeria </p>
+      </ion-title>
       <br>
       <ion-col>
         <ion-item>
@@ -204,11 +220,13 @@
       </ion-col>
       <br>
 
-      <p>
+      <ion-title>
         <b>
           Automotriz e industrial
         </b>
-      </p>
+      </ion-title>
+
+
       <br>
       <ion-col>
         <ion-item>
@@ -219,11 +237,13 @@
       </ion-col>
       <br>
 
-      <p>
+      <ion-title>
         <b>
-          Servicios para el hogar, empresas y organizacion
+          Servicios para el hogar
         </b>
-      </p>
+      </ion-title>
+
+
       <br>
       <ion-col>
         <ion-item>
