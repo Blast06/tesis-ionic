@@ -34,7 +34,7 @@ export class PerfilPage {
   translateAmt: any;
   darkHeader: any;
 
-  user: User;
+  user:any[];
 
   websites: any[] = [];
   favorites: any[] = [];
@@ -71,20 +71,29 @@ export class PerfilPage {
   ionViewWillEnter() {
     console.log("ionViewWillEnter");
     this.getFavorites();
+    this.getUserInfo();
 
   }
 
   getUserInfo() {
     this._us.mostrar_usuario()
       .map(res => res.json())
-      .subscribe(data => {
-        let data2: any = JSON.stringify(data.data);
-        this.user = JSON.parse(data2);
-        console.log("USUARIOUSUARIO----------- USUARIO", JSON.parse(data.data));
-        console.log("SITIOS --------- SITIOS", JSON.parse(data.data.websites));
-        this.websites = this.user.websites;
+      .subscribe((data:any) => {
+        // let data2: any = JSON.stringify(data.data);
+        // this.user = JSON.parse(data2);
+        // console.log("USUARIOUSUARIO----------- USUARIO", JSON.parse(data.data));
+        // console.log("SITIOS --------- SITIOS", JSON.parse(data.data.websites));
+        // this.websites = this.user.websites;
 
-        console.log(JSON.stringify(data));
+        console.log("ESTO ES LO QUE HAY EN DATA MOSTRAR USUARIO EN PERFILTS")
+        console.log("CONSOLE SOLO CON DATA: ",data);
+        this.user = data.data;
+        console.log("CONSOLE IMPRIMIENDO EL DATA.DATA.WEBSITES: ",data.data.websites);
+        this.websites = data.data.websites;
+
+        console.log("CONSOLE IMPRIMIENDO EL DATA PERO EN JSONSTRINGFY: ",JSON.stringify(data));
+        console.log("CONSOLE IMPRIMIENDO EL USER PERO EN JSONSTRINGFY: ",JSON.stringify(this.user));
+        // console.log("CONSOLE IMPRIMIENDO EL DATA.DATA  EN JSONPARSE: ",JSON.parse(data.data));
       }
         , err => {
           console.log(JSON.stringify(err));
@@ -102,13 +111,14 @@ export class PerfilPage {
 
   getFavorites() {
     this._us.getFavorites().subscribe((data: any) => {
-      console.log("FAVORITOS ----------FAVORITOS", JSON.stringify(data.data.favorite_article));
-      let data2: any = JSON.stringify(data.data.favorite_article);
-      this.favorites = JSON.parse(data2);
-      console.log("EST ES EL FAVORITES CON JSON PARSE DEL DATA2", this.favorites);
-      console.log("EST ES EL DATA2  SOLO CON JSONSTRINFY", data2);
-      console.log("EST ES EL DATA2  CON JSONPARSE", JSON.parse(data2));
-      this.favorites = JSON.parse(data.data.favorite_article);
+      // console.log("FAVORITOS ----------FAVORITOS", JSON.stringify(data.data.favorite_article));
+      // let data2: any = JSON.stringify(data.data.favorite_article);
+      // this.favorites = JSON.parse(data2);
+      // console.log("EST ES EL FAVORITES CON JSON PARSE DEL DATA2", this.favorites);
+      // console.log("EST ES EL DATA2  SOLO CON JSONSTRINFY", data2);
+      // console.log("EST ES EL DATA2  CON JSONPARSE", JSON.parse(data2));
+      // this.favorites = JSON.parse(data.data.favorite_article);
+      this.favorites = data.data.favorite_article;
     });
 
   }

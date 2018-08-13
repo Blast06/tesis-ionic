@@ -22,14 +22,14 @@
     <ion-spinner name="circles"></ion-spinner>
   </div>
 
-  <p (click)="crearSitio()" *ngIf="websites.length < 1">
+  <p (click)="crearSitio()" *ngIf="!websites">
     <b>
       No tienes sitios? Crea uno aqui
     </b>
   </p>
 
   <!-- lista de sitios -->
-  <div *ngIf="!show">
+  <div *ngIf="!show && websites">
     <ion-card class="app-card" *ngFor="let website of websites">
       <img src="{{website.image_path}}" (click)="sendId(website.username)" />
       <div class="det">

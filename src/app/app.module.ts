@@ -1,3 +1,4 @@
+import { Camera } from '@ionic-native/camera';
 import { MainListPage } from './../pages/main-list/main-list';
 import { Network } from '@ionic-native/network';
 
@@ -141,6 +142,7 @@ import { PipesNullfieldsPipe } from '../pipes/pipes-nullfields/pipes-nullfields'
     WebsiteProvider,
     NgAisInstantSearch,
     StarRatingConfigService,
+    Camera,
     HTTP,
 
   ]

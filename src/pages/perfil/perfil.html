@@ -3,15 +3,15 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title text-capitalize *ngIf="user">Perfil</ion-title>
+    <ion-title text-capitalize >Perfil</ion-title>
   </ion-navbar>
 
   <!-- <div *ngIf="!user" class="spinner-container">
     <ion-spinner name="circles"></ion-spinner>
   </div> -->
 
-  <ion-toolbar color="primary" class="profile-head" text-center>
-    <img src="http://178.128.183.171/{{user.avatar}}" />
+  <ion-toolbar color="primary" class="profile-head" text-center *ngIf="user">
+    <img src="assets/imgs/01.png" />
     <h4>{{user.name}}</h4>
     <p>{{user.email}}</p>
   </ion-toolbar>

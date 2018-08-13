@@ -27,7 +27,7 @@ export class CreararticuloPage {
 
   public currentNumber = 0;
 
-  user: User;
+  user:any[] = [];
   websites: any[] = [];
   searching: any = false;
 
@@ -56,6 +56,8 @@ export class CreararticuloPage {
     public alertCtrl: AlertController,
     public camera: Camera, ) {
 
+    // this.getArticleInfo();
+
     this.todo = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       price: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(3), Validators.maxLength(7)]],
@@ -66,14 +68,26 @@ export class CreararticuloPage {
     });
 
 
+  }
 
+  ionViewWillEnter() {
+    console.log("IONVIEWWILLENTER");
+    this.getArticleInfo();
 
+  }
 
-    _us.mostrar_usuario().subscribe((data: any) => {
-      console.log(data);
+  getArticleInfo() {
+    this._us.mostrar_usuario().map(res => res.json())
+    .subscribe((data: any) => {
+      console.log("DATA MOSTRANDO TODO: ", JSON.stringify(data));
       this.user = data.data;
-      console.log(data.data.websites);
-      this.websites = this.user.websites;
+      console.log("DATA MOSTRANDO USER: ", this.user);
+      console.log("DATA MOSTRANDO LOS WEBSITES: ", JSON.stringify(data.data.websites));
+      this.websites = data.data.websites;
+
+      console.log("DATOS DEL USUARIO: ",this.user);
+      
+
 
 
       if (this.user) {
@@ -82,9 +96,6 @@ export class CreararticuloPage {
       }
 
     });
-
-
-
   }
 
   logForm() {
