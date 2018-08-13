@@ -38,8 +38,10 @@ interface APIErrorResponse extends HttpErrorResponse {
 
 
 const CLIENT_ID = "2";
+const CLIENT_ID2 = "2";
 
 const SECRET_KEY = "HdcAKuH3XhxzvZxyNI6isj9z1NT0AGdu0of4ufKK";
+const SECRET_KEY2 = "pDdRmq1acgBWJ1E0hARDkEEKU6NMzz98LtFAk92p";
 
 
 
@@ -120,7 +122,9 @@ export class UsuarioProvider {
         };
 
 
-        return this.http2.post(URL_LOGIN, body, this.options);
+        return this.http2.post(URL_LOGIN, body,{headers:
+            {'Accept':'Application/json', 'Content-Type': 'Application/json',
+            'Access-Control-Allow-Origin':'*'} });
 
 
     }
@@ -142,7 +146,8 @@ export class UsuarioProvider {
 
         console.log("token desde metodo mostar_usuario");
         console.log(this.token);
-        return this.http.get(URL_SHOW_USER, this.options2).map((response: Response) => response.json());
+        //return this.http.get(URL_SHOW_USER, this.options2).map((response: Response) => response.json());
+        return this.http.get(URL_SHOW_USER, this.options2);
 
     }
 
@@ -209,30 +214,16 @@ export class UsuarioProvider {
         let promesa = new Promise((resolve, reject) => {
 
             if (this.platform.is("cordova")) {
-                // dispositivo
-                // this.storage.ready()
-                //     .then(() => {
-
-                //         this.storage.get("token")
-                //             .then(token => {
-                //                 if (token) {
-                //                     this.token = token;
-                //                 }
-                //             })
-
-                //         this.storage.get("id_usuario")
-                //             .then(id_usuario => {
-                //                 if (id_usuario) {
-                //                     this.id_usuario = id_usuario;
-                //                 }
-                //                 resolve();
-                //             })
-
-                //     })
+              
 
                 this.storage.get('token').then(val =>{
                     if (val) {
                         this.token = val
+                        this.headers2.delete("Accept");
+                        this.headers2.delete("Authorization");
+                        this.headers2.append("Accept", "Application/json");
+                        this.headers2.append("Authorization", "Bearer " + this.token);
+                        this.options2 = new RequestOptions({ headers: this.headers2 });
                         resolve(true);
                         
                     }else{

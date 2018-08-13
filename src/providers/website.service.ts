@@ -47,7 +47,7 @@ export class WebsiteProvider {
 
     //config de headers para la peticion
     this.headers.append("Accept", "Application/json");
-    this.headers.append("Authorization", "Bearer " + this.token);
+    //this.headers.append("Authorization", "Bearer " + this.token);
     this.options = new RequestOptions({ headers: this.headers });
 
   }
@@ -58,6 +58,8 @@ export class WebsiteProvider {
   }
 
   getArticlesFromSubscribed() {
+
+    console.log('options', this.options);
 
     return this.http2.get(URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED, this.options).map((response: Response) => response.json());
 
@@ -107,5 +109,44 @@ export class WebsiteProvider {
     return this.http2.get("https://jsonplaceholder.typicode.com/posts").map((response: Response) => response.json());
 
   }
+
+  cargar_storage() {
+    let promesa = new Promise((resolve, reject) => {
+        if (this.platform.is("cordova")) {
+            this.storage.get('token').then(val =>{
+                if (val) {
+                    this.token = val
+                    this.headers.append("Accept", "Application/json");
+                    this.headers.append("Authorization", "Bearer " + this.token);
+                    this.options = new RequestOptions({ headers: this.headers });
+                    console.log('ok', this.options);
+                    resolve(true);
+                    
+                }else{
+                    resolve(false);
+                }
+            });
+
+            
+
+
+        } else {
+           if (localStorage.getItem("token")) {
+            //Existe items en el localstorage
+            this.token = localStorage.getItem("token");
+            this.headers.append("Authorization", "Bearer " + this.token);
+            this.options = new RequestOptions({ headers: this.headers });
+            console.log('ok', this.options);
+        }
+
+            resolve();
+
+        }
+
+    });
+
+    return promesa;
+
+}
 
 }

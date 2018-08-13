@@ -1,4 +1,4 @@
-import { PorCategoriaPage } from './../por-categoria/por-categoria';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, AlertController } from 'ionic-angular';
 import { User } from '../../app/models/user';
@@ -38,6 +38,9 @@ export class CreararticuloPage {
   price: number;
   estatus: any;
 
+  article_id: any;
+  mypic: any;
+
   public todo: FormGroup;
 
 
@@ -50,12 +53,13 @@ export class CreararticuloPage {
     public _us: UsuarioProvider,
     public fb: FormBuilder,
     public articleService: ArticlesProvider,
-    public alertCtrl:AlertController, ) {
+    public alertCtrl: AlertController,
+    public camera: Camera, ) {
 
     this.todo = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
-      price: ['', [Validators.required,Validators.pattern('[0-9]*')]],
-      stock: ['', [Validators.required]],
+      price: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(3), Validators.maxLength(7)]],
+      stock: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(4)]],
       sub_category_id: ['', [Validators.required]],
       status: ['', [Validators.required]],
       description: ['', [Validators.required, Validators.minLength(20)]],
@@ -99,20 +103,54 @@ export class CreararticuloPage {
     this.show = true;
   }
 
+  getImage() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum: false
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+
+      this.mypic = 'data:image/jpeg;base64,' + imageData;
+    },
+      (error) => {
+        console.log(error)
+      }
+    );
+
+
+  }
+
 
   createArticle() {
     console.log(this.website_slug);
-    this.articleService.createArticle(this.todo.value.name,this.todo.value.description,
-      this.todo.value.price,this.todo.value.status,this.todo.value.stock,this.todo.value.sub_category_id, this.website_slug).subscribe((data) => {
+    this.articleService.createArticle(this.todo.value.name, this.todo.value.description,
+      this.todo.value.price, this.todo.value.status, this.todo.value.stock, this.todo.value.sub_category_id, this.website_slug).subscribe((data: any) => {
+        console.log(data);
+        console.log(data.data.id);
+        this.article_id = data.data.id;
+        console.log("Este es el id del articulo:", this.article_id);
+        this.presentAlert('Hecho', 'Tu articulo ha sido creado');
+      },
+        (error: any) => {
+          console.log(error);
+          this.presentAlert('Error', 'Revisa tu plan para ver que ha pasado');
+        }
+
+      );
+  }
+
+  uploadImg(article_id, img) {
+    this.articleService.sendArticleImg(article_id, img).subscribe((data: any) => {
       console.log(data);
-      this.presentAlert('Hecho', 'Tu articulo ha sido creado');
     },
       (error: any) => {
         console.log(error);
-        this.presentAlert('Error', 'Revisa tu plan para ver que ha pasado');
-      }
+      })
 
-    );
+
   }
 
   presentAlert(ms1, ms2) {

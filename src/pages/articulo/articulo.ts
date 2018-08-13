@@ -7,7 +7,7 @@ import { ArticlesProvider } from '../../providers/index.services';
 
 
 
-@IonicPage()
+
 @Component({
   selector: 'page-articulo',
   templateUrl: 'articulo.html',

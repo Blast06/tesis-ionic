@@ -1,4 +1,5 @@
 page-profile {
+    
     ion-segment{
         margin-top: -2px;
         margin-bottom: 5px;
@@ -94,10 +95,32 @@ page-profile {
             color: color($colors,dark); 
         }
     }
-    
-    
-}
 
+    .customMargin{
+        margin-top: 10px;
+        
+    
+    }
+    
+    ion-scroll {
+        white-space: nowrap;
+        height: 500px;
+    }
+
+
+    // .slide-zoom{
+        
+    //     height: 90%;
+    // }
+
+  
+    
+    .padding2{
+        padding: 8px;
+
+    }
+
+}
 .spinner-container {
     width: 100%;
     text-align: center;
@@ -130,6 +153,7 @@ page-profile {
 }
 .myHeader{
     transition: all .05s ease-in-out;
+    position: relative;
 }
 .userInfo{
     .profile-head{
@@ -139,15 +163,10 @@ page-profile {
         }
     }
 
-.customMargin{
-    margin-top: 10px;
-    
-
-}
-
-ion-slide{
-    margin-top: 100px;
-}
+    .app-slider{
+        position: relative;
+        bottom: 0;
+    }
 
 
 }

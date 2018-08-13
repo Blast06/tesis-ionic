@@ -21,6 +21,7 @@
         "@angular/http": "5.2.10",
         "@angular/platform-browser": "5.2.10",
         "@angular/platform-browser-dynamic": "5.2.10",
+        "@ionic-native/camera": "^4.11.0",
         "@ionic-native/core": "4.7.0",
         "@ionic-native/http": "^4.7.0",
         "@ionic-native/network": "^4.9.0",
@@ -33,6 +34,7 @@
         "angular-instantsearch": "^2.0.3",
         "angular-star-rating": "^4.0.0-beta.3",
         "cordova-android": "6.4.0",
+        "cordova-plugin-camera": "^4.0.3",
         "cordova-plugin-device": "^2.0.2",
         "cordova-plugin-file": "^6.0.1",
         "cordova-plugin-http": "^1.2.0",
@@ -70,7 +72,8 @@
             "cordova-plugin-http": {},
             "cordova-sqlite-storage": {},
             "cordova-plugin-network-information": {},
-            "cordova-plugin-whitelist": {}
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-camera": {}
         },
         "platforms": [
             "android"

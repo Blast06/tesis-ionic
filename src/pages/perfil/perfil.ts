@@ -19,6 +19,7 @@ import { Storage } from "@ionic/storage";
 })
 export class PerfilPage {
 
+
   @ViewChild('pageSlider') pageSlider: Slides;
   @ViewChild('mySlider') slider: Slides;
   @ViewChild(Content) content: Content;
@@ -58,52 +59,37 @@ export class PerfilPage {
     public _us: UsuarioProvider,
     public platform: Platform,
     public storage: Storage) {
-
+    console.log('perfil');
     this.getFavorites();
+    this.getUserInfo();
 
 
-
-    _us.mostrar_usuario().subscribe((data: any) => {
-
-      console.log(data);
-      this.user = data.data;
-      console.log(data.data.websites);
-      this.websites = this.user.websites;
-
-      if (this.user) {
-        this.searching = false;
-
-      }
-
-
-      if (this.platform.is("cordova")) {
-        //dispositivo
-
-        this.storage.set('websites', JSON.stringify(this.websites));
-      } else {
-        //computadora
-        if (this.websites) {
-
-          localStorage.setItem('websites', JSON.stringify(this.websites));
-
-
-
-        } else {
-          localStorage.removeItem("websites");
-
-        }
-
-      }
-
-
-    });
 
 
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     console.log("ionViewWillEnter");
     this.getFavorites();
+
+  }
+
+  getUserInfo() {
+    this._us.mostrar_usuario()
+      .map(res => res.json())
+      .subscribe(data => {
+        let data2: any = JSON.stringify(data.data);
+        this.user = JSON.parse(data2);
+        console.log("USUARIOUSUARIO----------- USUARIO", JSON.parse(data.data));
+        console.log("SITIOS --------- SITIOS", JSON.parse(data.data.websites));
+        this.websites = this.user.websites;
+
+        console.log(JSON.stringify(data));
+      }
+        , err => {
+          console.log(JSON.stringify(err));
+        }
+      );
 
   }
 
@@ -116,9 +102,13 @@ export class PerfilPage {
 
   getFavorites() {
     this._us.getFavorites().subscribe((data: any) => {
-      console.log(data);
-      this.favorites = data.data.favorite_article;
-      console.log(this.favorites);
+      console.log("FAVORITOS ----------FAVORITOS", JSON.stringify(data.data.favorite_article));
+      let data2: any = JSON.stringify(data.data.favorite_article);
+      this.favorites = JSON.parse(data2);
+      console.log("EST ES EL FAVORITES CON JSON PARSE DEL DATA2", this.favorites);
+      console.log("EST ES EL DATA2  SOLO CON JSONSTRINFY", data2);
+      console.log("EST ES EL DATA2  CON JSONPARSE", JSON.parse(data2));
+      this.favorites = JSON.parse(data.data.favorite_article);
     });
 
   }
@@ -164,7 +154,7 @@ export class PerfilPage {
     this.header = document.getElementsByClassName("myHeader")[length];
     // var lengthToolbar=document.getElementsByClassName("toolbar-background-md").length -1;
     // this.headerHeight = this.header.clientHeight;
-    
+
 
   }
 

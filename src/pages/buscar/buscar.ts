@@ -1,10 +1,10 @@
+import { Injectable } from '@angular/core';
 import { ArticuloPage } from './../articulo/articulo';
 import { ArticlesProvider } from './../../providers/article.service';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, Slides, Platform } from 'ionic-angular';
 import { NgAisModule } from 'angular-instantsearch';
 import { SuperTabs } from '../../../node_modules/ionic2-super-tabs';
-
 
 
 @IonicPage()

@@ -48,7 +48,7 @@ export class CarritoProvider {
     this.headers.append("Accept", "Application/json");
     // this.headers.append("Content-Type", "undefined");
     // this.headers.append('Access-Control-Allow-Origin', '*');
-    this.headers.append("Authorization", "Bearer " + usuarioService.token);
+    this.headers.append("Authorization", "Bearer " + usuarioService.token); // esto hay que restablecerlo
     this.options = new RequestOptions({ headers: this.headers });
 
   }
@@ -145,33 +145,34 @@ export class CarritoProvider {
 
 
   cargar_storage() {
-
-
-
     let promesa = new Promise((resolve, reject) => {
-
       if (this.platform.is("cordova")) {
-        // dispositivo
-        this.storage.ready()
-          .then(() => {
+        this.storage.get('token').then(val => {
+          if (val) {
+            this.token = val
+            this.headers.delete("Accept");
+            this.headers.delete("Authorization");
+            this.headers.append("Accept", "Application/json");
+            this.headers.append("Authorization", "Bearer " + this.token);
+            this.options = new RequestOptions({ headers: this.headers });
+            console.log('ok', this.options);
+            resolve(true);
 
-            this.storage.get("token")
-              .then(token => {
-                if (token) {
-                  this.token = token;
-                }
-              })
+          } else {
+            resolve(false);
+          }
+        });
 
-          })
+
 
 
       } else {
-        // computadora
         if (localStorage.getItem("token")) {
           //Existe items en el localstorage
           this.token = localStorage.getItem("token");
-          
-
+          this.headers.append("Authorization", "Bearer " + this.token);
+          this.options = new RequestOptions({ headers: this.headers });
+          console.log('ok', this.options);
         }
 
         resolve();

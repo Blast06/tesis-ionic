@@ -1,7 +1,7 @@
 import { UsuarioProvider } from './usuario.service';
 
 import { LoadingController } from 'ionic-angular';
-import { URL_ARTICULOS, URL_SHOW_SINGLE_ARTICLE, URL_ARTICLE_FAVORITE, URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED, URL_CREATE_ARTICLE, URL_ARTICLE_UNFAVORITE, URL_ARTICLE_ISFAVORITED } from './../URLs/url.servicios';
+import { URL_ARTICULOS, URL_SHOW_SINGLE_ARTICLE, URL_ARTICLE_FAVORITE, URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED, URL_CREATE_ARTICLE, URL_ARTICLE_UNFAVORITE, URL_ARTICLE_ISFAVORITED, URL_SEND_ARTICLE_IMAGE } from './../URLs/url.servicios';
 
 import { Http } from '@angular/http';
 import { Storage } from "@ionic/storage";
@@ -44,7 +44,7 @@ export class ArticlesProvider {
     // this.token;
 
     // sacar token del storage
-    this.getToken();
+    this.cargar_storage();
 
     //console.log(this.token);
 
@@ -92,23 +92,32 @@ export class ArticlesProvider {
     return this.http.get(URL_ARTICLE_ISFAVORITED + slug + "/isFavoritedTo", this.options).map((response: Response) => response.json());
   }
 
-  createArticle(name,description,price,status,stock,subcategory, websiteslug) {
+  createArticle(name, description, price, status, stock, subcategory, websiteslug) {
     let body2 = {
       name: name,
       description: description,
-      price:price,
-      status:status,
-      stock:stock,
-      sub_category_id:subcategory
+      price: price,
+      status: status,
+      stock: stock,
+      sub_category_id: subcategory
 
     }
-    this.getToken();
+
     console.log(this.token);
 
-    // return this.http2.post(URL_CREATE_ARTICLE + websiteslug + "/articles", body2, this.options);
+    return this.http2.post(URL_CREATE_ARTICLE + websiteslug + "/articles", body2, {
+      headers:
+        { 'Accept': 'Application/json', 'Authorization': 'Bearer ' + this.token }
+    });
+  }
 
-    return this.http2.post(URL_CREATE_ARTICLE + websiteslug + "/articles" ,body2, {headers:
-       {'Accept':'Application/json', 'Authorization': 'Bearer ' + this.token} });
+  sendArticleImg(website, img) {
+
+    return this.http2.post(URL_SEND_ARTICLE_IMAGE + website + "/image", img, {
+      headers:
+        { 'Accept': 'Application/json', 'Authorization': 'Bearer ' + this.token }
+    });
+
   }
 
 
@@ -116,31 +125,35 @@ export class ArticlesProvider {
 
 
 
-  getToken() {
+  cargar_storage() {
     let promesa = new Promise((resolve, reject) => {
-
       if (this.platform.is("cordova")) {
-        // dispositivo
-        this.storage.ready()
-          .then(() => {
+        this.storage.get('token').then(val => {
+          if (val) {
+            this.token = val
+            this.headers.delete("Accept");
+            this.headers.delete("Authorization");
+            this.headers.append("Accept", "Application/json");
+            this.headers.append("Authorization", "Bearer " + this.token);
+            this.options = new RequestOptions({ headers: this.headers });
+            console.log('ok', this.options);
+            resolve(true);
 
-            this.storage.get("token")
-              .then(token => {
-                if (token) {
-                  this.token = token;
-                }
-              })
+          } else {
+            resolve(false);
+          }
+        });
 
-          })
+
 
 
       } else {
-        // computadora
         if (localStorage.getItem("token")) {
           //Existe items en el localstorage
           this.token = localStorage.getItem("token");
-
-
+          this.headers.append("Authorization", "Bearer " + this.token);
+          this.options = new RequestOptions({ headers: this.headers });
+          console.log('ok', this.options);
         }
 
         resolve();

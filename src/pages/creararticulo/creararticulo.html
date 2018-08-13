@@ -39,6 +39,8 @@
   </div>
 
 
+  
+
 
   <form [formGroup]="todo" (ngSubmit)="logForm()" *ngIf="show">
     <ion-item>
@@ -49,6 +51,10 @@
       <ion-label>Descripcion</ion-label>
       <ion-textarea formControlName="description"></ion-textarea>
     </ion-item>
+
+
+    <button ion-button (click)="getImage()">Subir foto</button>
+    <p><img src="{{mypic}}" ></p>
 
 
     <h6>Categorias</h6>

@@ -42,13 +42,13 @@ export class HomePage implements OnInit {
 
   constructor(public navCtrl: NavController,
     public _us: UsuarioProvider,
+    public _ws: WebsiteProvider,
     public articleService: ArticlesProvider,
     public carritoService: CarritoProvider,
     public events: Events,
     public websiteService: WebsiteProvider,
     public renderer: Renderer,
     public zone: NgZone, ) {
-
 
 
 
@@ -83,9 +83,14 @@ export class HomePage implements OnInit {
 
   ionViewWillEnter() {
     this._us.cargar_storage();
+    this._ws.cargar_storage();
+    this.carritoService.cargar_storage();
         
     console.log("ionViewWillEnter");
     this.token = this._us.token;
+
+    console.log('token', this.token);
+
     if (this.token) {
       this.websiteService.getArticlesFromSubscribed().subscribe((data) => {
         console.log(data.data);
@@ -95,7 +100,7 @@ export class HomePage implements OnInit {
 
       this.carritoService.getCart().subscribe((data) => {
         this.carritoService.carritoBadgeCounter = data.data.cart_article.length;
-
+        this.show = true;
       });
     }
 
@@ -125,7 +130,7 @@ export class HomePage implements OnInit {
 
       });
 
-      // this.getTotalItemsCart();
+    
 
     }
 
@@ -138,12 +143,7 @@ export class HomePage implements OnInit {
 
   }
 
-  // calculateReviews() {
-  //   if (this.articlesFromSubscribed) {
-  //     this.rate = this.articlesFromSubscribed.reviews.reduce((rate, article) => rate += parseFloat(article.review), 0);
-  //   }
 
-  // }
 
   getTotalItemsCart() {
     this.carritoService.getCart().subscribe((data: any) => {

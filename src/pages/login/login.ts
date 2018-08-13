@@ -83,7 +83,7 @@ export class LoginPage {
                 //success catch
                 console.log(data)
                 this.data = data;
-                console.log(this.data);
+                console.log('here', this.data);
                 this.usuarioService.token = data.access_token;
                 this.token = data.access_token;
                 // this.usuarioService.guardar_storage();
