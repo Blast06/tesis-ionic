@@ -9,6 +9,10 @@ import { Validators, FormGroup, FormBuilder } from '../../../node_modules/@angul
 import { CrearSitiosPage } from '../crear-sitios/crear-sitios';
 
 
+//file transfer
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from "@ionic-native/file";
+
 /**
  * Generated class for the CreararticuloPage page.
  *
@@ -54,7 +58,9 @@ export class CreararticuloPage {
     public fb: FormBuilder,
     public articleService: ArticlesProvider,
     public alertCtrl: AlertController,
-    public camera: Camera, ) {
+    public camera: Camera,
+    public file:File,
+    public transfer:FileTransfer,) {
 
     // this.getArticleInfo();
 
@@ -165,6 +171,22 @@ export class CreararticuloPage {
         console.log("CONSOLE LOG DE ERROR SUBIR IMAGEN",JSON.stringify(error));
       });
 
+
+  }
+
+  uploadImage(){
+    const fileTransfer: FileTransferObject = this.transfer.create();
+
+    let random = Math.floor(Math.random() * 100);
+
+    let options: FileUploadOptions = {
+      fileKey: 'photo',
+      fileName:"myImage_" + random + ".jpg",
+      chunkedMode:false,
+      httpMethod:'post',
+      mimeType:"image/jpeg",
+    
+    }
 
   }
 

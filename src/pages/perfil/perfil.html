@@ -1,66 +1,66 @@
 <ion-header class="myHeader">
-  <ion-navbar color="primary">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title text-capitalize >Perfil</ion-title>
-  </ion-navbar>
-
-  <!-- <div *ngIf="!user" class="spinner-container">
-    <ion-spinner name="circles"></ion-spinner>
-  </div> -->
-
-  <ion-toolbar color="primary" class="profile-head" text-center *ngIf="user">
-    <img src="assets/imgs/01.png" />
-    <h4>{{user.name}}</h4>
-    <p>{{user.email}}</p>
-  </ion-toolbar>
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title text-capitalize *ngIf="user">Perfil</ion-title>
+    </ion-navbar>
+  
+    <!-- <div *ngIf="!user" class="spinner-container">
+      <ion-spinner name="circles"></ion-spinner>
+    </div> -->
+  
+    <ion-toolbar color="primary" class="profile-head" text-center *ngIf="user">
+      <img src="{{user.avatar}}" />
+      <h4>{{user.name}}</h4>
+      <p>{{user.email}}</p>
+    </ion-toolbar>
+    
+    
+    <ion-segment [(ngModel)]="tabs">
+      <ion-segment-button value="Likes" (click)="selectTab(0)" value="0" text-uppercase>
+      Favoritos
+    </ion-segment-button>
+    <ion-segment-button value="notification" (click)="selectTab(1)" value="1" text-uppercase>
+      Mis sitios
+    </ion-segment-button>
+  </ion-segment>
+  </ion-header>
   
   
-  <ion-segment [(ngModel)]="tabs">
-    <ion-segment-button value="Likes" (click)="selectTab(0)" value="0" text-uppercase>
-    Favoritos
-  </ion-segment-button>
-  <ion-segment-button value="notification" (click)="selectTab(1)" value="1" text-uppercase>
-    Mis sitios
-  </ion-segment-button>
-</ion-segment>
-</ion-header>
-
-
-
-
-<ion-content fullscreen (ionScroll)="scrollingFun($event)" [ngSwitch]="tabs" class="has-header has-subheader">
-
-
-  <ion-slides class="app-slider" #pageSlider>
-    <ion-slide (ionSlideWillChange)="changeWillSlide($event)">
-      <div *ngIf="favorites.length < 1">No tienes favoritos</div>
-
-      <!-- <div *ngIf="favorites"> -->
-        <ion-card class="app-card" *ngFor="let article of favorites">
-          <img src="http://178.128.183.171/{{article.image_path}}" (click)="goToSingleArticle(article.slug)" />
-          <div class="det">
-            <h4 no-margin>{{article.name | slice:0:5}}</h4>
-            <p no-margin>{{article.price | currency:'RD$'}}</p>
-          </div>
-        </ion-card>
-      <!-- </div> -->
-    </ion-slide>
-
-
-    <ion-slide (ionSlideWillChange)="changeWillSlide($event)">
-      <div *ngIf="websites.length < 1">No tienes sitios</div>
-      <ion-item class="cart-list" no-lines *ngFor="let website of websites">
-        <ion-thumbnail item-left>
-          <img src="{{website.image_path}}" (click)="goTowebsite(website.username)">
-        </ion-thumbnail>
-        <h2>{{website.name}}</h2>
-        <p>{{website.subscribed_users_count}} subscriptores</p>
-      </ion-item>
-    </ion-slide>
-  </ion-slides>
-
-
-
-</ion-content>
+  
+  
+  <ion-content fullscreen (ionScroll)="scrollingFun($event)" [ngSwitch]="tabs" class="has-header has-subheader">
+  
+  
+    <ion-slides class="app-slider" #pageSlider>
+      <ion-slide (ionSlideWillChange)="changeWillSlide($event)">
+        <div *ngIf="favorites.length < 1">No tienes favoritos</div>
+  
+        <!-- <div *ngIf="favorites"> -->
+          <ion-card class="app-card" *ngFor="let article of favorites">
+            <img src="http://178.128.183.171/{{article.image_path}}" (click)="goToSingleArticle(article.slug)" />
+            <div class="det">
+              <h4 no-margin>{{article.name | slice:0:5}}</h4>
+              <p no-margin>{{article.price | currency:'RD$'}}</p>
+            </div>
+          </ion-card>
+        <!-- </div> -->
+      </ion-slide>
+  
+  
+      <ion-slide (ionSlideWillChange)="changeWillSlide($event)">
+        <div *ngIf="websites.length < 1">No tienes sitios</div>
+        <ion-item class="cart-list" no-lines *ngFor="let website of websites">
+          <ion-thumbnail item-left>
+            <img src="{{website.image_path}}" (click)="goTowebsite(website.username)">
+          </ion-thumbnail>
+          <h2>{{website.name}}</h2>
+          <p>{{website.subscribed_users_count}} subscriptores</p>
+        </ion-item>
+      </ion-slide>
+    </ion-slides>
+  
+  
+  
+  </ion-content>

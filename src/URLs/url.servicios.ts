@@ -1,4 +1,6 @@
-export const URL_BASE= "http://178.128.183.171/api";
+
+export const URL_INICIAL= "http://68.183.125.161";
+export const URL_BASE= "http://68.183.125.161/api";
 export const URL_ARTICULOS = URL_BASE + "/articles/all";
 // export const URL_WEBSITE= "http://127.0.0.1:8000/api";
 
@@ -6,7 +8,7 @@ export const URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED= URL_BASE + "/articles/subscri
 export const URL_SHOW_SINGLE_ARTICLE = URL_BASE + "/articles/"; //MAS EL SLUG DEL ARTICULO = /{slug}.
 export const URL_SIGNUP= "signup";
 
-export const URL_LOGIN= "http://178.128.183.171" + "/oauth/token";
+export const URL_LOGIN= URL_INICIAL + "/oauth/token";
 export const URL_SHOW_USER= URL_BASE + "/user";
 export const URL_LOGOUT=  URL_BASE + "logout";
 export const URL_SHOW_WEBSITE= URL_BASE + "/"; //-> MAS EL SLUG DEL WEBSITE =  /{sitio-slug} ->(que es el username)

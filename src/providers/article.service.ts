@@ -5,15 +5,12 @@ import { URL_ARTICULOS, URL_SHOW_SINGLE_ARTICLE, URL_ARTICLE_FAVORITE, URL_SHOW_
 
 import { Http } from '@angular/http';
 import { Storage } from "@ionic/storage";
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import "rxjs/Rx";
 import { Observable } from 'rxjs/Observable';
-import { Headers, RequestOptions, Response } from '@angular/http';
-
-
+import { Response } from '@angular/http';
 import { Platform } from 'ionic-angular'
-
 
 
 
@@ -22,14 +19,9 @@ import { Platform } from 'ionic-angular'
 @Injectable()
 export class ArticlesProvider {
 
-  headers = new Headers();
 
   private options;
-
-  // public token: string;
   public token;
-
-
   articulos: any[] = [];
 
 
@@ -41,20 +33,9 @@ export class ArticlesProvider {
     public storage: Storage,
     public usuarioService: UsuarioProvider) {
 
-    // this.token;
-
-    // sacar token del storage
-    this.cargar_storage();
-
-    //console.log(this.token);
+       
 
 
-    //config de headers para la peticion
-    // this.headers.append("Accept", "Application/json");
-    // this.headers.append("Content-Type", "application/x-www-form-urlencoded");
-    this.headers.append("Accept", "Application/json");
-    this.headers.append("Authorization", "Bearer " + this.token);
-    this.options = new RequestOptions({ headers: this.headers });
   }
 
 
@@ -75,21 +56,21 @@ export class ArticlesProvider {
   }
 
   getArticlesFromSubscribed() {
-    return this.http.get(URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED, this.options).map((response: Response) => response.json());
+    return this.http2.get(URL_SHOW_ARTICLES_WEBSITE_SUBSCRIBED);
     //
   }
 
   addToFavorite(slug) {
     console.log(this.token);
-    return this.http.get(URL_ARTICLE_FAVORITE + slug + "/favorite", this.options).map((response: Response) => response.json());
+    return this.http2.get(URL_ARTICLE_FAVORITE + slug + "/favorite");
   }
 
   removeToFavorite(slug) {
-    return this.http.get(URL_ARTICLE_UNFAVORITE + slug + "/unfavorite", this.options).map((response: Response) => response.json());
+    return this.http2.get(URL_ARTICLE_UNFAVORITE + slug + "/unfavorite");
   }
 
   isFavorite(slug) {
-    return this.http.get(URL_ARTICLE_ISFAVORITED + slug + "/isFavoritedTo", this.options).map((response: Response) => response.json());
+    return this.http2.get(URL_ARTICLE_ISFAVORITED + slug + "/isFavoritedTo");
   }
 
   createArticle(name, description, price, status, stock, subcategory, websiteslug) {
@@ -103,68 +84,15 @@ export class ArticlesProvider {
 
     }
 
-    console.log(this.token);
-
-    return this.http2.post(URL_CREATE_ARTICLE + websiteslug + "/articles", body2, {
-      headers:
-        { 'Accept': 'Application/json', 'Authorization': 'Bearer ' + this.token }
-    });
+    return this.http2.post(URL_CREATE_ARTICLE + websiteslug + "/articles", body2);
   }
 
   sendArticleImg(website, img) {
 
-    return this.http2.post(URL_SEND_ARTICLE_IMAGE + website + "articles/images", img, {
-      headers:
-        { 'Accept': 'Application/json', 'Authorization': 'Bearer ' + this.token }
-    });
+    return this.http2.post(URL_SEND_ARTICLE_IMAGE + website + "articles/images", img);
 
   }
 
-
-
-
-
-
-  cargar_storage() {
-    let promesa = new Promise((resolve, reject) => {
-      if (this.platform.is("cordova")) {
-        this.storage.get('token').then(val => {
-          if (val) {
-            this.token = val
-            this.headers.delete("Accept");
-            this.headers.delete("Authorization");
-            this.headers.append("Accept", "Application/json");
-            this.headers.append("Authorization", "Bearer " + this.token);
-            this.options = new RequestOptions({ headers: this.headers });
-            console.log('ok', this.options);
-            resolve(true);
-
-          } else {
-            resolve(false);
-          }
-        });
-
-
-
-
-      } else {
-        if (localStorage.getItem("token")) {
-          //Existe items en el localstorage
-          this.token = localStorage.getItem("token");
-          this.headers.append("Authorization", "Bearer " + this.token);
-          this.options = new RequestOptions({ headers: this.headers });
-          console.log('ok', this.options);
-        }
-
-        resolve();
-
-      }
-
-    });
-
-    return promesa;
-
-  }
 
 
 }

@@ -52,7 +52,7 @@ export class MisSitiosPage {
 
     this.username = navParams.get('username');
 
-    websiteService.mostrar_info_sitio(this.username).subscribe((data) => {
+    websiteService.mostrar_info_sitio(this.username).subscribe((data:any) => {
       console.log(data);
       console.log(this.username);
       this.website = data.data;
@@ -86,7 +86,7 @@ export class MisSitiosPage {
 
   subscribeTowebsite(website) {
     if (website) {
-      this.websiteService.subscribeToWebsite(website).subscribe((data) => {
+      this.websiteService.subscribeToWebsite(website).subscribe((data:any) => {
         console.log(data);
         // console.log(data.data.message);
         console.log(data.message);
@@ -97,7 +97,7 @@ export class MisSitiosPage {
   }
   unSubscribeTowebsite(website) {
     if (website) {
-      this.websiteService.unSubscribeToWebsite(website).subscribe((data) => {
+      this.websiteService.unSubscribeToWebsite(website).subscribe((data:any) => {
         console.log(data);
         // console.log(data.data.message);
         console.log(data.message);

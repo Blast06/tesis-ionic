@@ -1,15 +1,13 @@
+import { Injectable } from "@angular/core";
 
 //http
-import { Http, Response, Headers, RequestOptions } from "@angular/http";
+import { Http, Response, Headers } from "@angular/http";
 import 'rxjs/add/operator/catch';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-
+//API ENDPOINTS
 import { URL_SIGNUP, URL_LOGIN, URL_SHOW_USER, URL_SHOPPING_CART } from './../URLs/url.servicios';
 
-
-
-import { Injectable } from "@angular/core";
 
 
 //plugins misc
@@ -36,12 +34,9 @@ interface APIErrorResponse extends HttpErrorResponse {
 }
 
 
-
 const CLIENT_ID = "2";
-const CLIENT_ID2 = "2";
 
-const SECRET_KEY = "HdcAKuH3XhxzvZxyNI6isj9z1NT0AGdu0of4ufKK";
-const SECRET_KEY2 = "pDdRmq1acgBWJ1E0hARDkEEKU6NMzz98LtFAk92p";
+const SECRET_KEY = "s0Q7G10XdrxwJCUmGd4pVOgIwEJlORo2nbSqg8c4";
 
 
 
@@ -80,19 +75,6 @@ export class UsuarioProvider {
         this.cargar_storage();
 
 
-        //para el login
-        this.headers.append("Accept", "Application/json");
-        this.headers.append("Content-Type", "Application/json");
-        this.headers.append("Access-Control-Allow-Origin", "*");
-
-        this.options = new RequestOptions({ headers: this.headers });
-
-        //para las peticiones que necesitan user conectado
-        this.headers2.append("Accept", "Application/json");
-        this.headers2.append("Authorization", "Bearer " + this.token);
-        this.options2 = new RequestOptions({ headers: this.headers2 });
-
-
     }
 
     token_activo(): boolean {
@@ -105,9 +87,8 @@ export class UsuarioProvider {
 
     }
 
-
     getFavorites() {
-        return this.http.get(URL_SHOPPING_CART, this.options2).map((response: Response) => response.json());
+        return this.http2.get(URL_SHOPPING_CART);
     }
 
 
@@ -126,6 +107,7 @@ export class UsuarioProvider {
             {'Accept':'Application/json', 'Content-Type': 'Application/json',
             'Access-Control-Allow-Origin':'*'} });
 
+        // return this.http2.post(URL_LOGIN,body, httpOptionsLogin);
 
     }
 
@@ -141,20 +123,17 @@ export class UsuarioProvider {
 
 
     mostrar_usuario() {
-
-        // this.cargar_storage();
-
         console.log("token desde metodo mostar_usuario");
         console.log(this.token);
-        //return this.http.get(URL_SHOW_USER, this.options2).map((response: Response) => response.json());
-        return this.http.get(URL_SHOW_USER, this.options2);
+        // return this.http.get(URL_SHOW_USER, this.options2).map((response: Response) => response.json());
+        return this.http2.get(URL_SHOW_USER);
 
     }
 
 
 
     mostrar_sitios() {
-        return this.http.get(URL_SHOW_USER, this.options2).map((response: Response) => response.json());
+        return this.http.get(URL_SHOW_USER).map((response: Response) => response.json());
 
     }
 
@@ -219,11 +198,6 @@ export class UsuarioProvider {
                 this.storage.get('token').then(val =>{
                     if (val) {
                         this.token = val
-                        this.headers2.delete("Accept");
-                        this.headers2.delete("Authorization");
-                        this.headers2.append("Accept", "Application/json");
-                        this.headers2.append("Authorization", "Bearer " + this.token);
-                        this.options2 = new RequestOptions({ headers: this.headers2 });
                         resolve(true);
                         
                     }else{
@@ -286,8 +260,6 @@ export class UsuarioProvider {
     }
 
 
-
-
     presentLoadingDefault(message: string) {
         let loading = this.loadingCtrl.create({
             content: message
@@ -299,7 +271,6 @@ export class UsuarioProvider {
             loading.dismiss();
         }, 2000);
     }
-
 
 
 }

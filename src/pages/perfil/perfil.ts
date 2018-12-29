@@ -1,8 +1,8 @@
 import { ArticuloPage } from './../articulo/articulo';
-import { Platform } from 'ionic-angular';
+
 
 import { Component, ViewChild, Renderer, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides, Content, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, Content, ModalController,Platform } from 'ionic-angular';
 import { UsuarioProvider } from '../../providers/index.services';
 import { User } from '../../app/models/user';
 import { Observable } from 'rxjs/Observable';
@@ -49,7 +49,7 @@ export class PerfilPage {
 
   hideFavoriteBtn: boolean = false;
 
-
+  
 
   constructor(public navCtrl: NavController,
     public renderer: Renderer,
@@ -72,6 +72,7 @@ export class PerfilPage {
     console.log("ionViewWillEnter");
     this.getFavorites();
     this.getUserInfo();
+    this.content.resize();
 
   }
 
@@ -79,6 +80,8 @@ export class PerfilPage {
     this._us.mostrar_usuario()
       .map(res => res.json())
       .subscribe((data:any) => {
+             
+        
         // let data2: any = JSON.stringify(data.data);
         // this.user = JSON.parse(data2);
         // console.log("USUARIOUSUARIO----------- USUARIO", JSON.parse(data.data));
@@ -94,6 +97,8 @@ export class PerfilPage {
         console.log("CONSOLE IMPRIMIENDO EL DATA PERO EN JSONSTRINGFY: ",JSON.stringify(data));
         console.log("CONSOLE IMPRIMIENDO EL USER PERO EN JSONSTRINGFY: ",JSON.stringify(this.user));
         // console.log("CONSOLE IMPRIMIENDO EL DATA.DATA  EN JSONPARSE: ",JSON.parse(data.data));
+
+        this.content.resize();
       }
         , err => {
           console.log(JSON.stringify(err));
@@ -180,10 +185,6 @@ export class PerfilPage {
     }, 200)
   }
 
-  presentCartModal() {
-    let modal = this.modalCtrl.create('Cart');
-    modal.present();
-  }
 
 
 }

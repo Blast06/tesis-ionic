@@ -26,7 +26,7 @@ export class WebsiteArticlesPage {
 
     this.username = navParams.get('username');
 
-    websiteService.mostrar_info_sitio(this.username).subscribe((data) => {
+    websiteService.mostrar_info_sitio(this.username).subscribe((data:any) => {
       console.log(data);
       this.websiteArticles = data.data;
       console.log(this.websiteArticles);

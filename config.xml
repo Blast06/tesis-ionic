@@ -94,5 +94,8 @@
     <allow-navigation href="http://*/*" />
     <allow-navigation href="https://*/*" />
     <allow-navigation href="data:*" />
-    <engine name="android" spec="~6.4.0" />
+    <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
+    <plugin name="cordova-plugin-file" spec="^6.0.1" />
+    <allow-navigation href="http://172.30.0.125:8100" />
+    <engine name="android" spec="6.4.0" />
 </widget>

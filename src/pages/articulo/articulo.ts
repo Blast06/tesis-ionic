@@ -1,7 +1,7 @@
 
 import { CarritoProvider } from './../../providers/carrito.service';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, LoadingController, AlertController, Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController, AlertController, Slides, Content } from 'ionic-angular';
 import { ArticlesProvider } from '../../providers/index.services';
 
 
@@ -15,6 +15,7 @@ import { ArticlesProvider } from '../../providers/index.services';
 export class ArticuloPage {
 
   @ViewChild(Slides) slides: Slides;
+  @ViewChild(Content) content: Content;
 
   articuloPage = ArticuloPage;
 
@@ -86,6 +87,7 @@ export class ArticuloPage {
     });
     articleService.getSingleArticleRelateds(this.slug).subscribe((data) => {
       console.log(data);
+      this.content.resize();
     });
 
 
@@ -102,6 +104,7 @@ export class ArticuloPage {
     this.reviews.forEach((review) => {
       this.rate += review.rating;
     });
+    this.content.resize();
 
   }
   ngOnInit() {

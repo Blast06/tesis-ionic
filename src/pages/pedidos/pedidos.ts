@@ -56,11 +56,11 @@ export class PedidosPage {
   ionViewWillEnter() {
     console.log('ionViewWillEnter PedidosPage');
     if (this.usuarioService.token) {
-      this.carritoService.getOrders().subscribe((data) => {
+      this.carritoService.getOrders().subscribe((data:any) => {
         console.log(data);
         this.orders = data;
         console.log(this.orders);
-        console.log(this.orders);
+        console.log(this.orders.length);
         this.show = false;
         this.show2 = false;
 

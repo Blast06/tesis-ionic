@@ -8,8 +8,13 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 import { StarRatingModule, StarRatingConfigService } from 'angular-star-rating';
 
 
+//file transfer
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from "@ionic-native/file";
 
-import { HttpModule } from '@angular/http';
+
+
+import { HttpModule, RequestOptions } from '@angular/http';
 import { MbscModule } from '@mobiscroll/angular';
 import { FormsModule } from '@angular/forms';
 
@@ -18,7 +23,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -32,6 +37,7 @@ import { IonicStorageModule } from '@ionic/storage';
 
 //servicios
 import { CarritoProvider,ArticlesProvider,UsuarioProvider,WebsiteProvider} from "../providers/index.services";
+
 
 //paginas
 import { MyApp } from './app.component';
@@ -60,6 +66,9 @@ import {
 import { InstantsearchProvider } from '../providers/instantsearch';
 import { NetworkProvider } from '../providers/network/network';
 import { PipesNullfieldsPipe } from '../pipes/pipes-nullfields/pipes-nullfields';
+import { InterceptorProvider } from '../providers/interceptor/interceptor';
+
+
 
  
 @NgModule({
@@ -143,7 +152,10 @@ import { PipesNullfieldsPipe } from '../pipes/pipes-nullfields/pipes-nullfields'
     NgAisInstantSearch,
     StarRatingConfigService,
     Camera,
+    File,FileTransfer,
     HTTP,
+    {provide:HTTP_INTERCEPTORS, useClass: InterceptorProvider, multi:true},
+
 
   ]
 })

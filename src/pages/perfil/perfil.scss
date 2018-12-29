@@ -1,4 +1,12 @@
-page-profile {
+.slide-zoom {
+    padding-top: 190px !important;
+}
+
+.md page-profile {
+
+    .slide-zoom {
+        padding-top: 190px !important;
+    }
     
     ion-segment{
         margin-top: -2px;
@@ -168,5 +176,5 @@ page-profile {
         bottom: 0;
     }
 
-
+    
 }

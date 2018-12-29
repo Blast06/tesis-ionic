@@ -1,13 +1,13 @@
-import { Http } from '@angular/http';
+import { Http, RequestOptionsArgs } from '@angular/http';
 
 import { Storage } from '@ionic/storage';
 
 
-import { AlertController, Platform, ModalController } from 'ionic-angular';
+import { Platform, ModalController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UsuarioProvider } from './usuario.service';
-import { Headers, RequestOptions, Response } from '@angular/http';
+import { Headers } from '@angular/http';
 
 import { CarritoPage, LoginPage } from "../pages/index.paginas";
 import { URL_SHOPPING_CART, URL_REMOVE_ARTICLE_SHOPPING_CART, URL_ADD_ARTICLE_SHOPPING_CART, URL_SHOPPING_CART_COUNT, URL_MAKE_ORDER } from '../URLs/url.servicios';
@@ -19,7 +19,7 @@ export class CarritoProvider {
 
   headers = new Headers();
 
-  private options;
+  private options:RequestOptionsArgs;
 
 
   items: any[] = [];
@@ -31,25 +31,11 @@ export class CarritoProvider {
   constructor(public http: HttpClient,
     private platform: Platform,
     private storage: Storage,
-    private usuarioService: UsuarioProvider,
+    private _usuarioService: UsuarioProvider,
     private modalCtrl: ModalController,
     public http2: Http, ) {
     console.log('Hello CarritoProvider Provider');
-    this.cargar_storage();
     this.actualizar_total();
-
-    // sacar token del storage
-    this.token = usuarioService.token;
-
-    // this.getCarritoCounter();
-
-
-    //config de headers para la peticion
-    this.headers.append("Accept", "Application/json");
-    // this.headers.append("Content-Type", "undefined");
-    // this.headers.append('Access-Control-Allow-Origin', '*');
-    this.headers.append("Authorization", "Bearer " + usuarioService.token); // esto hay que restablecerlo
-    this.options = new RequestOptions({ headers: this.headers });
 
   }
 
@@ -58,12 +44,8 @@ export class CarritoProvider {
 
     let modal: any;
 
-    if (this.usuarioService.token) {
+    if (this._usuarioService.token) {
       modal = this.modalCtrl.create(CarritoPage);
-      // this.getCartItemsCount().subscribe((data:any) =>{
-      //   console.log(data);
-      // });
-
 
     } else {
       modal = this.modalCtrl.create(LoginPage);
@@ -80,15 +62,6 @@ export class CarritoProvider {
       }
     });
 
-
-
-
-
-
-
-
-
-
   }
 
 
@@ -103,89 +76,31 @@ export class CarritoProvider {
   }
 
   getCart() {
-    console.log("TOKEN EN GETCART - CARRITOSERVICE.TS");
-    console.log(this.token);
-    return this.http2.get(URL_SHOPPING_CART, this.options).map((response: Response) => response.json());
-
-
+    return this.http.get(URL_SHOPPING_CART);
   }
 
   getCartItemsCount() {
-    return this.http2.get(URL_SHOPPING_CART_COUNT, this.options).map((response: Response) => response.json());
+    return this.http.get(URL_SHOPPING_CART_COUNT);
   }
 
   addToCart(id, cantidad) {
-    console.log("TOKEN EN ADDTOCART - CARRITOSERVICE.TS");
-    console.log(this.token);
-    return this.http2.get(URL_ADD_ARTICLE_SHOPPING_CART + "/" + id + "/add/" + cantidad + "/cart", this.options).map((response: Response) => response.json());
+    return this.http.get(URL_ADD_ARTICLE_SHOPPING_CART + "/" + id + "/add/" + cantidad + "/cart");
 
 
   }
 
   removeFromCart(id) {
-    console.log("TOKEN EN REMOVEFROMCART - CARRITOSERVICE.TS");
-    console.log(this.token);
-    return this.http2.get(URL_REMOVE_ARTICLE_SHOPPING_CART + "/" + id + "/remove/cart", this.options).map((response: Response) => response.json());
+    return this.http.get(URL_REMOVE_ARTICLE_SHOPPING_CART + "/" + id + "/remove/cart");
 
   }
 
   makeOrder(orders1 = []) {
-    console.log("TOKEN EN MAKEORDER - CARRITOSERVICE.TS");
-    console.log(this.token);
-    return this.http2.post(URL_MAKE_ORDER, { orders: orders1 }, this.options).map((response: Response) => response.json());
+    return this.http.post(URL_MAKE_ORDER, { orders: orders1 });
   }
 
   getOrders() {
-    console.log("TOKEN EN GETORDER - CARRITOSERVICE.TS");
-    console.log(this.token);
-    return this.http2.get(URL_MAKE_ORDER, this.options).map((response: Response) => response.json());
+    return this.http.get(URL_MAKE_ORDER);
   }
-
-
-
-
-  cargar_storage() {
-    let promesa = new Promise((resolve, reject) => {
-      if (this.platform.is("cordova")) {
-        this.storage.get('token').then(val => {
-          if (val) {
-            this.token = val
-            this.headers.delete("Accept");
-            this.headers.delete("Authorization");
-            this.headers.append("Accept", "Application/json");
-            this.headers.append("Authorization", "Bearer " + this.token);
-            this.options = new RequestOptions({ headers: this.headers });
-            console.log('ok', this.options);
-            resolve(true);
-
-          } else {
-            resolve(false);
-          }
-        });
-
-
-
-
-      } else {
-        if (localStorage.getItem("token")) {
-          //Existe items en el localstorage
-          this.token = localStorage.getItem("token");
-          this.headers.append("Authorization", "Bearer " + this.token);
-          this.options = new RequestOptions({ headers: this.headers });
-          console.log('ok', this.options);
-        }
-
-        resolve();
-
-      }
-
-    });
-
-    return promesa;
-
-  }
-
-
 
 
 

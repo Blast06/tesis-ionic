@@ -17,7 +17,7 @@ import { CreararticuloPage } from '../creararticulo/creararticulo';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage implements OnInit {
+export class HomePage {
 
   rate: number = 0;
 
@@ -53,7 +53,7 @@ export class HomePage implements OnInit {
 
 
     if (this.token) {
-      websiteService.getArticlesFromSubscribed().subscribe((data) => {
+      websiteService.getArticlesFromSubscribed().subscribe((data:any) => {
         console.log(data.data);
         this.articlesFromSubscribed = data.data;
 
@@ -82,9 +82,9 @@ export class HomePage implements OnInit {
 
 
   ionViewWillEnter() {
-    this._us.cargar_storage();
-    this._ws.cargar_storage();
-    this.carritoService.cargar_storage();
+    // this._us.cargar_storage();
+    // this._ws.cargar_storage();
+    // this.carritoService.cargar_storage();
         
     console.log("ionViewWillEnter");
     this.token = this._us.token;
@@ -92,13 +92,13 @@ export class HomePage implements OnInit {
     console.log('token', this.token);
 
     if (this.token) {
-      this.websiteService.getArticlesFromSubscribed().subscribe((data) => {
+      this.websiteService.getArticlesFromSubscribed().subscribe((data:any) => {
         console.log(data.data);
         this.articlesFromSubscribed = data.data;
       });
 
 
-      this.carritoService.getCart().subscribe((data) => {
+      this.carritoService.getCart().subscribe((data:any) => {
         this.carritoService.carritoBadgeCounter = data.data.cart_article.length;
         this.show = true;
       });
@@ -108,36 +108,36 @@ export class HomePage implements OnInit {
 
 
   }
-  ngOnInit() {
+  // ngOnInit() {
 
-    if (this.token) {
-      this.websiteService.getArticlesFromSubscribed().subscribe((data) => {
-        console.log(data.data);
-        this.articlesFromSubscribed = data.data;
+  //   if (this.token) {
+  //     this.websiteService.getArticlesFromSubscribed().subscribe((data) => {
+  //       console.log(data.data);
+  //       this.articlesFromSubscribed = data.data;
 
-        if (this.articlesFromSubscribed.length < 1) {
-          this.articlesFromSubscribed = null;
+  //       if (this.articlesFromSubscribed.length < 1) {
+  //         this.articlesFromSubscribed = null;
 
-        } else {
+  //       } else {
 
-          this.show = true;
-        }
+  //         this.show = true;
+  //       }
 
-      });
+  //     });
 
-      this.carritoService.getCart().subscribe((data) => {
-        this.carritoService.carritoBadgeCounter = data.data.cart_article.length;
+  //     this.carritoService.getCart().subscribe((data) => {
+  //       this.carritoService.carritoBadgeCounter = data.data.cart_article.length;
 
-      });
+  //     });
 
     
 
-    }
+  //   }
 
-    //para cambiar las opciones del menu lateral
-    this.actualizar_menu();
-    console.log(this.rate);
-  }
+  //   para cambiar las opciones del menu lateral
+  //   this.actualizar_menu();
+  //   console.log(this.rate);
+  // }
 
   siguiente_pagina(infiniteScroll) {
 
